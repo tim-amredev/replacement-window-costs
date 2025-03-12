@@ -1,0 +1,29 @@
+<header class="site-header">
+  <div class="container">
+    <div class="header-content">
+      <a href="{{ site.baseurl }}/" class="logo">
+        <h1>ReplacementWindowCosts.com</h1>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="{{ site.baseurl }}/">Home</a></li>
+          <li><a href="{{ site.baseurl }}/calculator.html">Cost Calculator</a></li>
+          <li><a href="{{ site.baseurl }}/form-collection.html">Request a Quote</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+    document.querySelector('.main-nav').classList.toggle('active');
+    this.classList.toggle('active');
+  });
+</script>
+

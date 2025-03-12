@@ -1,0 +1,26 @@
+# Site settings
+title: ReplacementWindowCosts.com
+email: info@replacementwindowcosts.com
+description: >-
+  Get accurate estimates for your window replacement project. Calculate costs based on window type, 
+  material, size, and quantity to make informed decisions for your home improvement project.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://replacementwindowcosts.com" # the base hostname & protocol for your site
+github_username: replacementwindowcosts
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md
+

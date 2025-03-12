@@ -1,0 +1,110 @@
+---
+layout: default
+title: Request a Quote
+custom_js:
+  - form-handler
+---
+
+<section class="container">
+  <div class="section">
+    <h1>Request a Personalized Quote</h1>
+    <p>Fill out the form below to receive a personalized quote for your window replacement project. Our network of trusted professionals will review your requirements and provide you with an accurate estimate.</p>
+    
+    <div class="card">
+      <form id="quote-form" action="https://formsubmit.co/your-email@example.com" method="POST">
+        <!-- FormSubmit Configuration -->
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_next" id="thank-you-url" value="{{ site.baseurl }}/thankyou.html">
+        <input type="hidden" name="_subject" value="New Quote Request from ReplacementWindowCosts.com">
+        
+        <h3>Contact Information</h3>
+        <div class="form-row">
+          <div class="form-col">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+          </div>
+          
+          <div class="form-col">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="address">Property Address</label>
+          <input type="text" id="address" name="address" required>
+        </div>
+        
+        <h3>Window Details</h3>
+        <div class="form-group">
+          <label for="window-count">Number of Windows</label>
+          <input type="number" id="window-count" name="window_count" min="1" value="1" required>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-col">
+            <div class="form-group">
+              <label for="window-type">Window Type</label>
+              <select id="window-type" name="window_type" required>
+                <option value="double-hung">Double-Hung</option>
+                <option value="casement">Casement</option>
+                <option value="bay">Bay/Bow</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-col">
+            <div class="form-group">
+              <label for="frame-material">Frame Material</label>
+              <select id="frame-material" name="frame_material" required>
+                <option value="vinyl">Vinyl</option>
+                <option value="wood">Wood</option>
+                <option value="fiberglass">Fiberglass</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="window-size">Window Size</label>
+          <select id="window-size" name="window_size" required>
+            <option value="small">Small (Less than 3 ft × 4 ft)</option>
+            <option value="medium" selected>Medium (3 ft × 4 ft to 4 ft × 5 ft)</option>
+            <option value="large">Large (Larger than 4 ft × 5 ft)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="comments">Additional Comments or Requirements</label>
+          <textarea id="comments" name="comments" rows="4"></textarea>
+        </div>
+        
+        <input type="hidden" id="estimated-price" name="estimated_price" value="0">
+        
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2>What Happens Next?</h2>
+    <div class="card">
+      <ol>
+        <li>We'll review your request and calculate a personalized estimate.</li>
+        <li>You'll receive your quote via email within 24-48 hours.</li>
+        <li>If you have any questions, our team will be available to assist you.</li>
+        <li>Should you decide to proceed, we'll connect you with trusted professionals in your area.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+

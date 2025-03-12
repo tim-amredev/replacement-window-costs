@@ -1,0 +1,50 @@
+---
+layout: default
+title: Thank You
+---
+
+<section class="container">
+  <div class="section" style="text-align: center; padding: 3rem 0;">
+    <h1>Thank You for Your Request!</h1>
+    <div class="card">
+      <h2>Your Estimated Window Replacement Cost</h2>
+      <p class="price" id="quoted-price">$0</p>
+      <p>This is an estimate based on the information you provided. Our team will review your request and contact you with a personalized quote within 24-48 hours.</p>
+      
+      <div style="margin-top: 2rem;">
+        <a href="{{ site.baseurl }}/" class="btn btn-primary">Return to Home</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2>What Happens Next?</h2>
+    <div class="card">
+      <ol>
+        <li>Our team will review your request and calculate a personalized estimate.</li>
+        <li>You'll receive your detailed quote via email within 24-48 hours.</li>
+        <li>If you have any questions, our team will be available to assist you.</li>
+        <li>Should you decide to proceed, we'll connect you with trusted professionals in your area.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const quotedPrice = document.getElementById('quoted-price');
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if (urlParams.has('price')) {
+      const price = parseInt(urlParams.get('price'));
+      if (!isNaN(price)) {
+        quotedPrice.textContent = '$' + price.toLocaleString();
+      } else {
+        quotedPrice.textContent = 'Price information unavailable';
+      }
+    } else {
+      quotedPrice.textContent = 'Price information unavailable';
+    }
+  });
+</script>
+
