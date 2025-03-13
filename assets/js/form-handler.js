@@ -88,57 +88,119 @@ document.addEventListener("DOMContentLoaded", () => {
     const windowSize = document.getElementById("window-size").value
 
     // Calculate price using the same logic as the calculator
-    const price = calculatePrice(windowCount, windowType, frameMaterial, windowSize)
+    const { totalPrice } = calculateDetailedPrice(windowCount, windowType, frameMaterial, windowSize)
 
     // Update hidden input
-    estimatedPriceInput.value = price
+    estimatedPriceInput.value = totalPrice
   }
 
-  function calculatePrice(count, type, material, size) {
-    // Base price per window - this is hidden from the user until form submission
-    let basePrice = 500
+  function calculateDetailedPrice(count, type, material, size) {
+    // Base price per window
+    let baseWindowPrice = 300
 
     // Adjustments for window type
     switch (type) {
       case "double-hung":
-        basePrice += 0
+        baseWindowPrice += 0
         break
       case "casement":
-        basePrice += 50
+        baseWindowPrice += 50
         break
       case "bay":
-        basePrice += 200
+        baseWindowPrice += 200
         break
     }
 
     // Adjustments for frame material
     switch (material) {
       case "vinyl":
-        basePrice += 0
+        baseWindowPrice += 0
         break
       case "wood":
-        basePrice += 100
+        baseWindowPrice += 100
         break
       case "fiberglass":
-        basePrice += 150
+        baseWindowPrice += 150
         break
     }
 
     // Adjustments for window size
     switch (size) {
       case "small":
-        basePrice += 0
+        baseWindowPrice += 0
         break
       case "medium":
-        basePrice += 100
+        baseWindowPrice += 100
         break
       case "large":
-        basePrice += 200
+        baseWindowPrice += 200
         break
     }
 
+    // Calculate window cost
+    const windowCost = baseWindowPrice * count
+
+    // Calculate installation cost (varies by type, material, and size)
+    let baseInstallCost = 150 // Base installation cost per window
+
+    // Installation adjustments for window type
+    switch (type) {
+      case "double-hung":
+        baseInstallCost += 0
+        break
+      case "casement":
+        baseInstallCost += 25
+        break
+      case "bay":
+        baseInstallCost += 150
+        break
+    }
+
+    // Installation adjustments for material (some materials are harder to install)
+    switch (material) {
+      case "vinyl":
+        baseInstallCost += 0
+        break
+      case "wood":
+        baseInstallCost += 50
+        break
+      case "fiberglass":
+        baseInstallCost += 75
+        break
+    }
+
+    // Installation adjustments for size
+    switch (size) {
+      case "small":
+        baseInstallCost += 0
+        break
+      case "medium":
+        baseInstallCost += 50
+        break
+      case "large":
+        baseInstallCost += 100
+        break
+    }
+
+    // Calculate total installation cost
+    const installationCost = baseInstallCost * count
+
+    // Calculate subtotal before commission
+    const subtotal = windowCost + installationCost
+
+    // Add commission (typically 15-20% in home improvement)
+    const commissionRate = 0.18 // 18%
+    const commission = Math.round(subtotal * commissionRate)
+
     // Calculate total price
-    return basePrice * count
+    const totalPrice = subtotal + commission
+
+    return {
+      windowCost,
+      installationCost,
+      commission,
+      totalPrice,
+    }
   }
 
   function setupOtherInputs() {
