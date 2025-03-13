@@ -233,6 +233,24 @@ document.addEventListener("DOMContentLoaded", () => {
         })
       }
     })
+
+    // Setup terms and privacy policy links to prevent form submission when clicked
+    const termsLink = document.querySelector(".terms-link")
+    const privacyLink = document.querySelector(".privacy-link")
+
+    if (termsLink) {
+      termsLink.addEventListener("click", (e) => {
+        e.preventDefault()
+        alert("Terms of Service would open in a new window. This is a placeholder.")
+      })
+    }
+
+    if (privacyLink) {
+      privacyLink.addEventListener("click", (e) => {
+        e.preventDefault()
+        alert("Privacy Policy would open in a new window. This is a placeholder.")
+      })
+    }
   }
 })
 
