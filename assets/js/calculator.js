@@ -16,9 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Calculate price
     const price = calculatePrice(windowCount, windowType, frameMaterial, windowSize)
 
-    // Display result
+    // Display result with animation
     estimatedPrice.textContent = "$" + price.toLocaleString()
     calculatorResult.style.display = "block"
+    calculatorResult.classList.add("fadeIn")
 
     // Update request quote button URL
     const baseUrl = requestQuoteBtn.getAttribute("href").split("?")[0]
