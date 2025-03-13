@@ -3,6 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const calculatorResult = document.getElementById("calculator-result")
   const estimatedPrice = document.getElementById("estimated-price")
   const requestQuoteBtn = document.getElementById("request-quote-btn")
+  const breakdownContainer = document.getElementById("price-breakdown")
+  const windowCostElement = document.getElementById("window-cost")
+  const installationCostElement = document.getElementById("installation-cost")
+  const commissionElement = document.getElementById("commission")
+  const totalCostElement = document.getElementById("total-cost")
 
   calculatorForm.addEventListener("submit", (e) => {
     e.preventDefault()
@@ -13,12 +18,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const frameMaterial = document.getElementById("frame-material").value
     const windowSize = document.getElementById("window-size").value
 
-    // Calculate price
-    const price = calculatePrice(windowCount, windowType, frameMaterial, windowSize)
+    // Calculate prices
+    const { windowCost, installationCost, commission, totalPrice } = calculateDetailedPrice(
+      windowCount,
+      windowType,
+      frameMaterial,
+      windowSize,
+    )
 
     // Display result with animation
-    estimatedPrice.textContent = "$" + price.toLocaleString()
+    estimatedPrice.textContent = "$" + totalPrice.toLocaleString()
+
+    // Update price breakdown
+    windowCostElement.textContent = "$" + windowCost.toLocaleString()
+    installationCostElement.textContent = "$" + installationCost.toLocaleString()
+    commissionElement.textContent = "$" + commission.toLocaleString()
+    totalCostElement.textContent = "$" + totalPrice.toLocaleString()
+
     calculatorResult.style.display = "block"
+    breakdownContainer.style.display = "block"
     calculatorResult.classList.add("fadeIn")
 
     // Update request quote button URL
@@ -28,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
       type: windowType,
       material: frameMaterial,
       size: windowSize,
-      price: price,
+      price: totalPrice,
     })
 
     requestQuoteBtn.setAttribute("href", `${baseUrl}?${queryParams.toString()}`)
@@ -37,51 +55,113 @@ document.addEventListener("DOMContentLoaded", () => {
     calculatorResult.scrollIntoView({ behavior: "smooth" })
   })
 
-  function calculatePrice(count, type, material, size) {
+  function calculateDetailedPrice(count, type, material, size) {
     // Base price per window
-    let basePrice = 500
+    let baseWindowPrice = 300
 
     // Adjustments for window type
     switch (type) {
       case "double-hung":
-        basePrice += 0
+        baseWindowPrice += 0
         break
       case "casement":
-        basePrice += 50
+        baseWindowPrice += 50
         break
       case "bay":
-        basePrice += 200
+        baseWindowPrice += 200
         break
     }
 
     // Adjustments for frame material
     switch (material) {
       case "vinyl":
-        basePrice += 0
+        baseWindowPrice += 0
         break
       case "wood":
-        basePrice += 100
+        baseWindowPrice += 100
         break
       case "fiberglass":
-        basePrice += 150
+        baseWindowPrice += 150
         break
     }
 
     // Adjustments for window size
     switch (size) {
       case "small":
-        basePrice += 0
+        baseWindowPrice += 0
         break
       case "medium":
-        basePrice += 100
+        baseWindowPrice += 100
         break
       case "large":
-        basePrice += 200
+        baseWindowPrice += 200
         break
     }
 
+    // Calculate window cost
+    const windowCost = baseWindowPrice * count
+
+    // Calculate installation cost (varies by type, material, and size)
+    let baseInstallCost = 150 // Base installation cost per window
+
+    // Installation adjustments for window type
+    switch (type) {
+      case "double-hung":
+        baseInstallCost += 0
+        break
+      case "casement":
+        baseInstallCost += 25
+        break
+      case "bay":
+        baseInstallCost += 150
+        break
+    }
+
+    // Installation adjustments for material (some materials are harder to install)
+    switch (material) {
+      case "vinyl":
+        baseInstallCost += 0
+        break
+      case "wood":
+        baseInstallCost += 50
+        break
+      case "fiberglass":
+        baseInstallCost += 75
+        break
+    }
+
+    // Installation adjustments for size
+    switch (size) {
+      case "small":
+        baseInstallCost += 0
+        break
+      case "medium":
+        baseInstallCost += 50
+        break
+      case "large":
+        baseInstallCost += 100
+        break
+    }
+
+    // Calculate total installation cost
+    const installationCost = baseInstallCost * count
+
+    // Calculate subtotal before commission
+    const subtotal = windowCost + installationCost
+
+    // Add commission (typically 15-20% in home improvement)
+    const commissionRate = 0.18 // 18%
+    const commission = Math.round(subtotal * commissionRate)
+
     // Calculate total price
-    return basePrice * count
+    const totalPrice = subtotal + commission
+
+    return {
+      windowCost,
+      installationCost,
+      commission,
+      totalPrice,
+    }
   }
 })
 
