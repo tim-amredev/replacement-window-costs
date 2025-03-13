@@ -1,53 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="120" height="50" viewBox="0 0 120 50">
-  <defs>
-    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2e5d9f"/>
-      <stop offset="100%" stop-color="#1e4785"/>
-    </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#000000" flood-opacity="0.3"/>
-    </filter>
-  </defs>
-  
-  <!-- Window-like border with rounded corners -->
-  <rect x="5" y="5" width="110" height="40" rx="8" 
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
+  <!-- Main border rectangle -->
+  <rect x="4" y="4" width="112" height="32" rx="4" 
         fill="white" 
-        stroke="url(#logo-gradient)" 
-        stroke-width="2.5"/>
+        stroke="#2e5d9f" 
+        stroke-width="2"/>
   
-  <!-- Decorative window pane lines -->
-  <line x1="42" y1="5" x2="42" y2="45" stroke="#e0e0e0" stroke-width="1"/>
-  <line x1="78" y1="5" x2="78" y2="45" stroke="#e0e0e0" stroke-width="1"/>
-  
-  <!-- RWC Letters -->
+  <!-- RWC Letters - using bold, solid shapes -->
   <!-- R -->
-  <path d="M15 12 L15 38 M15 12 L30 12 Q35 12 35 17 L35 20 Q35 25 30 25 L15 25 M30 25 L35 38" 
-        fill="none" 
-        stroke="url(#logo-gradient)" 
-        stroke-width="4" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
-        filter="url(#shadow)"/>
+  <path d="M20 10 h15 q5 0 5 5 v2 q0 5 -5 5 h-15 v8 h5 l5 -8 h-5 M20 10 v20" 
+        fill="#2e5d9f"/>
   
   <!-- W -->
-  <path d="M45 12 L50 38 L58 20 L66 38 L71 12" 
+  <path d="M50 10 l5 20 l5 -15 l5 15 l5 -20" 
         fill="none" 
-        stroke="url(#logo-gradient)" 
-        stroke-width="4" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
-        filter="url(#shadow)"/>
+        stroke="#2e5d9f" 
+        stroke-width="5" 
+        stroke-linejoin="round" 
+        stroke-linecap="round"/>
   
   <!-- C -->
-  <path d="M95 15 Q85 15 85 25 L85 25 Q85 35 95 35" 
+  <path d="M95 10 h-10 q-5 0 -5 10 q0 10 5 10 h10" 
         fill="none" 
-        stroke="url(#logo-gradient)" 
-        stroke-width="4" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
-        filter="url(#shadow)"/>
+        stroke="#2e5d9f" 
+        stroke-width="5" 
+        stroke-linejoin="round" 
+        stroke-linecap="round"/>
   
-  <!-- Small accent square -->
-  <rect x="100" y="12" width="6" height="6" fill="#4caf50" rx="1"/>
+  <!-- Green square accent -->
+  <rect x="100" y="8" width="6" height="6" fill="#4caf50" rx="1"/>
 </svg>
 
