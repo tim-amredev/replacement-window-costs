@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function calculatePrice(count, type, material, size) {
-    // Base price per window
+    // Base price per window - this is hidden from the user until form submission
     let basePrice = 500
 
     // Adjustments for window type
