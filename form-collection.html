@@ -45,51 +45,711 @@ custom_js:
         </div>
         
         <div class="form-section">
+          <h3>Basic Information</h3>
+          
+          <div class="form-group">
+            <label>What is your primary reason for considering window replacement/remodeling?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="reason-efficiency" name="primary_reason" value="Improve energy efficiency">
+                <label for="reason-efficiency">Improve energy efficiency</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="reason-damaged" name="primary_reason" value="Replace damaged/broken windows">
+                <label for="reason-damaged">Replace damaged/broken windows</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="reason-appearance" name="primary_reason" value="Update home appearance">
+                <label for="reason-appearance">Update home appearance</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="reason-noise" name="primary_reason" value="Reduce outside noise">
+                <label for="reason-noise">Reduce outside noise</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="reason-drafts" name="primary_reason" value="Address drafts or leaks">
+                <label for="reason-drafts">Address drafts or leaks</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="reason-value" name="primary_reason" value="Increase home value for sale">
+                <label for="reason-value">Increase home value for sale</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="reason-other" name="primary_reason" value="Other">
+                <label for="reason-other">Other</label>
+                <input type="text" id="reason-other-text" name="primary_reason_other" placeholder="Please specify" class="other-input">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>How old are your current windows?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="age-less5" name="window_age" value="Less than 5 years">
+                <label for="age-less5">Less than 5 years</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="age-5to10" name="window_age" value="5-10 years">
+                <label for="age-5to10">5-10 years</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="age-11to20" name="window_age" value="11-20 years">
+                <label for="age-11to20">11-20 years</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="age-21to30" name="window_age" value="21-30 years">
+                <label for="age-21to30">21-30 years</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="age-more30" name="window_age" value="More than 30 years">
+                <label for="age-more30">More than 30 years</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="age-original" name="window_age" value="Original to the home (historic)">
+                <label for="age-original">Original to the home (historic)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="age-unsure" name="window_age" value="Unsure">
+                <label for="age-unsure">Unsure</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Approximately how many windows are you looking to replace/remodel?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="count-1to3" name="window_count_range" value="1-3 windows">
+                <label for="count-1to3">1-3 windows</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="count-4to6" name="window_count_range" value="4-6 windows">
+                <label for="count-4to6">4-6 windows</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="count-7to10" name="window_count_range" value="7-10 windows">
+                <label for="count-7to10">7-10 windows</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="count-11to15" name="window_count_range" value="11-15 windows">
+                <label for="count-11to15">11-15 windows</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="count-16to20" name="window_count_range" value="16-20 windows">
+                <label for="count-16to20">16-20 windows</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="count-all" name="window_count_range" value="All windows in home">
+                <label for="count-all">All windows in home</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="count-unsure" name="window_count_range" value="Unsure/need assessment">
+                <label for="count-unsure">Unsure/need assessment</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-section">
           <h3>Window Details</h3>
-          <div class="form-group">
-            <label for="window-count">Number of Windows</label>
-            <input type="number" id="window-count" name="window_count" min="1" value="1" required>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-col">
-              <div class="form-group">
-                <label for="window-type">Window Type</label>
-                <select id="window-type" name="window_type" required>
-                  <option value="double-hung">Double-Hung</option>
-                  <option value="casement">Casement</option>
-                  <option value="bay">Bay/Bow</option>
-                </select>
-              </div>
-            </div>
-            
-            <div class="form-col">
-              <div class="form-group">
-                <label for="frame-material">Frame Material</label>
-                <select id="frame-material" name="frame_material" required>
-                  <option value="vinyl">Vinyl</option>
-                  <option value="wood">Wood</option>
-                  <option value="fiberglass">Fiberglass</option>
-                </select>
-              </div>
-            </div>
-          </div>
           
           <div class="form-group">
-            <label for="window-size">Window Size</label>
-            <select id="window-size" name="window_size" required>
-              <option value="small">Small (Less than 3 ft × 4 ft)</option>
-              <option value="medium" selected>Medium (3 ft × 4 ft to 4 ft × 5 ft)</option>
-              <option value="large">Large (Larger than 4 ft × 5 ft)</option>
-            </select>
+            <label>What type of windows do you currently have?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="type-single" name="current_window_type" value="Single-hung">
+                <label for="type-single">Single-hung</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-double" name="current_window_type" value="Double-hung">
+                <label for="type-double">Double-hung</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-casement" name="current_window_type" value="Casement (crank out)">
+                <label for="type-casement">Casement (crank out)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-sliding" name="current_window_type" value="Sliding/gliding">
+                <label for="type-sliding">Sliding/gliding</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-picture" name="current_window_type" value="Picture/fixed">
+                <label for="type-picture">Picture/fixed</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-bay" name="current_window_type" value="Bay or bow">
+                <label for="type-bay">Bay or bow</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-awning" name="current_window_type" value="Awning">
+                <label for="type-awning">Awning</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-garden" name="current_window_type" value="Garden">
+                <label for="type-garden">Garden</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-storm" name="current_window_type" value="Storm windows">
+                <label for="type-storm">Storm windows</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-mixture" name="current_window_type" value="Mixture of types">
+                <label for="type-mixture">Mixture of types</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="type-unsure" name="current_window_type" value="Unsure">
+                <label for="type-unsure">Unsure</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>What window frame material are you interested in?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="material-vinyl" name="frame_material" value="Vinyl">
+                <label for="material-vinyl">Vinyl</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="material-wood" name="frame_material" value="Wood">
+                <label for="material-wood">Wood</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="material-fiberglass" name="frame_material" value="Fiberglass">
+                <label for="material-fiberglass">Fiberglass</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="material-aluminum" name="frame_material" value="Aluminum">
+                <label for="material-aluminum">Aluminum</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="material-composite" name="frame_material" value="Composite">
+                <label for="material-composite">Composite</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="material-woodclad" name="frame_material" value="Wood-clad">
+                <label for="material-woodclad">Wood-clad</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="material-steel" name="frame_material" value="Steel">
+                <label for="material-steel">Steel</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="material-other" name="frame_material" value="Other">
+                <label for="material-other">Other</label>
+                <input type="text" id="material-other-text" name="frame_material_other" placeholder="Please specify" class="other-input">
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="material-unsure" name="frame_material" value="Unsure/need recommendations">
+                <label for="material-unsure">Unsure/need recommendations</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>What glass features are you most interested in? (Select all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-double" name="glass_features[]" value="Double-pane">
+                <label for="glass-double">Double-pane</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-triple" name="glass_features[]" value="Triple-pane">
+                <label for="glass-triple">Triple-pane</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-lowe" name="glass_features[]" value="Low-E coating">
+                <label for="glass-lowe">Low-E coating</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-gas" name="glass_features[]" value="Gas-filled (argon/krypton)">
+                <label for="glass-gas">Gas-filled (argon/krypton)</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-impact" name="glass_features[]" value="Impact-resistant">
+                <label for="glass-impact">Impact-resistant</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-uv" name="glass_features[]" value="UV protection">
+                <label for="glass-uv">UV protection</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-noise" name="glass_features[]" value="Noise reduction">
+                <label for="glass-noise">Noise reduction</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-tinted" name="glass_features[]" value="Tinted">
+                <label for="glass-tinted">Tinted</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-decorative" name="glass_features[]" value="Decorative/stained glass">
+                <label for="glass-decorative">Decorative/stained glass</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-cleaning" name="glass_features[]" value="Self-cleaning">
+                <label for="glass-cleaning">Self-cleaning</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="glass-unsure" name="glass_features[]" value="Unsure/need recommendations">
+                <label for="glass-unsure">Unsure/need recommendations</label>
+              </div>
+            </div>
           </div>
         </div>
         
-        <div class="form-group">
-          <label for="comments">Additional Comments or Requirements</label>
-          <textarea id="comments" name="comments" rows="4"></textarea>
+        <div class="form-section">
+          <h3>Project Specifics</h3>
+          
+          <div class="form-group">
+            <label>Are you experiencing any issues with your current windows? (Select all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-drafts" name="window_issues[]" value="Drafts">
+                <label for="issue-drafts">Drafts</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-condensation" name="window_issues[]" value="Condensation between panes">
+                <label for="issue-condensation">Condensation between panes</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-operation" name="window_issues[]" value="Difficulty opening/closing">
+                <label for="issue-operation">Difficulty opening/closing</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-leaks" name="window_issues[]" value="Leaks during rain">
+                <label for="issue-leaks">Leaks during rain</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-rotting" name="window_issues[]" value="Rotting frames">
+                <label for="issue-rotting">Rotting frames</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-hardware" name="window_issues[]" value="Broken hardware">
+                <label for="issue-hardware">Broken hardware</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-noise" name="window_issues[]" value="Excessive outside noise">
+                <label for="issue-noise">Excessive outside noise</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-energy" name="window_issues[]" value="High energy bills">
+                <label for="issue-energy">High energy bills</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-fading" name="window_issues[]" value="Fading furniture/flooring near windows">
+                <label for="issue-fading">Fading furniture/flooring near windows</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-security" name="window_issues[]" value="Security concerns">
+                <label for="issue-security">Security concerns</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="issue-other" name="window_issues[]" value="Other">
+                <label for="issue-other">Other</label>
+                <input type="text" id="issue-other-text" name="window_issues_other" placeholder="Please specify" class="other-input">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Are you planning to change the size or location of any windows?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="change-no" name="window_changes" value="No, same size and location">
+                <label for="change-no">No, same size and location</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="change-enlarge" name="window_changes" value="Yes, enlarging existing windows">
+                <label for="change-enlarge">Yes, enlarging existing windows</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="change-reduce" name="window_changes" value="Yes, reducing size of existing windows">
+                <label for="change-reduce">Yes, reducing size of existing windows</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="change-adding" name="window_changes" value="Yes, adding new window openings">
+                <label for="change-adding">Yes, adding new window openings</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="change-removing" name="window_changes" value="Yes, removing some window openings">
+                <label for="change-removing">Yes, removing some window openings</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="change-style" name="window_changes" value="Yes, changing window style/shape">
+                <label for="change-style">Yes, changing window style/shape</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="change-unsure" name="window_changes" value="Unsure/need consultation">
+                <label for="change-unsure">Unsure/need consultation</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Do you need any specialized windows for specific areas? (Select all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-option">
+                <input type="checkbox" id="special-egress" name="specialized_windows[]" value="Egress windows for basement">
+                <label for="special-egress">Egress windows for basement</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="special-privacy" name="specialized_windows[]" value="Privacy windows for bathrooms">
+                <label for="special-privacy">Privacy windows for bathrooms</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="special-picture" name="specialized_windows[]" value="Picture windows for views">
+                <label for="special-picture">Picture windows for views</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="special-bay" name="specialized_windows[]" value="Bay/bow windows for added space">
+                <label for="special-bay">Bay/bow windows for added space</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="special-energy" name="specialized_windows[]" value="Energy-efficient windows for south/west exposures">
+                <label for="special-energy">Energy-efficient windows for south/west exposures</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="special-impact" name="specialized_windows[]" value="Hurricane/impact windows for weather protection">
+                <label for="special-impact">Hurricane/impact windows for weather protection</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="special-historical" name="specialized_windows[]" value="Historical/period-appropriate windows">
+                <label for="special-historical">Historical/period-appropriate windows</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="special-other" name="specialized_windows[]" value="Other">
+                <label for="special-other">Other</label>
+                <input type="text" id="special-other-text" name="specialized_windows_other" placeholder="Please specify" class="other-input">
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="special-none" name="specialized_windows[]" value="No specialized needs">
+                <label for="special-none">No specialized needs</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>What is your preferred timeframe for this project?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="time-1month" name="timeframe" value="Within 1 month">
+                <label for="time-1month">Within 1 month</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="time-1to3" name="timeframe" value="1-3 months">
+                <label for="time-1to3">1-3 months</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="time-3to6" name="timeframe" value="3-6 months">
+                <label for="time-3to6">3-6 months</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="time-6to12" name="timeframe" value="6-12 months">
+                <label for="time-6to12">6-12 months</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="time-research" name="timeframe" value="Just researching for future project">
+                <label for="time-research">Just researching for future project</label>
+              </div>
+            </div>
+          </div>
         </div>
         
+        <div class="form-section">
+          <h3>Budget and Preferences</h3>
+          
+          <div class="form-group">
+            <label>What is your approximate budget for window replacement/remodeling?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="budget-under5k" name="budget" value="Under $5,000">
+                <label for="budget-under5k">Under $5,000</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="budget-5to10k" name="budget" value="$5,000-$10,000">
+                <label for="budget-5to10k">$5,000-$10,000</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="budget-10to15k" name="budget" value="$10,001-$15,000">
+                <label for="budget-10to15k">$10,001-$15,000</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="budget-15to20k" name="budget" value="$15,001-$20,000">
+                <label for="budget-15to20k">$15,001-$20,000</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="budget-20to30k" name="budget" value="$20,001-$30,000">
+                <label for="budget-20to30k">$20,001-$30,000</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="budget-over30k" name="budget" value="Over $30,000">
+                <label for="budget-over30k">Over $30,000</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="budget-unsure" name="budget" value="Unsure/Need estimate">
+                <label for="budget-unsure">Unsure/Need estimate</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>What factors are most important to you in this project?</label>
+            <div class="ranking-group">
+              <div class="ranking-item">
+                <label for="rank-cost">Cost</label>
+                <select id="rank-cost" name="rank_cost">
+                  <option value="1">1 (Most Important)</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Least Important)</option>
+                </select>
+              </div>
+              <div class="ranking-item">
+                <label for="rank-efficiency">Energy efficiency</label>
+                <select id="rank-efficiency" name="rank_efficiency">
+                  <option value="1">1 (Most Important)</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Least Important)</option>
+                </select>
+              </div>
+              <div class="ranking-item">
+                <label for="rank-appearance">Appearance/style</label>
+                <select id="rank-appearance" name="rank_appearance">
+                  <option value="1">1 (Most Important)</option>
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Least Important)</option>
+                </select>
+              </div>
+              <div class="ranking-item">
+                <label for="rank-durability">Durability/warranty</label>
+                <select id="rank-durability" name="rank_durability">
+                  <option value="1">1 (Most Important)</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4" selected>4</option>
+                  <option value="5">5 (Least Important)</option>
+                </select>
+              </div>
+              <div class="ranking-item">
+                <label for="rank-maintenance">Ease of maintenance</label>
+                <select id="rank-maintenance" name="rank_maintenance">
+                  <option value="1">1 (Most Important)</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5" selected>5 (Least Important)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Are you interested in any additional window features? (Select all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-option">
+                <input type="checkbox" id="feature-blinds" name="additional_features[]" value="Built-in blinds/shades">
+                <label for="feature-blinds">Built-in blinds/shades</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="feature-security" name="additional_features[]" value="Security locks/sensors">
+                <label for="feature-security">Security locks/sensors</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="feature-screens" name="additional_features[]" value="Screen options">
+                <label for="feature-screens">Screen options</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="feature-grilles" name="additional_features[]" value="Grilles/muntins (decorative  id="feature-grilles" name="additional_features[]" value="Grilles/muntins (decorative dividers)">
+                <label for="feature-grilles">Grilles/muntins (decorative dividers)</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="feature-shapes" name="additional_features[]" value="Custom shapes">
+                <label for="feature-shapes">Custom shapes</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="feature-smart" name="additional_features[]" value="Smart home integration">
+                <label for="feature-smart">Smart home integration</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="feature-other" name="additional_features[]" value="Other">
+                <label for="feature-other">Other</label>
+                <input type="text" id="feature-other-text" name="additional_features_other" placeholder="Please specify" class="other-input">
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="feature-none" name="additional_features[]" value="None">
+                <label for="feature-none">None</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Do you have any specific brand preferences?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="brand-andersen" name="brand_preference" value="Andersen">
+                <label for="brand-andersen">Andersen</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-pella" name="brand_preference" value="Pella">
+                <label for="brand-pella">Pella</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-marvin" name="brand_preference" value="Marvin">
+                <label for="brand-marvin">Marvin</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-jeldwen" name="brand_preference" value="Jeld-Wen">
+                <label for="brand-jeldwen">Jeld-Wen</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-milgard" name="brand_preference" value="Milgard">
+                <label for="brand-milgard">Milgard</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-loewen" name="brand_preference" value="Loewen">
+                <label for="brand-loewen">Loewen</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-kolbe" name="brand_preference" value="Kolbe">
+                <label for="brand-kolbe">Kolbe</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-simonton" name="brand_preference" value="Simonton">
+                <label for="brand-simonton">Simonton</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-plygem" name="brand_preference" value="Ply Gem">
+                <label for="brand-plygem">Ply Gem</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-none" name="brand_preference" value="No preference" checked>
+                <label for="brand-none">No preference</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brand-other" name="brand_preference" value="Other">
+                <label for="brand-other">Other</label>
+                <input type="text" id="brand-other-text" name="brand_preference_other" placeholder="Please specify" class="other-input">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Will you need additional services with your window project? (Select all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-option">
+                <input type="checkbox" id="service-trim" name="additional_services[]" value="Interior trim work">
+                <label for="service-trim">Interior trim work</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="service-siding" name="additional_services[]" value="Exterior siding repair/replacement">
+                <label for="service-siding">Exterior siding repair/replacement</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="service-treatments" name="additional_services[]" value="Window treatments (blinds/curtains)">
+                <label for="service-treatments">Window treatments (blinds/curtains)</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="service-painting" name="additional_services[]" value="Painting">
+                <label for="service-painting">Painting</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="service-insulation" name="additional_services[]" value="Insulation">
+                <label for="service-insulation">Insulation</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="service-disposal" name="additional_services[]" value="Removal/disposal of old windows">
+                <label for="service-disposal">Removal/disposal of old windows</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="service-permits" name="additional_services[]" value="Permits/HOA approval assistance">
+                <label for="service-permits">Permits/HOA approval assistance</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="service-other" name="additional_services[]" value="Other">
+                <label for="service-other">Other</label>
+                <input type="text" id="service-other-text" name="additional_services_other" placeholder="Please specify" class="other-input">
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="service-none" name="additional_services[]" value="None">
+                <label for="service-none">None</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>How did you hear about our window services?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="source-search" name="referral_source" value="Online search">
+                <label for="source-search">Online search</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="source-social" name="referral_source" value="Social media">
+                <label for="source-social">Social media</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="source-referral" name="referral_source" value="Referral from friend/family">
+                <label for="source-referral">Referral from friend/family</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="source-neighborhood" name="referral_source" value="Saw your work in my neighborhood">
+                <label for="source-neighborhood">Saw your work in my neighborhood</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="source-store" name="referral_source" value="Home improvement store">
+                <label for="source-store">Home improvement store</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="source-ad" name="referral_source" value="Local advertisement">
+                <label for="source-ad">Local advertisement</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="source-other" name="referral_source" value="Other">
+                <label for="source-other">Other</label>
+                <input type="text" id="source-other-text" name="referral_source_other" placeholder="Please specify" class="other-input">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>What is your preferred method of contact for follow-up?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="contact-phone" name="contact_preference" value="Phone call" checked>
+                <label for="contact-phone">Phone call</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="contact-email" name="contact_preference" value="Email">
+                <label for="contact-email">Email</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="contact-text" name="contact_preference" value="Text message">
+                <label for="contact-text">Text message</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="contact-inperson" name="contact_preference" value="In-person consultation">
+                <label for="contact-inperson">In-person consultation</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="comments">Is there anything else you'd like us to know about your window project or specific concerns?</label>
+            <textarea id="comments" name="comments" rows="4"></textarea>
+          </div>
+        </div>
+        
+        <!-- Original window details (hidden but preserved for functionality) -->
+        <input type="hidden" id="window-count" name="window_count" value="1">
+        <input type="hidden" id="window-type" name="window_type" value="double-hung">
+        <input type="hidden" id="frame-material" name="frame_material_original" value="vinyl">
+        <input type="hidden" id="window-size" name="window_size" value="medium">
         <input type="hidden" id="estimated-price" name="estimated_price" value="0">
         
         <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
@@ -109,4 +769,65 @@ custom_js:
     </div>
   </div>
 </section>
+
+<style>
+  /* Additional styles for the expanded form */
+  .form-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--medium-gray);
+  }
+  
+  .radio-group, .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  
+  .radio-option, .checkbox-option {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+  
+  .radio-option input[type="radio"],
+  .checkbox-option input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+    margin-top: 0.25rem;
+  }
+  
+  .other-input {
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+    width: calc(100% - 1.5rem);
+  }
+  
+  .ranking-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .ranking-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ranking-item label {
+    margin-bottom: 0.5rem;
+  }
+  
+  .ranking-item select {
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .radio-group, .checkbox-group, .ranking-group {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 
