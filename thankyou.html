@@ -4,49 +4,49 @@ title: Thank You
 ---
 
 <section class="container">
-  <div class="section" style="text-align: center; padding: 3rem 0;">
-    <h1>Thank You for Your Request!</h1>
-    <div class="card">
-      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 1.5rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-      
-      <h2>Your Estimated Window Replacement Cost</h2>
-      <p class="price" id="quoted-price">$0</p>
-      <p>This is an estimate based on the information you provided. Our team will review your request and contact you with a personalized quote within 24-48 hours.</p>
-      
-      <div style="margin-top: 2rem;">
-        <a href="{{ site.baseurl }}/" class="btn btn-primary">Return to Home</a>
-      </div>
+<div class="section" style="text-align: center; padding: 3rem 0;">
+  <h1>Thank You for Your Request!</h1>
+  <div class="card">
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 1.5rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+    
+    <h2>Your Estimated Window Replacement Cost</h2>
+    <p class="price" id="quoted-price">$0</p>
+    <p>This comprehensive estimate includes window costs, professional installation, and service fees.</p>
+    
+    <div style="margin-top: 2rem;">
+      <a href="{{ site.baseurl }}/" class="btn btn-primary">Return to Home</a>
     </div>
   </div>
-  
-  <div class="section">
-    <h2>What Happens Next?</h2>
-    <div class="card">
-      <ol>
-        <li>Our team will review your request and calculate a personalized estimate.</li>
-        <li>You'll receive your detailed quote via email within 24-48 hours.</li>
-        <li>If you have any questions, our team will be available to assist you.</li>
-        <li>Should you decide to proceed, we'll connect you with trusted professionals in your area.</li>
-      </ol>
-    </div>
+</div>
+
+<div class="section">
+  <h2>What Happens Next?</h2>
+  <div class="card">
+    <ol>
+      <li>Our team will review your request and calculate a personalized estimate.</li>
+      <li>You'll receive your detailed quote via email within 24-48 hours.</li>
+      <li>If you have any questions, our team will be available to assist you.</li>
+      <li>Should you decide to proceed, we'll connect you with trusted professionals in your area.</li>
+    </ol>
   </div>
+</div>
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const quotedPrice = document.getElementById('quoted-price');
-    const urlParams = new URLSearchParams(window.location.search);
-    
-    if (urlParams.has('price')) {
-      const price = parseInt(urlParams.get('price'));
-      if (!isNaN(price)) {
-        quotedPrice.textContent = '$' + price.toLocaleString();
-      } else {
-        quotedPrice.textContent = 'Price information unavailable';
-      }
+document.addEventListener('DOMContentLoaded', function() {
+  const quotedPrice = document.getElementById('quoted-price');
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  if (urlParams.has('price')) {
+    const price = parseInt(urlParams.get('price'));
+    if (!isNaN(price)) {
+      quotedPrice.textContent = '$' + price.toLocaleString();
     } else {
       quotedPrice.textContent = 'Price information unavailable';
     }
-  });
+  } else {
+    quotedPrice.textContent = 'Price information unavailable';
+  }
+});
 </script>
 
