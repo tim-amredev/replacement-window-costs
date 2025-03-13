@@ -7,8 +7,8 @@ custom_js:
 
 <section class="container">
   <div class="section">
-    <h1>Request a Personalized Quote</h1>
-    <p>Fill out the form below to receive a personalized quote for your window replacement project. Our network of trusted professionals will review your requirements and provide you with an accurate estimate.</p>
+    <h1 class="text-center">Request a Personalized Quote</h1>
+    <p class="text-center">Fill out the form below to receive a personalized quote for your window replacement project. Our network of trusted professionals will review your requirements and provide you with an accurate estimate.</p>
     
     <div class="card">
       <form id="quote-form" action="https://formsubmit.co/your-email@example.com" method="POST">
@@ -44,43 +44,45 @@ custom_js:
           <input type="text" id="address" name="address" required>
         </div>
         
-        <h3>Window Details</h3>
-        <div class="form-group">
-          <label for="window-count">Number of Windows</label>
-          <input type="number" id="window-count" name="window_count" min="1" value="1" required>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-col">
-            <div class="form-group">
-              <label for="window-type">Window Type</label>
-              <select id="window-type" name="window_type" required>
-                <option value="double-hung">Double-Hung</option>
-                <option value="casement">Casement</option>
-                <option value="bay">Bay/Bow</option>
-              </select>
+        <div class="form-section">
+          <h3>Window Details</h3>
+          <div class="form-group">
+            <label for="window-count">Number of Windows</label>
+            <input type="number" id="window-count" name="window_count" min="1" value="1" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label for="window-type">Window Type</label>
+                <select id="window-type" name="window_type" required>
+                  <option value="double-hung">Double-Hung</option>
+                  <option value="casement">Casement</option>
+                  <option value="bay">Bay/Bow</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label for="frame-material">Frame Material</label>
+                <select id="frame-material" name="frame_material" required>
+                  <option value="vinyl">Vinyl</option>
+                  <option value="wood">Wood</option>
+                  <option value="fiberglass">Fiberglass</option>
+                </select>
+              </div>
             </div>
           </div>
           
-          <div class="form-col">
-            <div class="form-group">
-              <label for="frame-material">Frame Material</label>
-              <select id="frame-material" name="frame_material" required>
-                <option value="vinyl">Vinyl</option>
-                <option value="wood">Wood</option>
-                <option value="fiberglass">Fiberglass</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label for="window-size">Window Size</label>
+            <select id="window-size" name="window_size" required>
+              <option value="small">Small (Less than 3 ft × 4 ft)</option>
+              <option value="medium" selected>Medium (3 ft × 4 ft to 4 ft × 5 ft)</option>
+              <option value="large">Large (Larger than 4 ft × 5 ft)</option>
+            </select>
           </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="window-size">Window Size</label>
-          <select id="window-size" name="window_size" required>
-            <option value="small">Small (Less than 3 ft × 4 ft)</option>
-            <option value="medium" selected>Medium (3 ft × 4 ft to 4 ft × 5 ft)</option>
-            <option value="large">Large (Larger than 4 ft × 5 ft)</option>
-          </select>
         </div>
         
         <div class="form-group">
@@ -90,7 +92,7 @@ custom_js:
         
         <input type="hidden" id="estimated-price" name="estimated_price" value="0">
         
-        <button type="submit" class="btn btn-primary">Submit Request</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
       </form>
     </div>
   </div>
