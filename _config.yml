@@ -4,8 +4,8 @@ email: info@replacementwindowcosts.com
 description: >-
   Get accurate estimates for your window replacement project. Calculate costs based on window type, 
   material, size, and quantity to make informed decisions for your home improvement project.
-baseurl: "/replacement-window-costs" # the subpath of your site, e.g. /blog
-url: "https://tim-amredev.github.io/" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://replacementwindowcosts.com/" # the base hostname & protocol for your site
 github_username: replacementwindowcosts
 
 # Build settings
