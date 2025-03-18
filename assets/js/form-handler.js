@@ -72,13 +72,175 @@ document.addEventListener("DOMContentLoaded", () => {
   // Handle "Other" options
   setupOtherInputs()
 
+  // Add input validation for phone and zip
+  const phoneInput = document.getElementById("phone1")
+  const zipInput = document.getElementById("zip")
+  const stateInput = document.getElementById("state")
+
+  if (phoneInput) {
+    // Phone validation - only allow numbers
+    phoneInput.addEventListener("input", function (e) {
+      // Remove any non-numeric characters
+      this.value = this.value.replace(/\D/g, "")
+
+      // Limit to 10 digits
+      if (this.value.length > 10) {
+        this.value = this.value.slice(0, 10)
+      }
+    })
+  }
+
+  if (zipInput) {
+    // Zip code validation - only allow numbers
+    zipInput.addEventListener("input", function (e) {
+      // Remove any non-numeric characters
+      this.value = this.value.replace(/\D/g, "")
+
+      // Limit to 5 digits
+      if (this.value.length > 5) {
+        this.value = this.value.slice(0, 5)
+      }
+    })
+  }
+
+  if (stateInput) {
+    // State code validation - force uppercase
+    stateInput.addEventListener("input", function (e) {
+      // Convert to uppercase
+      this.value = this.value.toUpperCase()
+
+      // Limit to 2 characters
+      if (this.value.length > 2) {
+        this.value = this.value.slice(0, 2)
+      }
+
+      // Only allow letters
+      this.value = this.value.replace(/[^A-Z]/g, "")
+    })
+  }
+
   // Handle form submission
   quoteForm.addEventListener("submit", (e) => {
-    // Update the thank you URL with the estimated price
-    const baseThankYouUrl = thankYouUrl.value.split("?")[0]
-    const price = estimatedPriceInput.value
+    e.preventDefault() // Prevent default form submission
 
-    thankYouUrl.value = `${baseThankYouUrl}?price=${price}`
+    // Validate required fields for LeadPerfection
+    const phone1 = document.getElementById("phone1").value
+    const zip = document.getElementById("zip").value
+
+    if (!phone1 || !zip) {
+      alert("Please provide a valid phone number and zip code.")
+      return
+    }
+
+    // Prepare notes field with all form data
+    const formData = new FormData(quoteForm)
+    let notesContent = "Window Replacement Quote Request:\n\n"
+
+    // Add primary reason
+    const primaryReason = document.querySelector('input[name="primary_reason"]:checked')
+    if (primaryReason) {
+      notesContent += `Primary Reason: ${primaryReason.value}\n`
+    }
+
+    // Add window age
+    const windowAge = document.querySelector('input[name="window_age"]:checked')
+    if (windowAge) {
+      notesContent += `Window Age: ${windowAge.value}\n`
+    }
+
+    // Add window count range
+    const windowCountRange = document.querySelector('input[name="window_count_range"]:checked')
+    if (windowCountRange) {
+      notesContent += `Window Count Range: ${windowCountRange.value}\n`
+    }
+
+    // Add window types
+    const windowTypes = document.querySelectorAll('input[name="window_types[]"]:checked')
+    if (windowTypes.length > 0) {
+      notesContent += "Window Types: "
+      windowTypes.forEach((type, index) => {
+        notesContent += type.value + (index < windowTypes.length - 1 ? ", " : "")
+      })
+      notesContent += "\n"
+    }
+
+    // Add frame material
+    const frameMaterial = document.querySelector('input[name="frame_material"]:checked')
+    if (frameMaterial) {
+      notesContent += `Frame Material: ${frameMaterial.value}\n`
+    }
+
+    // Add glass features
+    const glassFeatures = document.querySelectorAll('input[name="glass_features[]"]:checked')
+    if (glassFeatures.length > 0) {
+      notesContent += "Glass Features: "
+      glassFeatures.forEach((feature, index) => {
+        notesContent += feature.value + (index < glassFeatures.length - 1 ? ", " : "")
+      })
+      notesContent += "\n"
+    }
+
+    // Add window issues
+    const windowIssues = document.querySelectorAll('input[name="window_issues[]"]:checked')
+    if (windowIssues.length > 0) {
+      notesContent += "Window Issues: "
+      windowIssues.forEach((issue, index) => {
+        notesContent += issue.value + (index < windowIssues.length - 1 ? ", " : "")
+      })
+      notesContent += "\n"
+    }
+
+    // Add budget
+    const budget = document.querySelector('input[name="budget"]:checked')
+    if (budget) {
+      notesContent += `Budget: ${budget.value}\n`
+    }
+
+    // Add timeframe
+    const timeframe = document.querySelector('input[name="timeframe"]:checked')
+    if (timeframe) {
+      notesContent += `Timeframe: ${timeframe.value}\n`
+    }
+
+    // Add comments
+    const comments = document.getElementById("comments").value
+    if (comments) {
+      notesContent += `\nAdditional Comments: ${comments}\n`
+    }
+
+    // Add estimated price
+    const price = estimatedPriceInput.value
+    if (price) {
+      notesContent += `\nEstimated Price: $${price}\n`
+    }
+
+    // Set the notes field
+    document.getElementById("lp-notes").value = notesContent
+
+    // Set call time preferences as boolean values
+    const callMorning = document.getElementById("contact-phone").checked ? "true" : "false"
+    const callAfternoon = document.getElementById("contact-email").checked ? "true" : "false"
+    const callEvening = document.getElementById("contact-text").checked ? "true" : "false"
+    const callWeekend = document.getElementById("contact-inperson").checked ? "true" : "false"
+
+    // Add hidden fields for call preferences
+    appendHiddenField("callmorning", callMorning)
+    appendHiddenField("callafternoon", callAfternoon)
+    appendHiddenField("callevening", callEvening)
+    appendHiddenField("callweekend", callWeekend)
+
+    // Extract zip code from address and add it as a separate field
+    if (zip) {
+      appendHiddenField("zip", zip)
+    }
+
+    // Store the thank you URL in localStorage to redirect after form submission
+    const baseThankYouUrl = thankYouUrl.value.split("?")[0]
+    const redirectUrl = `${baseThankYouUrl}?price=${price}`
+    localStorage.setItem("redirectUrl", redirectUrl)
+
+    // Submit the form to LeadPerfection
+    quoteForm.submit()
   })
 
   function updateEstimatedPrice() {
@@ -251,6 +413,24 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Privacy Policy would open in a new window. This is a placeholder.")
       })
     }
+  }
+
+  // Helper function to append hidden fields
+  function appendHiddenField(name, value) {
+    const input = document.createElement("input")
+    input.type = "hidden"
+    input.name = name
+    input.value = value
+    quoteForm.appendChild(input)
+  }
+})
+
+// Check if we need to redirect after form submission
+window.addEventListener("load", () => {
+  const redirectUrl = localStorage.getItem("redirectUrl")
+  if (redirectUrl) {
+    localStorage.removeItem("redirectUrl")
+    window.location.href = redirectUrl
   }
 })
 
