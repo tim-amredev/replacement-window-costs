@@ -121,13 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle form submission
   quoteForm.addEventListener("submit", (e) => {
+    e.preventDefault() // Prevent default form submission
+
     // Validate required fields for LeadPerfection
     const phone1 = document.getElementById("phone1").value
     const zip = document.getElementById("zip").value
 
     if (!phone1 || !zip) {
       alert("Please provide a valid phone number and zip code.")
-      e.preventDefault()
       return
     }
 
@@ -233,15 +234,13 @@ document.addEventListener("DOMContentLoaded", () => {
       appendHiddenField("zip", zip)
     }
 
-    // Set up redirect after form submission
+    // Store the thank you URL in localStorage to redirect after form submission
     const baseThankYouUrl = thankYouUrl.value.split("?")[0]
     const redirectUrl = `${baseThankYouUrl}?price=${price}`
+    localStorage.setItem("redirectUrl", redirectUrl)
 
-    // Use the hidden iframe to handle the form submission
-    // Then redirect after a short delay to ensure the form data is sent
-    setTimeout(() => {
-      window.location.href = redirectUrl
-    }, 500)
+    // Submit the form to LeadPerfection
+    quoteForm.submit()
   })
 
   function updateEstimatedPrice() {
