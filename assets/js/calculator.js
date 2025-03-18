@@ -16,6 +16,47 @@ document.addEventListener("DOMContentLoaded", () => {
     const saveEstimateBtn = document.getElementById("save-estimate-btn")
     const leadCaptureForm = document.getElementById("lead-capture-form")
 
+    // Add input validation for phone and zip when the page loads
+    const phoneInput = document.getElementById("lp-phone1")
+    const zipInput = document.getElementById("lp-zip")
+    const stateInput = document.getElementById("lp-state")
+
+    // Phone validation - only allow numbers
+    phoneInput.addEventListener("input", function (e) {
+      // Remove any non-numeric characters
+      this.value = this.value.replace(/\D/g, "")
+
+      // Limit to 10 digits
+      if (this.value.length > 10) {
+        this.value = this.value.slice(0, 10)
+      }
+    })
+
+    // Zip code validation - only allow numbers
+    zipInput.addEventListener("input", function (e) {
+      // Remove any non-numeric characters
+      this.value = this.value.replace(/\D/g, "")
+
+      // Limit to 5 digits
+      if (this.value.length > 5) {
+        this.value = this.value.slice(0, 5)
+      }
+    })
+
+    // State code validation - force uppercase
+    stateInput.addEventListener("input", function (e) {
+      // Convert to uppercase
+      this.value = this.value.toUpperCase()
+
+      // Limit to 2 characters
+      if (this.value.length > 2) {
+        this.value = this.value.slice(0, 2)
+      }
+
+      // Only allow letters
+      this.value = this.value.replace(/[^A-Z]/g, "")
+    })
+
     saveEstimateBtn.addEventListener("click", () => {
       leadCaptureForm.style.display = "block"
       saveEstimateBtn.style.display = "none"
@@ -33,9 +74,21 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("lp-productid").value = "WINDOWS"
       document.getElementById("lp-proddescr").value = "Window Replacement"
 
+      // Get contact information from the main form
+      const firstName = document.getElementById("lp-firstname").value
+      const lastName = document.getElementById("lp-lastname").value
+      const email = document.getElementById("lp-email").value
+      const phone = document.getElementById("lp-phone1").value
+      const zip = document.getElementById("lp-zip").value
+      const city = document.getElementById("lp-city").value
+      const state = document.getElementById("lp-state").value
+
       // Create detailed notes
       const notes = `
 Window Estimate Details:
+- Customer: ${firstName} ${lastName}
+- Contact: ${email} / ${phone}
+- Location: ${city}, ${state} ${zip}
 - Window Count: ${windowCount}
 - Window Type: ${windowType}
 - Frame Material: ${frameMaterial}
@@ -47,47 +100,6 @@ Window Estimate Details:
 
       document.getElementById("lp-notes").value = notes
 
-      // Add input validation for phone and zip
-      const phoneInput = document.getElementById("lp-phone1")
-      const zipInput = document.getElementById("lp-zip")
-
-      // Phone validation - only allow numbers
-      phoneInput.addEventListener("input", function (e) {
-        // Remove any non-numeric characters
-        this.value = this.value.replace(/\D/g, "")
-
-        // Limit to 10 digits
-        if (this.value.length > 10) {
-          this.value = this.value.slice(0, 10)
-        }
-      })
-
-      // Zip code validation - only allow numbers
-      zipInput.addEventListener("input", function (e) {
-        // Remove any non-numeric characters
-        this.value = this.value.replace(/\D/g, "")
-
-        // Limit to 5 digits
-        if (this.value.length > 5) {
-          this.value = this.value.slice(0, 5)
-        }
-      })
-
-      // State code validation - force uppercase
-      const stateInput = document.getElementById("lp-state")
-      stateInput.addEventListener("input", function (e) {
-        // Convert to uppercase
-        this.value = this.value.toUpperCase()
-
-        // Limit to 2 characters
-        if (this.value.length > 2) {
-          this.value = this.value.slice(0, 2)
-        }
-
-        // Only allow letters
-        this.value = this.value.replace(/[^A-Z]/g, "")
-      })
-
       // Scroll to the form
       leadCaptureForm.scrollIntoView({ behavior: "smooth" })
     })
@@ -95,10 +107,44 @@ Window Estimate Details:
     // Handle the quick lead form submission
     const quickLeadForm = document.getElementById("quick-lead-form")
     quickLeadForm.addEventListener("submit", (e) => {
-      // Validate the form
-      if (!quickLeadForm.checkValidity()) {
-        return // Let the browser handle validation
+      e.preventDefault() // Prevent default submission
+
+      // Validate the main form fields
+      const mainForm = document.getElementById("calculator-form")
+      if (!mainForm.checkValidity()) {
+        alert("Please fill out all required fields in the form above.")
+        return
       }
+
+      // Get values from the main form
+      const firstName = document.getElementById("lp-firstname").value
+      const lastName = document.getElementById("lp-lastname").value
+      const email = document.getElementById("lp-email").value
+      const phone = document.getElementById("lp-phone1").value
+      const zip = document.getElementById("lp-zip").value
+      const city = document.getElementById("lp-city").value
+      const state = document.getElementById("lp-state").value
+
+      // Add these values as hidden fields to the quick lead form
+      appendHiddenField(quickLeadForm, "firstname", firstName)
+      appendHiddenField(quickLeadForm, "lastname", lastName)
+      appendHiddenField(quickLeadForm, "email", email)
+      appendHiddenField(quickLeadForm, "phone1", phone)
+      appendHiddenField(quickLeadForm, "zip", zip)
+      appendHiddenField(quickLeadForm, "city", city)
+      appendHiddenField(quickLeadForm, "state", state)
+
+      // Get call time preferences
+      const callMorning = document.getElementById("lp-callmorning").checked ? "true" : "false"
+      const callAfternoon = document.getElementById("lp-callafternoon").checked ? "true" : "false"
+      const callEvening = document.getElementById("lp-callevening").checked ? "true" : "false"
+      const callWeekend = document.getElementById("lp-callweekend").checked ? "true" : "false"
+
+      // Add call time preferences to the form
+      appendHiddenField(quickLeadForm, "callmorning", callMorning)
+      appendHiddenField(quickLeadForm, "callafternoon", callAfternoon)
+      appendHiddenField(quickLeadForm, "callevening", callEvening)
+      appendHiddenField(quickLeadForm, "callweekend", callWeekend)
 
       // If valid, prepare to redirect to thank you page after submission
       const site = { baseurl: "" } // Define site variable
@@ -107,8 +153,18 @@ Window Estimate Details:
       // Store the thank you URL in localStorage to redirect after form submission
       localStorage.setItem("redirectUrl", thankYouUrl)
 
-      // The form will submit to the LeadPerfection webhook
+      // Submit the form to the LeadPerfection webhook
+      quickLeadForm.submit()
     })
+
+    // Helper function to append hidden fields
+    function appendHiddenField(form, name, value) {
+      const input = document.createElement("input")
+      input.type = "hidden"
+      input.name = name
+      input.value = value
+      form.appendChild(input)
+    }
 
     // Get form values
     const windowCount = Number.parseInt(document.getElementById("window-count").value)
