@@ -107,12 +107,11 @@ Window Estimate Details:
     // Handle the quick lead form submission
     const quickLeadForm = document.getElementById("quick-lead-form")
     quickLeadForm.addEventListener("submit", (e) => {
-      e.preventDefault() // Prevent default submission
-
       // Validate the main form fields
       const mainForm = document.getElementById("calculator-form")
       if (!mainForm.checkValidity()) {
         alert("Please fill out all required fields in the form above.")
+        e.preventDefault()
         return
       }
 
@@ -146,15 +145,15 @@ Window Estimate Details:
       appendHiddenField(quickLeadForm, "callevening", callEvening)
       appendHiddenField(quickLeadForm, "callweekend", callWeekend)
 
-      // If valid, prepare to redirect to thank you page after submission
+      // Set up redirect after form submission
       const site = { baseurl: "" } // Define site variable
       const thankYouUrl = `${window.location.origin}${site.baseurl}/thankyou.html?price=${estimatedPrice.textContent.replace(/[^0-9]/g, "")}`
 
-      // Store the thank you URL in localStorage to redirect after form submission
-      localStorage.setItem("redirectUrl", thankYouUrl)
-
-      // Submit the form to the LeadPerfection webhook
-      quickLeadForm.submit()
+      // Use the hidden iframe to handle the form submission
+      // Then redirect after a short delay to ensure the form data is sent
+      setTimeout(() => {
+        window.location.href = thankYouUrl
+      }, 500)
     })
 
     // Helper function to append hidden fields
