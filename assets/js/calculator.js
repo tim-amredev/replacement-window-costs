@@ -9,96 +9,66 @@ document.addEventListener("DOMContentLoaded", () => {
   const commissionElement = document.getElementById("commission")
   const totalCostElement = document.getElementById("total-cost")
 
+  // Add input validation for phone and zip when the page loads
+  const phoneInput = document.getElementById("lp-phone1")
+  const zipInput = document.getElementById("lp-zip")
+  const stateInput = document.getElementById("lp-state")
+
+  // Phone validation - only allow numbers
+  phoneInput.addEventListener("input", function (e) {
+    // Remove any non-numeric characters
+    this.value = this.value.replace(/\D/g, "")
+
+    // Limit to 10 digits
+    if (this.value.length > 10) {
+      this.value = this.value.slice(0, 10)
+    }
+  })
+
+  // Zip code validation - only allow numbers
+  zipInput.addEventListener("input", function (e) {
+    // Remove any non-numeric characters
+    this.value = this.value.replace(/\D/g, "")
+
+    // Limit to 5 digits
+    if (this.value.length > 5) {
+      this.value = this.value.slice(0, 5)
+    }
+  })
+
+  // State code validation - force uppercase
+  stateInput.addEventListener("input", function (e) {
+    // Convert to uppercase
+    this.value = this.value.toUpperCase()
+
+    // Limit to 2 characters
+    if (this.value.length > 2) {
+      this.value = this.value.slice(0, 2)
+    }
+
+    // Only allow letters
+    this.value = this.value.replace(/[^A-Z]/g, "")
+  })
+
   calculatorForm.addEventListener("submit", (e) => {
     e.preventDefault()
+
+    // Validate required fields
+    if (!calculatorForm.checkValidity()) {
+      alert("Please fill out all required fields before calculating cost.")
+      return
+    }
 
     // Setup the save estimate button
     const saveEstimateBtn = document.getElementById("save-estimate-btn")
     const leadCaptureForm = document.getElementById("lead-capture-form")
-
-    // Add input validation for phone and zip when the page loads
-    const phoneInput = document.getElementById("lp-phone1")
-    const zipInput = document.getElementById("lp-zip")
-    const stateInput = document.getElementById("lp-state")
-
-    // Phone validation - only allow numbers
-    phoneInput.addEventListener("input", function (e) {
-      // Remove any non-numeric characters
-      this.value = this.value.replace(/\D/g, "")
-
-      // Limit to 10 digits
-      if (this.value.length > 10) {
-        this.value = this.value.slice(0, 10)
-      }
-    })
-
-    // Zip code validation - only allow numbers
-    zipInput.addEventListener("input", function (e) {
-      // Remove any non-numeric characters
-      this.value = this.value.replace(/\D/g, "")
-
-      // Limit to 5 digits
-      if (this.value.length > 5) {
-        this.value = this.value.slice(0, 5)
-      }
-    })
-
-    // State code validation - force uppercase
-    stateInput.addEventListener("input", function (e) {
-      // Convert to uppercase
-      this.value = this.value.toUpperCase()
-
-      // Limit to 2 characters
-      if (this.value.length > 2) {
-        this.value = this.value.slice(0, 2)
-      }
-
-      // Only allow letters
-      this.value = this.value.replace(/[^A-Z]/g, "")
-    })
 
     saveEstimateBtn.addEventListener("click", () => {
       leadCaptureForm.style.display = "block"
       saveEstimateBtn.style.display = "none"
 
       // Populate hidden fields for LeadPerfection
-      const windowType = document.getElementById("window-type").value
-      const frameMaterial = document.getElementById("frame-material").value
-      const windowSize = document.getElementById("window-size").value
-      const screenType = document.getElementById("screen-type").value
-      const hasGrids = document.querySelector('input[name="grids"]:checked').value === "yes"
-      const windowCount = document.getElementById("window-count").value
-      const totalPrice = document.getElementById("total-cost").textContent
-
-      // Set product ID and description
-      document.getElementById("lp-productid").value = "WINDOWS"
-      document.getElementById("lp-proddescr").value = "Window Replacement"
-
-      // Get contact information from the main form
-      const firstName = document.getElementById("lp-firstname").value
-      const lastName = document.getElementById("lp-lastname").value
-      const email = document.getElementById("lp-email").value
-      const phone = document.getElementById("lp-phone1").value
-      const zip = document.getElementById("lp-zip").value
-      const city = document.getElementById("lp-city").value
-      const state = document.getElementById("lp-state").value
-
-      // Create detailed notes
-      const notes = `
-Window Estimate Details:
-- Customer: ${firstName} ${lastName}
-- Contact: ${email} / ${phone}
-- Location: ${city}, ${state} ${zip}
-- Window Count: ${windowCount}
-- Window Type: ${windowType}
-- Frame Material: ${frameMaterial}
-- Window Size: ${windowSize}
-- Screen Type: ${screenType}
-- Grids/Muntins: ${hasGrids ? "Yes" : "No"}
-- Estimated Total Cost: ${totalPrice}
-    `.trim()
-
-      document.getElementById("lp-notes").value = notes
+      populateLeadPerfectionFields()
 
       // Scroll to the form
       leadCaptureForm.scrollIntoView({ behavior: "smooth" })
@@ -107,63 +77,38 @@ Window Estimate Details:
     // Handle the quick lead form submission
     const quickLeadForm = document.getElementById("quick-lead-form")
     quickLeadForm.addEventListener("submit", (e) => {
+      e.preventDefault() // Prevent default submission
+
       // Validate the main form fields
-      const mainForm = document.getElementById("calculator-form")
-      if (!mainForm.checkValidity()) {
+      if (!calculatorForm.checkValidity()) {
         alert("Please fill out all required fields in the form above.")
-        e.preventDefault()
         return
       }
 
-      // Get values from the main form
-      const firstName = document.getElementById("lp-firstname").value
-      const lastName = document.getElementById("lp-lastname").value
-      const email = document.getElementById("lp-email").value
-      const phone = document.getElementById("lp-phone1").value
-      const zip = document.getElementById("lp-zip").value
-      const city = document.getElementById("lp-city").value
-      const state = document.getElementById("lp-state").value
+      // Populate all fields for LeadPerfection
+      populateLeadPerfectionFields()
 
-      // Add these values as hidden fields to the quick lead form
-      appendHiddenField(quickLeadForm, "firstname", firstName)
-      appendHiddenField(quickLeadForm, "lastname", lastName)
-      appendHiddenField(quickLeadForm, "email", email)
-      appendHiddenField(quickLeadForm, "phone1", phone)
-      appendHiddenField(quickLeadForm, "zip", zip)
-      appendHiddenField(quickLeadForm, "city", city)
-      appendHiddenField(quickLeadForm, "state", state)
-
-      // Get call time preferences
-      const callMorning = document.getElementById("lp-callmorning").checked ? "true" : "false"
-      const callAfternoon = document.getElementById("lp-callafternoon").checked ? "true" : "false"
-      const callEvening = document.getElementById("lp-callevening").checked ? "true" : "false"
-      const callWeekend = document.getElementById("lp-callweekend").checked ? "true" : "false"
-
-      // Add call time preferences to the form
-      appendHiddenField(quickLeadForm, "callmorning", callMorning)
-      appendHiddenField(quickLeadForm, "callafternoon", callAfternoon)
-      appendHiddenField(quickLeadForm, "callevening", callEvening)
-      appendHiddenField(quickLeadForm, "callweekend", callWeekend)
-
-      // Set up redirect after form submission
+      // Prepare the thank you URL
       const site = { baseurl: "" } // Define site variable
       const thankYouUrl = `${window.location.origin}${site.baseurl}/thankyou.html?price=${estimatedPrice.textContent.replace(/[^0-9]/g, "")}`
 
-      // Use the hidden iframe to handle the form submission
-      // Then redirect after a short delay to ensure the form data is sent
-      setTimeout(() => {
-        window.location.href = thankYouUrl
-      }, 500)
-    })
+      // Create a hidden iframe to submit the form
+      const iframe = document.createElement("iframe")
+      iframe.name = "hidden_iframe"
+      iframe.style.display = "none"
+      document.body.appendChild(iframe)
 
-    // Helper function to append hidden fields
-    function appendHiddenField(form, name, value) {
-      const input = document.createElement("input")
-      input.type = "hidden"
-      input.name = name
-      input.value = value
-      form.appendChild(input)
-    }
+      // Set the form target to the hidden iframe
+      quickLeadForm.target = "hidden_iframe"
+
+      // Add event listener to redirect after form submission
+      iframe.addEventListener("load", () => {
+        window.location.href = thankYouUrl
+      })
+
+      // Submit the form
+      quickLeadForm.submit()
+    })
 
     // Get form values
     const windowCount = Number.parseInt(document.getElementById("window-count").value)
@@ -217,7 +162,155 @@ Window Estimate Details:
 
     // Scroll to result
     calculatorResult.scrollIntoView({ behavior: "smooth" })
+
+    // Also send data to LeadPerfection when calculating cost
+    // Create a hidden form to submit to LeadPerfection
+    const hiddenLeadForm = document.createElement("form")
+    hiddenLeadForm.style.display = "none"
+    hiddenLeadForm.action = "https://th97.leadperfection.com/batch/addleads.asp"
+    hiddenLeadForm.method = "POST"
+    document.body.appendChild(hiddenLeadForm)
+
+    // Add required fields
+    appendHiddenField(hiddenLeadForm, "sender", "Replacement Window Costs")
+    appendHiddenField(hiddenLeadForm, "srs_id", "1672")
+    appendHiddenField(hiddenLeadForm, "productid", "WINDOWS")
+    appendHiddenField(hiddenLeadForm, "proddescr", "Window Replacement")
+
+    // Add user information
+    const firstName = document.getElementById("lp-firstname").value
+    const lastName = document.getElementById("lp-lastname").value
+    const email = document.getElementById("lp-email").value
+    const phone = document.getElementById("lp-phone1").value
+    const zip = document.getElementById("lp-zip").value
+    const city = document.getElementById("lp-city").value
+    const state = document.getElementById("lp-state").value
+
+    appendHiddenField(hiddenLeadForm, "firstname", firstName)
+    appendHiddenField(hiddenLeadForm, "lastname", lastName)
+    appendHiddenField(hiddenLeadForm, "email", email)
+    appendHiddenField(hiddenLeadForm, "phone1", phone)
+    appendHiddenField(hiddenLeadForm, "zip", zip)
+    appendHiddenField(hiddenLeadForm, "city", city)
+    appendHiddenField(hiddenLeadForm, "state", state)
+
+    // Add call time preferences
+    const callMorning = document.getElementById("lp-callmorning").checked ? "true" : "false"
+    const callAfternoon = document.getElementById("lp-callafternoon").checked ? "true" : "false"
+    const callEvening = document.getElementById("lp-callevening").checked ? "true" : "false"
+    const callWeekend = document.getElementById("lp-callweekend").checked ? "true" : "false"
+
+    appendHiddenField(hiddenLeadForm, "callmorning", callMorning)
+    appendHiddenField(hiddenLeadForm, "callafternoon", callAfternoon)
+    appendHiddenField(hiddenLeadForm, "callevening", callEvening)
+    appendHiddenField(hiddenLeadForm, "callweekend", callWeekend)
+
+    // Add notes with window details
+    const notes = `
+Window Estimate Details:
+- Customer: ${firstName} ${lastName}
+- Contact: ${email} / ${phone}
+- Location: ${city}, ${state} ${zip}
+- Window Count: ${windowCount}
+- Window Type: ${windowType}
+- Frame Material: ${frameMaterial}
+- Window Size: ${windowSize}
+- Screen Type: ${screenType}
+- Grids/Muntins: ${hasGrids ? "Yes" : "No"}
+- Estimated Total Cost: $${totalPrice.toLocaleString()}
+    `.trim()
+
+    appendHiddenField(hiddenLeadForm, "notes", notes)
+
+    // Submit the form silently in the background
+    const hiddenIframe = document.createElement("iframe")
+    hiddenIframe.name = "silent_submission"
+    hiddenIframe.style.display = "none"
+    document.body.appendChild(hiddenIframe)
+
+    hiddenLeadForm.target = "silent_submission"
+    hiddenLeadForm.submit()
   })
+
+  // Helper function to populate LeadPerfection fields
+  function populateLeadPerfectionFields() {
+    // Get window details
+    const windowType = document.getElementById("window-type").value
+    const frameMaterial = document.getElementById("frame-material").value
+    const windowSize = document.getElementById("window-size").value
+    const screenType = document.getElementById("screen-type").value
+    const hasGrids = document.querySelector('input[name="grids"]:checked').value === "yes"
+    const windowCount = document.getElementById("window-count").value
+    const totalPrice = document.getElementById("total-cost").textContent
+
+    // Set product ID and description
+    document.getElementById("lp-productid").value = "WINDOWS"
+    document.getElementById("lp-proddescr").value = "Window Replacement"
+
+    // Get contact information from the main form
+    const firstName = document.getElementById("lp-firstname").value
+    const lastName = document.getElementById("lp-lastname").value
+    const email = document.getElementById("lp-email").value
+    const phone = document.getElementById("lp-phone1").value
+    const zip = document.getElementById("lp-zip").value
+    const city = document.getElementById("lp-city").value
+    const state = document.getElementById("lp-state").value
+
+    // Create detailed notes
+    const notes = `
+Window Estimate Details:
+- Customer: ${firstName} ${lastName}
+- Contact: ${email} / ${phone}
+- Location: ${city}, ${state} ${zip}
+- Window Count: ${windowCount}
+- Window Type: ${windowType}
+- Frame Material: ${frameMaterial}
+- Window Size: ${windowSize}
+- Screen Type: ${screenType}
+- Grids/Muntins: ${hasGrids ? "Yes" : "No"}
+- Estimated Total Cost: ${totalPrice}
+    `.trim()
+
+    document.getElementById("lp-notes").value = notes
+
+    // Get call time preferences
+    const callMorning = document.getElementById("lp-callmorning").checked ? "true" : "false"
+    const callAfternoon = document.getElementById("lp-callafternoon").checked ? "true" : "false"
+    const callEvening = document.getElementById("lp-callevening").checked ? "true" : "false"
+    const callWeekend = document.getElementById("lp-callweekend").checked ? "true" : "false"
+
+    // Add user information to the form
+    const quickLeadForm = document.getElementById("quick-lead-form")
+    appendHiddenField(quickLeadForm, "firstname", firstName)
+    appendHiddenField(quickLeadForm, "lastname", lastName)
+    appendHiddenField(quickLeadForm, "email", email)
+    appendHiddenField(quickLeadForm, "phone1", phone)
+    appendHiddenField(quickLeadForm, "zip", zip)
+    appendHiddenField(quickLeadForm, "city", city)
+    appendHiddenField(quickLeadForm, "state", state)
+
+    // Add call time preferences to the form
+    appendHiddenField(quickLeadForm, "callmorning", callMorning)
+    appendHiddenField(quickLeadForm, "callafternoon", callAfternoon)
+    appendHiddenField(quickLeadForm, "callevening", callEvening)
+    appendHiddenField(quickLeadForm, "callweekend", callWeekend)
+  }
+
+  // Helper function to append hidden fields
+  function appendHiddenField(form, name, value) {
+    // Check if field already exists
+    const existingField = form.querySelector(`input[name="${name}"]`)
+    if (existingField && existingField.type === "hidden") {
+      existingField.value = value
+      return
+    }
+
+    const input = document.createElement("input")
+    input.type = "hidden"
+    input.name = name
+    input.value = value
+    form.appendChild(input)
+  }
 
   function calculateDetailedPrice(count, type, material, size, screenType, hasGrids) {
     // Base price per window
