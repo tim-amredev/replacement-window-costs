@@ -205,7 +205,7 @@ custom_js:
         <h4>Save Your Estimate</h4>
         <p>Review your information and submit to save this estimate and receive a detailed quote from our professionals.</p>
         
-        <form id="quick-lead-form" action="https://th97.leadperfection.com/batch/addleads.asp" method="POST">
+        <form id="quick-lead-form" action="https://th97.leadperfection.com/batch/addleads.asp" method="POST" target="hidden-iframe">
           <!-- Hidden fields for LeadPerfection -->
           <input type="hidden" name="sender" value="Replacement Window Costs">
           <input type="hidden" name="srs_id" value="1672">
@@ -215,6 +215,8 @@ custom_js:
           
           <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Estimate Request</button>
         </form>
+        <!-- Hidden iframe for form submission without page redirect -->
+        <iframe name="hidden-iframe" style="display:none;"></iframe>
       </div>
       
       <div class="action-buttons">
