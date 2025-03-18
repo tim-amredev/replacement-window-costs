@@ -11,25 +11,28 @@ custom_js:
     <p class="text-center">Fill out the form below to receive a personalized quote for your window replacement project. Our network of trusted professionals will review your requirements and provide you with an accurate estimate.</p>
     
     <div class="card">
-      <form id="quote-form" action="https://formsubmit.co/34621b6167978998b0c76f8366420183" method="POST">
-        <!-- FormSubmit Configuration -->
-        <input type="hidden" name="_captcha" value="true">
-        <input type="hidden" name="_next" id="thank-you-url" value="{{ site.baseurl }}/thankyou.html">
-        <input type="hidden" name="_subject" value="New Quote Request from ReplacementWindowCosts.com">
+      <form id="quote-form" action="https://th97.leadperfection.com/batch/addleads.asp" method="POST">
+        <!-- LeadPerfection Required Fields -->
+        <input type="hidden" name="sender" value="Replacement Window Costs">
+        <input type="hidden" name="srs_id" value="1672">
+        <input type="hidden" name="productid" value="WINDOWS">
+        <input type="hidden" name="proddescr" value="Window Replacement">
+        <input type="hidden" name="notes" id="lp-notes">
+        <input type="hidden" id="thank-you-url" value="{{ site.baseurl }}/thankyou.html">
         
         <h3>Contact Information</h3>
         <div class="form-row">
           <div class="form-col">
             <div class="form-group">
-              <label for="name">First Name</label>
-              <input type="text" id="name" name="name" required>
+              <label for="firstname">First Name</label>
+              <input type="text" id="firstname" name="firstname" required>
             </div>
           </div>
           
           <div class="form-col">
             <div class="form-group">
-              <label for="name">Last Name</label>
-              <input type="text" id="name" name="name" required>
+              <label for="lastname">Last Name</label>
+              <input type="text" id="lastname" name="lastname" required>
             </div>
           </div>
           
@@ -40,15 +43,45 @@ custom_js:
             </div>
           </div>
         </div>
-        
+
         <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" required>
+          <label for="phone1">Phone Number</label>
+          <input type="tel" id="phone1" name="phone1" pattern="[0-9]{10}" title="Please enter a 10-digit phone number without spaces or special characters" required>
+          <small class="input-help">Enter a 10-digit number without spaces or special characters</small>
         </div>
-        
-        <div class="form-group">
-          <label for="address">Property Address</label>
-          <input type="text" id="address" name="address" required>
+
+        <div class="form-row">
+          <div class="form-col">
+            <div class="form-group">
+              <label for="address1">Street Address</label>
+              <input type="text" id="address1" name="address1" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-col">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" required>
+            </div>
+          </div>
+          
+          <div class="form-col">
+            <div class="form-group">
+              <label for="state">State</label>
+              <input type="text" id="state" name="state" maxlength="2" required>
+              <small class="input-help">2-letter code (e.g., CA)</small>
+            </div>
+          </div>
+          
+          <div class="form-col">
+            <div class="form-group">
+              <label for="zip">Zip Code</label>
+              <input type="text" id="zip" name="zip" pattern="[0-9]{5}" title="Please enter a 5-digit zip code" required>
+              <small class="input-help">Enter a 5-digit zip code</small>
+            </div>
+          </div>
         </div>
         
         <div class="form-section">
@@ -271,6 +304,10 @@ custom_js:
                 <label for="material-composite">Composite</label>
               </div>
               <div class="radio-option">
+                <input type="radio" id="material-woodclad" name="frame_material" value="Wood-clad">
+                <label for="material-woodclad">Wood-clad</label>
+              </div>
+              <div class="radio-option">
                 <input type="radio" id="material-steel" name="frame_material" value="Steel">
                 <label for="material-steel">Steel</label>
               </div>
@@ -336,96 +373,6 @@ custom_js:
             </div>
           </div>
         </div>
-        
-<div class="form-section">
-  <h3>Window Color Options</h3>
-  
-  <div class="form-group">
-    <label>What exterior color are you interested in?</label>
-    <div class="radio-group">
-      <div class="radio-option">
-        <input type="radio" id="ext-white" name="exterior_color" value="White" checked>
-        <label for="ext-white">White</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="ext-tan" name="exterior_color" value="Almond/Tan/Beige">
-        <label for="ext-tan">Almond/Tan/Beige</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="ext-black" name="exterior_color" value="Black">
-        <label for="ext-black">Black</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="ext-bronze" name="exterior_color" value="Bronze">
-        <label for="ext-bronze">Bronze</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="ext-brown" name="exterior_color" value="Brown">
-        <label for="ext-brown">Brown</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="ext-gray" name="exterior_color" value="Gray/Slate">
-        <label for="ext-gray">Gray/Slate</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="ext-green" name="exterior_color" value="Forest Green">
-        <label for="ext-green">Forest Green</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="ext-terratone" name="exterior_color" value="Terratone/Clay">
-        <label for="ext-terratone">Terratone/Clay</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="ext-other" name="exterior_color" value="Other">
-        <label for="ext-other">Other</label>
-        <input type="text" id="ext-other-text" name="exterior_color_other" placeholder="Please specify" class="other-input">
-      </div>
-    </div>
-  </div>
-  
-  <div class="form-group">
-    <label>What interior color or finish are you interested in?</label>
-    <div class="radio-group">
-      <div class="radio-option">
-        <input type="radio" id="int-white" name="interior_color" value="White" checked>
-        <label for="int-white">White</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="int-tan" name="interior_color" value="Almond/Tan/Beige">
-        <label for="int-tan">Almond/Tan/Beige</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="int-black" name="interior_color" value="Black">
-        <label for="int-black">Black</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="int-oak" name="interior_color" value="Wood Grain - Oak">
-        <label for="int-oak">Wood Grain - Oak</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="int-cherry" name="interior_color" value="Wood Grain - Cherry">
-        <label for="int-cherry">Wood Grain - Cherry</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="int-maple" name="interior_color" value="Wood Grain - Maple">
-        <label for="int-maple">Wood Grain - Maple</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="int-walnut" name="interior_color" value="Wood Grain - Walnut">
-        <label for="int-walnut">Wood Grain - Walnut</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="int-stainable" name="interior_color" value="Stainable/Paintable">
-        <label for="int-stainable">Stainable/Paintable</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="int-other" name="interior_color" value="Other">
-        <label for="int-other">Other</label>
-        <input type="text" id="int-other-text" name="interior_color_other" placeholder="Please specify" class="other-input">
-      </div>
-    </div>
-  </div>
-</div>
         
         <div class="form-section">
           <h3>Project Specifics</h3>
@@ -1013,6 +960,21 @@ custom_js:
     color: var(--text-light);
     margin-top: 1rem;
     font-style: italic;
+  }
+
+  .input-help {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+  }
+
+  input:invalid {
+    border-color: #dc3545;
+  }
+
+  input:valid {
+    border-color: #28a745;
   }
 </style>
 
