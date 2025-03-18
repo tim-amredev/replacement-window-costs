@@ -22,9 +22,18 @@ custom_js:
           <div class="form-group">
             <label for="window-type">Window Type</label>
             <select id="window-type" required>
+              <option value="single-hung">Single-Hung</option>
               <option value="double-hung">Double-Hung</option>
               <option value="casement">Casement</option>
+              <option value="sliding">Sliding/Gliding</option>
+              <option value="picture">Picture/Fixed</option>
               <option value="bay">Bay/Bow</option>
+              <option value="awning">Awning</option>
+              <option value="hopper">Hopper</option>
+              <option value="garden">Garden</option>
+              <option value="storm">Storm</option>
+              <option value="skylight">Skylight</option>
+              <option value="jalousie">Jalousie</option>
             </select>
           </div>
         </div>
@@ -36,6 +45,10 @@ custom_js:
               <option value="vinyl">Vinyl</option>
               <option value="wood">Wood</option>
               <option value="fiberglass">Fiberglass</option>
+              <option value="aluminum">Aluminum</option>
+              <option value="composite">Composite</option>
+              <option value="wood-clad">Wood-Clad</option>
+              <option value="steel">Steel</option>
             </select>
           </div>
         </div>
@@ -48,6 +61,35 @@ custom_js:
           <option value="medium" selected>Medium (3 ft × 4 ft to 4 ft × 5 ft)</option>
           <option value="large">Large (Larger than 4 ft × 5 ft)</option>
         </select>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="screen-type">Screen Options</label>
+            <select id="screen-type" required>
+              <option value="none">No Screens</option>
+              <option value="half">Half Screens</option>
+              <option value="full">Full Screens</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-col">
+          <div class="form-group">
+            <label>Grids/Muntins</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="grids-yes" name="grids" value="yes">
+                <label for="grids-yes">Yes</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="grids-no" name="grids" value="no" checked>
+                <label for="grids-no">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       
       <button type="submit" class="btn btn-primary" style="width: 100%;">Calculate Cost</button>
@@ -91,7 +133,7 @@ custom_js:
   
   <div class="card">
     <ul>
-      <li><strong>Window Cost:</strong> The price of the windows themselves, based on type, material, and size</li>
+      <li><strong>Window Cost:</strong> The price of the windows themselves, based on type, material, size, screens, and grids</li>
       <li><strong>Installation Cost:</strong> Labor costs for professional installation</li>
       <li><strong>Service Fee:</strong> Includes project management, permits, and other service costs</li>
     </ul>
@@ -99,7 +141,7 @@ custom_js:
     <ul>
       <li><strong>Location:</strong> Labor and material costs vary by region</li>
       <li><strong>Installation Complexity:</strong> Structural modifications may be needed</li>
-      <li><strong>Additional Features:</strong> Energy-efficient glass, grids, or special finishes</li>
+      <li><strong>Additional Features:</strong> Energy-efficient glass, special finishes, or custom options</li>
       <li><strong>Brand:</strong> Different manufacturers offer various price points and quality levels</li>
     </ul>
   </div>
@@ -167,5 +209,20 @@ custom_js:
   font-family: monospace;
   font-size: 1.1rem;
 }
-</style>
 
+/* Radio group styles for grids option */
+.radio-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+}
+
+.radio-option input[type="radio"] {
+  margin-right: 0.5rem;
+}
+</style>
