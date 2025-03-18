@@ -162,51 +162,87 @@ custom_js:
           <h3>Window Details</h3>
           
           <div class="form-group">
-            <label>What type of windows do you currently have?</label>
-            <div class="radio-group">
-              <div class="radio-option">
-                <input type="radio" id="type-single" name="current_window_type" value="Single-hung">
+            <label>What type of windows are you interested in? (Select all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-single" name="window_types[]" value="Single-hung">
                 <label for="type-single">Single-hung</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-double" name="current_window_type" value="Double-hung">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-double" name="window_types[]" value="Double-hung">
                 <label for="type-double">Double-hung</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-casement" name="current_window_type" value="Casement (crank out)">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-casement" name="window_types[]" value="Casement (crank out)">
                 <label for="type-casement">Casement (crank out)</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-sliding" name="current_window_type" value="Sliding/gliding">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-sliding" name="window_types[]" value="Sliding/gliding">
                 <label for="type-sliding">Sliding/gliding</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-picture" name="current_window_type" value="Picture/fixed">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-picture" name="window_types[]" value="Picture/fixed">
                 <label for="type-picture">Picture/fixed</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-bay" name="current_window_type" value="Bay or bow">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-bay" name="window_types[]" value="Bay or bow">
                 <label for="type-bay">Bay or bow</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-awning" name="current_window_type" value="Awning">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-awning" name="window_types[]" value="Awning">
                 <label for="type-awning">Awning</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-garden" name="current_window_type" value="Garden">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-hopper" name="window_types[]" value="Hopper">
+                <label for="type-hopper">Hopper</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-garden" name="window_types[]" value="Garden">
                 <label for="type-garden">Garden</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-storm" name="current_window_type" value="Storm windows">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-storm" name="window_types[]" value="Storm windows">
                 <label for="type-storm">Storm windows</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-mixture" name="current_window_type" value="Mixture of types">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-skylight" name="window_types[]" value="Skylight">
+                <label for="type-skylight">Skylight</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-jalousie" name="window_types[]" value="Jalousie">
+                <label for="type-jalousie">Jalousie</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-mixture" name="window_types[]" value="Mixture of types">
                 <label for="type-mixture">Mixture of types</label>
               </div>
-              <div class="radio-option">
-                <input type="radio" id="type-unsure" name="current_window_type" value="Unsure">
+              <div class="checkbox-option">
+                <input type="checkbox" id="type-unsure" name="window_types[]" value="Unsure">
                 <label for="type-unsure">Unsure</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="screen-type">Screen Options</label>
+            <select id="screen-type" name="screen_type" class="form-select">
+              <option value="">Select screen type</option>
+              <option value="none">No screens</option>
+              <option value="half">Half screens</option>
+              <option value="full">Full screens</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Would you like grids/muntins on your windows?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="grids-yes" name="grids" value="Yes">
+                <label for="grids-yes">Yes</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="grids-no" name="grids" value="No">
+                <label for="grids-no">No</label>
               </div>
             </div>
           </div>
@@ -572,7 +608,7 @@ custom_js:
                 <label for="feature-screens">Screen options</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="feature-grilles" name="additional_features[]" value="Grilles/muntins (decorative  id="feature-grilles" name="additional_features[]" value="Grilles/muntins (decorative dividers)">
+                <input type="checkbox" id="feature-grilles" name="additional_features[]" value="Grilles/muntins (decorative dividers)">
                 <label for="feature-grilles">Grilles/muntins (decorative dividers)</label>
               </div>
               <div class="checkbox-option">
@@ -893,4 +929,3 @@ custom_js:
     font-style: italic;
   }
 </style>
-
