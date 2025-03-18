@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const windowType = document.getElementById("window-type").value
     const frameMaterial = document.getElementById("frame-material").value
     const windowSize = document.getElementById("window-size").value
+    const screenType = document.getElementById("screen-type").value
+    const hasGrids = document.querySelector('input[name="grids"]:checked').value === "yes"
 
     // Calculate prices
     const { windowCost, installationCost, commission, totalPrice } = calculateDetailedPrice(
@@ -24,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
       windowType,
       frameMaterial,
       windowSize,
+      screenType,
+      hasGrids
     )
 
     // Display result with animation
@@ -46,6 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
       type: windowType,
       material: frameMaterial,
       size: windowSize,
+      screen: screenType,
+      grids: hasGrids ? "yes" : "no",
       price: totalPrice,
     })
 
@@ -55,20 +61,47 @@ document.addEventListener("DOMContentLoaded", () => {
     calculatorResult.scrollIntoView({ behavior: "smooth" })
   })
 
-  function calculateDetailedPrice(count, type, material, size) {
+  function calculateDetailedPrice(count, type, material, size, screenType, hasGrids) {
     // Base price per window
     let baseWindowPrice = 300
 
     // Adjustments for window type
     switch (type) {
+      case "single-hung":
+        baseWindowPrice -= 25
+        break
       case "double-hung":
         baseWindowPrice += 0
         break
       case "casement":
         baseWindowPrice += 50
         break
+      case "sliding":
+        baseWindowPrice += 25
+        break
+      case "picture":
+        baseWindowPrice += 75
+        break
       case "bay":
         baseWindowPrice += 200
+        break
+      case "awning":
+        baseWindowPrice += 60
+        break
+      case "hopper":
+        baseWindowPrice += 40
+        break
+      case "garden":
+        baseWindowPrice += 150
+        break
+      case "storm":
+        baseWindowPrice -= 50
+        break
+      case "skylight":
+        baseWindowPrice += 250
+        break
+      case "jalousie":
+        baseWindowPrice += 30
         break
     }
 
@@ -82,6 +115,18 @@ document.addEventListener("DOMContentLoaded", () => {
         break
       case "fiberglass":
         baseWindowPrice += 150
+        break
+      case "aluminum":
+        baseWindowPrice += 50
+        break
+      case "composite":
+        baseWindowPrice += 125
+        break
+      case "wood-clad":
+        baseWindowPrice += 175
+        break
+      case "steel":
+        baseWindowPrice += 200
         break
     }
 
@@ -98,6 +143,24 @@ document.addEventListener("DOMContentLoaded", () => {
         break
     }
 
+    // Adjustments for screen type
+    switch (screenType) {
+      case "none":
+        baseWindowPrice += 0
+        break
+      case "half":
+        baseWindowPrice += 25
+        break
+      case "full":
+        baseWindowPrice += 50
+        break
+    }
+
+    // Adjustments for grids
+    if (hasGrids) {
+      baseWindowPrice += 75
+    }
+
     // Calculate window cost
     const windowCost = baseWindowPrice * count
 
@@ -106,14 +169,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Installation adjustments for window type
     switch (type) {
+      case "single-hung":
+        baseInstallCost -= 10
+        break
       case "double-hung":
         baseInstallCost += 0
         break
       case "casement":
         baseInstallCost += 25
         break
+      case "sliding":
+        baseInstallCost += 15
+        break
+      case "picture":
+        baseInstallCost += 20
+        break
       case "bay":
         baseInstallCost += 150
+        break
+      case "awning":
+        baseInstallCost += 30
+        break
+      case "hopper":
+        baseInstallCost += 20
+        break
+      case "garden":
+        baseInstallCost += 100
+        break
+      case "storm":
+        baseInstallCost -= 25
+        break
+      case "skylight":
+        baseInstallCost += 200
+        break
+      case "jalousie":
+        baseInstallCost += 15
         break
     }
 
@@ -128,6 +218,18 @@ document.addEventListener("DOMContentLoaded", () => {
       case "fiberglass":
         baseInstallCost += 75
         break
+      case "aluminum":
+        baseInstallCost += 25
+        break
+      case "composite":
+        baseInstallCost += 60
+        break
+      case "wood-clad":
+        baseInstallCost += 85
+        break
+      case "steel":
+        baseInstallCost += 100
+        break
     }
 
     // Installation adjustments for size
@@ -141,6 +243,24 @@ document.addEventListener("DOMContentLoaded", () => {
       case "large":
         baseInstallCost += 100
         break
+    }
+
+    // Installation adjustments for screens
+    switch (screenType) {
+      case "none":
+        baseInstallCost += 0
+        break
+      case "half":
+        baseInstallCost += 10
+        break
+      case "full":
+        baseInstallCost += 20
+        break
+    }
+
+    // Installation adjustments for grids
+    if (hasGrids) {
+      baseInstallCost += 15
     }
 
     // Calculate total installation cost
@@ -164,4 +284,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 })
-
