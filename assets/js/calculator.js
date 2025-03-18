@@ -12,6 +12,104 @@ document.addEventListener("DOMContentLoaded", () => {
   calculatorForm.addEventListener("submit", (e) => {
     e.preventDefault()
 
+    // Setup the save estimate button
+    const saveEstimateBtn = document.getElementById("save-estimate-btn")
+    const leadCaptureForm = document.getElementById("lead-capture-form")
+
+    saveEstimateBtn.addEventListener("click", () => {
+      leadCaptureForm.style.display = "block"
+      saveEstimateBtn.style.display = "none"
+
+      // Populate hidden fields for LeadPerfection
+      const windowType = document.getElementById("window-type").value
+      const frameMaterial = document.getElementById("frame-material").value
+      const windowSize = document.getElementById("window-size").value
+      const screenType = document.getElementById("screen-type").value
+      const hasGrids = document.querySelector('input[name="grids"]:checked').value === "yes"
+      const windowCount = document.getElementById("window-count").value
+      const totalPrice = document.getElementById("total-cost").textContent
+
+      // Set product ID and description
+      document.getElementById("lp-productid").value = "WINDOWS"
+      document.getElementById("lp-proddescr").value = "Window Replacement"
+
+      // Create detailed notes
+      const notes = `
+Window Estimate Details:
+- Window Count: ${windowCount}
+- Window Type: ${windowType}
+- Frame Material: ${frameMaterial}
+- Window Size: ${windowSize}
+- Screen Type: ${screenType}
+- Grids/Muntins: ${hasGrids ? "Yes" : "No"}
+- Estimated Total Cost: ${totalPrice}
+    `.trim()
+
+      document.getElementById("lp-notes").value = notes
+
+      // Add input validation for phone and zip
+      const phoneInput = document.getElementById("lp-phone1")
+      const zipInput = document.getElementById("lp-zip")
+
+      // Phone validation - only allow numbers
+      phoneInput.addEventListener("input", function (e) {
+        // Remove any non-numeric characters
+        this.value = this.value.replace(/\D/g, "")
+
+        // Limit to 10 digits
+        if (this.value.length > 10) {
+          this.value = this.value.slice(0, 10)
+        }
+      })
+
+      // Zip code validation - only allow numbers
+      zipInput.addEventListener("input", function (e) {
+        // Remove any non-numeric characters
+        this.value = this.value.replace(/\D/g, "")
+
+        // Limit to 5 digits
+        if (this.value.length > 5) {
+          this.value = this.value.slice(0, 5)
+        }
+      })
+
+      // State code validation - force uppercase
+      const stateInput = document.getElementById("lp-state")
+      stateInput.addEventListener("input", function (e) {
+        // Convert to uppercase
+        this.value = this.value.toUpperCase()
+
+        // Limit to 2 characters
+        if (this.value.length > 2) {
+          this.value = this.value.slice(0, 2)
+        }
+
+        // Only allow letters
+        this.value = this.value.replace(/[^A-Z]/g, "")
+      })
+
+      // Scroll to the form
+      leadCaptureForm.scrollIntoView({ behavior: "smooth" })
+    })
+
+    // Handle the quick lead form submission
+    const quickLeadForm = document.getElementById("quick-lead-form")
+    quickLeadForm.addEventListener("submit", (e) => {
+      // Validate the form
+      if (!quickLeadForm.checkValidity()) {
+        return // Let the browser handle validation
+      }
+
+      // If valid, prepare to redirect to thank you page after submission
+      const site = { baseurl: "" } // Define site variable
+      const thankYouUrl = `${window.location.origin}${site.baseurl}/thankyou.html?price=${estimatedPrice.textContent.replace(/[^0-9]/g, "")}`
+
+      // Store the thank you URL in localStorage to redirect after form submission
+      localStorage.setItem("redirectUrl", thankYouUrl)
+
+      // The form will submit to the LeadPerfection webhook
+    })
+
     // Get form values
     const windowCount = Number.parseInt(document.getElementById("window-count").value)
     const windowType = document.getElementById("window-type").value
@@ -27,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
       frameMaterial,
       windowSize,
       screenType,
-      hasGrids
+      hasGrids,
     )
 
     // Display result with animation
@@ -40,6 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
     totalCostElement.textContent = "$" + totalPrice.toLocaleString()
 
     calculatorResult.style.display = "block"
+
+    // Reset the lead capture form and buttons when showing new results
+    leadCaptureForm.style.display = "none"
+    saveEstimateBtn.style.display = "inline-flex"
+
     breakdownContainer.style.display = "block"
     calculatorResult.classList.add("fadeIn")
 
@@ -284,3 +387,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 })
+
