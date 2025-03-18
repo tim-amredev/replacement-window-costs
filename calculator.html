@@ -12,6 +12,84 @@ custom_js:
   
   <div class="card">
     <form id="calculator-form">
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="lp-firstname">First Name</label>
+            <input type="text" id="lp-firstname" name="firstname" required>
+          </div>
+        </div>
+        <div class="form-col">
+          <div class="form-group">
+            <label for="lp-lastname">Last Name</label>
+            <input type="text" id="lp-lastname" name="lastname" required>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="lp-email">Email Address</label>
+        <input type="email" id="lp-email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="lp-phone1">Phone Number</label>
+        <input type="tel" id="lp-phone1" name="phone1" pattern="[0-9]{10}" title="Please enter a 10-digit phone number without spaces or special characters" required>
+        <small class="input-help">Enter a 10-digit number without spaces or special characters</small>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="lp-zip">Zip Code</label>
+            <input type="text" id="lp-zip" name="zip" pattern="[0-9]{5}" title="Please enter a 5-digit zip code" required>
+            <small class="input-help">Enter a 5-digit zip code</small>
+          </div>
+        </div>
+        <div class="form-col">
+          <div class="form-group">
+            <label for="lp-city">City</label>
+            <input type="text" id="lp-city" name="city">
+          </div>
+        </div>
+        <div class="form-col">
+          <div class="form-group">
+            <label for="lp-state">State</label>
+            <input type="text" id="lp-state" name="state" maxlength="2">
+            <small class="input-help">2-letter code (e.g., CA)</small>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Best Time to Contact</label>
+        <div class="checkbox-group">
+          <div class="checkbox-option">
+            <input type="checkbox" id="lp-callmorning" name="callmorning" value="true">
+            <label for="lp-callmorning">Morning</label>
+          </div>
+          <div class="checkbox-option">
+            <input type="checkbox" id="lp-callafternoon" name="callafternoon" value="true">
+            <label for="lp-callafternoon">Afternoon</label>
+          </div>
+          <div class="checkbox-option">
+            <input type="checkbox" id="lp-callevening" name="callevening" value="true">
+            <label for="lp-callevening">Evening</label>
+          </div>
+          <div class="checkbox-option">
+            <input type="checkbox" id="lp-callweekend" name="callweekend" value="true">
+            <label for="lp-callweekend">Weekend</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group consent-section">
+        <div class="checkbox-option terms-checkbox">
+          <input type="checkbox" id="lp-terms-consent" required>
+          <label for="lp-terms-consent">I agree to be contacted about my window replacement project.</label>
+        </div>
+      </div>
+      
       <div class="form-group">
         <label for="window-count">Number of Windows</label>
         <input type="number" id="window-count" min="1" value="1" required>
@@ -125,7 +203,7 @@ custom_js:
       
       <div class="lead-capture-form" id="lead-capture-form" style="display: none;">
         <h4>Save Your Estimate</h4>
-        <p>Enter your information to save this estimate and receive a detailed quote from our professionals.</p>
+        <p>Review your information and submit to save this estimate and receive a detailed quote from our professionals.</p>
         
         <form id="quick-lead-form" action="https://th97.leadperfection.com/batch/addleads.asp" method="POST">
           <!-- Hidden fields for LeadPerfection -->
@@ -135,85 +213,7 @@ custom_js:
           <input type="hidden" name="proddescr" id="lp-proddescr">
           <input type="hidden" name="notes" id="lp-notes">
           
-          <div class="form-row">
-            <div class="form-col">
-              <div class="form-group">
-                <label for="lp-firstname">First Name</label>
-                <input type="text" id="lp-firstname" name="firstname" required>
-              </div>
-            </div>
-            <div class="form-col">
-              <div class="form-group">
-                <label for="lp-lastname">Last Name</label>
-                <input type="text" id="lp-lastname" name="lastname" required>
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="lp-email">Email Address</label>
-            <input type="email" id="lp-email" name="email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="lp-phone1">Phone Number</label>
-            <input type="tel" id="lp-phone1" name="phone1" pattern="[0-9]{10}" title="Please enter a 10-digit phone number without spaces or special characters" required>
-            <small class="input-help">Enter a 10-digit number without spaces or special characters</small>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-col">
-              <div class="form-group">
-                <label for="lp-zip">Zip Code</label>
-                <input type="text" id="lp-zip" name="zip" pattern="[0-9]{5}" title="Please enter a 5-digit zip code" required>
-                <small class="input-help">Enter a 5-digit zip code</small>
-              </div>
-            </div>
-            <div class="form-col">
-              <div class="form-group">
-                <label for="lp-city">City</label>
-                <input type="text" id="lp-city" name="city">
-              </div>
-            </div>
-            <div class="form-col">
-              <div class="form-group">
-                <label for="lp-state">State</label>
-                <input type="text" id="lp-state" name="state" maxlength="2">
-                <small class="input-help">2-letter code (e.g., CA)</small>
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label>Best Time to Contact</label>
-            <div class="checkbox-group">
-              <div class="checkbox-option">
-                <input type="checkbox" id="lp-callmorning" name="callmorning" value="true">
-                <label for="lp-callmorning">Morning</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="lp-callafternoon" name="callafternoon" value="true">
-                <label for="lp-callafternoon">Afternoon</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="lp-callevening" name="callevening" value="true">
-                <label for="lp-callevening">Evening</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="lp-callweekend" name="callweekend" value="true">
-                <label for="lp-callweekend">Weekend</label>
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group consent-section">
-            <div class="checkbox-option terms-checkbox">
-              <input type="checkbox" id="lp-terms-consent" required>
-              <label for="lp-terms-consent">I agree to be contacted about my window replacement project.</label>
-            </div>
-          </div>
-          
-          <button type="submit" class="btn btn-primary" style="width: 100%;">Save Estimate & Get Quote</button>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Estimate Request</button>
         </form>
       </div>
       
