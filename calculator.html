@@ -15,6 +15,204 @@ custom_js:
       <div class="form-row">
         <div class="form-col">
           <div class="form-group">
+            <label for="window-type">Window Type</label>
+            <select id="window-type" required>
+              <option value="single-hung">Single-Hung</option>
+              <option value="double-hung">Double-Hung</option>
+              <option value="casement">Casement</option>
+              <option value="sliding">Sliding/Gliding</option>
+              <option value="picture">Picture/Fixed</option>
+              <option value="bay">Bay/Bow</option>
+              <option value="awning">Awning</option>
+              <option value="hopper">Hopper</option>
+              <option value="garden">Garden</option>
+              <option value="storm">Storm</option>
+              <option value="skylight">Skylight</option>
+              <option value="jalousie">Jalousie</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-col">
+          <div class="form-group">
+            <label for="frame-material">Frame Material</label>
+            <select id="frame-material" required>
+              <option value="vinyl">Vinyl</option>
+              <option value="wood">Wood</option>
+              <option value="fiberglass">Fiberglass</option>
+              <option value="aluminum">Aluminum</option>
+              <option value="composite">Composite</option>
+              <option value="wood-clad">Wood-Clad</option>
+              <option value="steel">Steel</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="window-size">Window Size</label>
+        <select id="window-size" required>
+          <option value="small">Small (0-84 United inches)</option>
+          <option value="medium" selected>Medium (85-101 United inches)</option>
+          <option value="large">Large (101+ United inches)</option>
+        </select>
+        <small class="input-help">United inches = the width of the bottom + the height of one side</small>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="screen-type">Screen Options</label>
+            <select id="screen-type" required>
+              <option value="none">No Screens</option>
+              <option value="half">Half Screens</option>
+              <option value="full">Full Screens</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-col">
+          <div class="form-group">
+            <label>Grids/Muntins</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="grids-yes" name="grids" value="yes">
+                <label for="grids-yes">Yes</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="grids-no" name="grids" value="no" checked>
+                <label for="grids-no">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row grid-options" style="display: none;">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="grid-type">Grid Type</label>
+            <select id="grid-type" name="grid-type">
+              <option value="flat">Flat</option>
+              <option value="contour">Contour</option>
+              <option value="sdl">SDL (Simulated Divided Light)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-col">
+          <div class="form-group">
+            <label for="grid-pattern">Grid Pattern</label>
+            <select id="grid-pattern" name="grid-pattern">
+              <option value="colonial">Colonial</option>
+              <option value="prairie">Prairie</option>
+              <option value="diamond">Diamond</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Exterior Color</label>
+        <div class="color-selector">
+          <input type="radio" name="exterior-color" id="exterior-white" value="white" checked>
+          <label for="exterior-white" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/white.jpg" alt="White">
+            <span>White</span>
+          </label>
+          
+          <input type="radio" name="exterior-color" id="exterior-almond" value="almond">
+          <label for="exterior-almond" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/almond.png" alt="Almond">
+            <span>Almond</span>
+          </label>
+          
+          <input type="radio" name="exterior-color" id="exterior-cocoa" value="cocoa">
+          <label for="exterior-cocoa" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/cocoa.png" alt="Cocoa">
+            <span>Cocoa</span>
+          </label>
+          
+          <input type="radio" name="exterior-color" id="exterior-bronze" value="bronze">
+          <label for="exterior-bronze" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/bronze.png" alt="Bronze">
+            <span>Bronze</span>
+          </label>
+          
+          <input type="radio" name="exterior-color" id="exterior-black" value="black">
+          <label for="exterior-black" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/black.png" alt="Black">
+            <span>Black</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Interior Color</label>
+        <div class="color-selector">
+          <input type="radio" name="interior-color" id="interior-white" value="white" checked>
+          <label for="interior-white" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/white-interior.jpg" alt="White">
+            <span>White</span>
+          </label>
+          
+          <input type="radio" name="interior-color" id="interior-winchester" value="winchester">
+          <label for="interior-winchester" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/winchester.jpg" alt="Winchester">
+            <span>Winchester</span>
+          </label>
+          
+          <input type="radio" name="interior-color" id="interior-melrose-cherry" value="melrose-cherry">
+          <label for="interior-melrose-cherry" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/melrose-cherry.jpg" alt="Melrose Cherry">
+            <span>Melrose Cherry</span>
+          </label>
+          
+          <input type="radio" name="interior-color" id="interior-dark-oak" value="dark-oak">
+          <label for="interior-dark-oak" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/dark-oak.jpg" alt="Dark Oak">
+            <span>Dark Oak</span>
+          </label>
+          
+          <input type="radio" name="interior-color" id="interior-black" value="black">
+          <label for="interior-black" class="color-option">
+            <img src="{{ site.baseurl }}/images/colors/black-interior.jpg" alt="Black">
+            <span>Black</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Hardware Finish</label>
+        <div class="hardware-selector">
+          <input type="radio" name="hardware" id="hardware-white" value="white" checked>
+          <label for="hardware-white" class="hardware-option">
+            <img src="{{ site.baseurl }}/images/hardware/white-hw.jpg" alt="White">
+            <span>White</span>
+          </label>
+          
+          <input type="radio" name="hardware" id="hardware-matte-bronze" value="matte-bronze">
+          <label for="hardware-matte-bronze" class="hardware-option">
+            <img src="{{ site.baseurl }}/images/hardware/matte-bronze-hw.jpg" alt="Matte Bronze">
+            <span>Matte Bronze</span>
+          </label>
+          
+          <input type="radio" name="hardware" id="hardware-brushed-nickel" value="brushed-nickel">
+          <label for="hardware-brushed-nickel" class="hardware-option">
+            <img src="{{ site.baseurl }}/images/hardware/brushed-nickel-hw.jpg" alt="Brushed Nickel">
+            <span>Brushed Nickel</span>
+          </label>
+          
+          <input type="radio" name="hardware" id="hardware-antique-brass" value="antique-brass">
+          <label for="hardware-antique-brass" class="hardware-option">
+            <img src="{{ site.baseurl }}/images/hardware/antique-brass-hw.jpg" alt="Antique Brass">
+            <span>Antique Brass</span>
+          </label>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
             <label for="lp-firstname">First Name</label>
             <input type="text" id="lp-firstname" name="firstname" required>
           </div>
@@ -61,112 +259,10 @@ custom_js:
         </div>
       </div>
       
-      <div class="form-group">
-        <label>Best Time to Contact</label>
-        <div class="checkbox-group">
-          <div class="checkbox-option">
-            <input type="checkbox" id="lp-callmorning" name="callmorning" value="true">
-            <label for="lp-callmorning">Morning</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="lp-callafternoon" name="callafternoon" value="true">
-            <label for="lp-callafternoon">Afternoon</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="lp-callevening" name="callevening" value="true">
-            <label for="lp-callevening">Evening</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="lp-callweekend" name="callweekend" value="true">
-            <label for="lp-callweekend">Weekend</label>
-          </div>
-        </div>
-      </div>
-      
       <div class="form-group consent-section">
         <div class="checkbox-option terms-checkbox">
           <input type="checkbox" id="lp-terms-consent" required>
-          <label for="lp-terms-consent">I agree to be contacted about my window replacement project.</label>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="window-count">Number of Windows</label>
-        <input type="number" id="window-count" min="1" value="1" required>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-col">
-          <div class="form-group">
-            <label for="window-type">Window Type</label>
-            <select id="window-type" required>
-              <option value="single-hung">Single-Hung</option>
-              <option value="double-hung">Double-Hung</option>
-              <option value="casement">Casement</option>
-              <option value="sliding">Sliding/Gliding</option>
-              <option value="picture">Picture/Fixed</option>
-              <option value="bay">Bay/Bow</option>
-              <option value="awning">Awning</option>
-              <option value="hopper">Hopper</option>
-              <option value="garden">Garden</option>
-              <option value="storm">Storm</option>
-              <option value="skylight">Skylight</option>
-              <option value="jalousie">Jalousie</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="form-col">
-          <div class="form-group">
-            <label for="frame-material">Frame Material</label>
-            <select id="frame-material" required>
-              <option value="vinyl">Vinyl</option>
-              <option value="wood">Wood</option>
-              <option value="fiberglass">Fiberglass</option>
-              <option value="aluminum">Aluminum</option>
-              <option value="composite">Composite</option>
-              <option value="wood-clad">Wood-Clad</option>
-              <option value="steel">Steel</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="window-size">Window Size</label>
-        <select id="window-size" required>
-          <option value="small">Small (Less than 3 ft × 4 ft)</option>
-          <option value="medium" selected>Medium (3 ft × 4 ft to 4 ft × 5 ft)</option>
-          <option value="large">Large (Larger than 4 ft × 5 ft)</option>
-        </select>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-col">
-          <div class="form-group">
-            <label for="screen-type">Screen Options</label>
-            <select id="screen-type" required>
-              <option value="none">No Screens</option>
-              <option value="half">Half Screens</option>
-              <option value="full">Full Screens</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="form-col">
-          <div class="form-group">
-            <label>Grids/Muntins</label>
-            <div class="radio-group">
-              <div class="radio-option">
-                <input type="radio" id="grids-yes" name="grids" value="yes">
-                <label for="grids-yes">Yes</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="grids-no" name="grids" value="no" checked>
-                <label for="grids-no">No</label>
-              </div>
-            </div>
-          </div>
+          <label for="lp-terms-consent">By submitting this form, I consent to personalized text messages from Replacement Window Costs and its marketing partners. Message and data rates may apply, and consent is not a condition of purchase. See our terms of service and privacy policy for more information.</label>
         </div>
       </div>
       
@@ -384,5 +480,150 @@ input:invalid {
 input:valid {
   border-color: #28a745;
 }
+
+/* Color selector styles */
+.color-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.color-selector input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.color-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 80px;
+}
+
+.color-option img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--medium-gray);
+  transition: all 0.2s ease;
+  object-fit: cover;
+}
+
+.color-option span {
+  margin-top: 5px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.color-selector input[type="radio"]:checked + .color-option img {
+  border-color: var(--primary-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.color-selector input[type="radio"]:focus + .color-option {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.color-option:hover img {
+  border-color: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+/* Hardware selector styles */
+.hardware-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 0.5rem;
+}
+
+.hardware-selector input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.hardware-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100px;
+}
+
+.hardware-option img {
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+  border: 3px solid var(--medium-gray);
+  transition: all 0.2s ease;
+  object-fit: cover;
+}
+
+.hardware-option span {
+  margin-top: 5px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.hardware-selector input[type="radio"]:checked + .hardware-option img {
+  border-color: var(--primary-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.hardware-selector input[type="radio"]:focus + .hardware-option {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.hardware-option:hover img {
+  border-color: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+@media (max-width: 576px) {
+  .hardware-selector {
+    justify-content: center;
+  }
+  
+  .hardware-option {
+    width: 90px;
+  }
+  
+  .hardware-option img {
+    width: 70px;
+    height: 50px;
+  }
+}
 </style>
+
+<script>
+// Add this to the existing script
+document.addEventListener("DOMContentLoaded", () => {
+  // Grid options toggle
+  const gridsYes = document.getElementById("grids-yes");
+  const gridsNo = document.getElementById("grids-no");
+  const gridOptions = document.querySelector(".grid-options");
+  
+  function toggleGridOptions() {
+    gridOptions.style.display = gridsYes.checked ? "flex" : "none";
+  }
+  
+  gridsYes.addEventListener("change", toggleGridOptions);
+  gridsNo.addEventListener("change", toggleGridOptions);
+  
+  // Initial state
+  toggleGridOptions();
+});
+</script>
 
