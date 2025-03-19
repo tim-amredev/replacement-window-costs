@@ -249,14 +249,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const frameMaterial = document.getElementById("frame-material").value
     const windowSize = document.getElementById("window-size").value
 
+    // Get grid options if available
+    const hasGrids = document.getElementById("grids-yes") && document.getElementById("grids-yes").checked
+    const gridType =
+      hasGrids && document.getElementById("grid-type") ? document.getElementById("grid-type").value : null
+    const gridPattern =
+      hasGrids && document.getElementById("grid-pattern") ? document.getElementById("grid-pattern").value : null
+
+    // Get color and hardware options if available
+    const exteriorColor = document.getElementById("exterior-color")
+      ? document.getElementById("exterior-color").value
+      : "white"
+
+    // Get interior color and hardware from radio buttons
+    const interiorColor = document.querySelector('input[name="interior_color"]:checked')?.value || "white"
+    const hardware = document.querySelector('input[name="hardware"]:checked')?.value || "white"
+
     // Calculate price using the same logic as the calculator
-    const { totalPrice } = calculateDetailedPrice(windowCount, windowType, frameMaterial, windowSize)
+    const { totalPrice } = calculateDetailedPrice(
+      windowCount,
+      windowType,
+      frameMaterial,
+      windowSize,
+      "none", // screenType
+      hasGrids,
+      gridType,
+      gridPattern,
+      exteriorColor,
+      interiorColor,
+      hardware,
+    )
 
     // Update hidden input
     estimatedPriceInput.value = totalPrice
   }
 
-  function calculateDetailedPrice(count, type, material, size) {
+  function calculateDetailedPrice(
+    count,
+    type,
+    material,
+    size,
+    screenType = "none",
+    hasGrids = false,
+    gridType = null,
+    gridPattern = null,
+    exteriorColor = "white",
+    interiorColor = "white",
+    hardware = "white",
+  ) {
     // Base price per window
     let baseWindowPrice = 300
 
@@ -271,6 +311,33 @@ document.addEventListener("DOMContentLoaded", () => {
       case "bay":
         baseWindowPrice += 200
         break
+      case "single-hung":
+        baseWindowPrice -= 25
+        break
+      case "sliding":
+        baseWindowPrice += 25
+        break
+      case "picture":
+        baseWindowPrice += 75
+        break
+      case "awning":
+        baseWindowPrice += 60
+        break
+      case "hopper":
+        baseWindowPrice += 40
+        break
+      case "garden":
+        baseWindowPrice += 150
+        break
+      case "storm":
+        baseWindowPrice -= 50
+        break
+      case "skylight":
+        baseWindowPrice += 250
+        break
+      case "jalousie":
+        baseWindowPrice += 30
+        break
     }
 
     // Adjustments for frame material
@@ -283,6 +350,18 @@ document.addEventListener("DOMContentLoaded", () => {
         break
       case "fiberglass":
         baseWindowPrice += 150
+        break
+      case "aluminum":
+        baseWindowPrice += 50
+        break
+      case "composite":
+        baseWindowPrice += 125
+        break
+      case "wood-clad":
+        baseWindowPrice += 175
+        break
+      case "steel":
+        baseWindowPrice += 200
         break
     }
 
@@ -297,6 +376,84 @@ document.addEventListener("DOMContentLoaded", () => {
       case "large":
         baseWindowPrice += 200
         break
+    }
+
+    // Adjustments for screen type
+    if (screenType) {
+      switch (screenType) {
+        case "none":
+          baseWindowPrice += 0
+          break
+        case "half":
+          baseWindowPrice += 25
+          break
+        case "full":
+          baseWindowPrice += 50
+          break
+      }
+    }
+
+    // Adjustments for grids
+    if (hasGrids) {
+      baseWindowPrice += 75
+
+      // Additional adjustments for grid type
+      if (gridType) {
+        switch (gridType) {
+          case "flat":
+            baseWindowPrice += 0
+            break
+          case "contour":
+            baseWindowPrice += 25
+            break
+          case "sdl":
+            baseWindowPrice += 50
+            break
+        }
+      }
+
+      // Additional adjustments for grid pattern
+      if (gridPattern) {
+        switch (gridPattern) {
+          case "colonial":
+            baseWindowPrice += 0
+            break
+          case "prairie":
+            baseWindowPrice += 15
+            break
+          case "diamond":
+            baseWindowPrice += 30
+            break
+        }
+      }
+    }
+
+    // Adjustments for exterior color
+    if (exteriorColor && exteriorColor !== "white") {
+      baseWindowPrice += 35
+    }
+
+    // Adjustments for interior color
+    if (interiorColor && interiorColor !== "white") {
+      baseWindowPrice += 45
+    }
+
+    // Adjustments for hardware
+    if (hardware) {
+      switch (hardware) {
+        case "white":
+          baseWindowPrice += 0
+          break
+        case "matte-bronze":
+          baseWindowPrice += 20
+          break
+        case "brushed-nickel":
+          baseWindowPrice += 25
+          break
+        case "antique-brass":
+          baseWindowPrice += 30
+          break
+      }
     }
 
     // Calculate window cost
@@ -316,6 +473,33 @@ document.addEventListener("DOMContentLoaded", () => {
       case "bay":
         baseInstallCost += 150
         break
+      case "single-hung":
+        baseInstallCost -= 10
+        break
+      case "sliding":
+        baseInstallCost += 15
+        break
+      case "picture":
+        baseInstallCost += 20
+        break
+      case "awning":
+        baseInstallCost += 30
+        break
+      case "hopper":
+        baseInstallCost += 20
+        break
+      case "garden":
+        baseInstallCost += 100
+        break
+      case "storm":
+        baseInstallCost -= 25
+        break
+      case "skylight":
+        baseInstallCost += 200
+        break
+      case "jalousie":
+        baseInstallCost += 15
+        break
     }
 
     // Installation adjustments for material (some materials are harder to install)
@@ -328,6 +512,18 @@ document.addEventListener("DOMContentLoaded", () => {
         break
       case "fiberglass":
         baseInstallCost += 75
+        break
+      case "aluminum":
+        baseInstallCost += 25
+        break
+      case "composite":
+        baseInstallCost += 60
+        break
+      case "wood-clad":
+        baseInstallCost += 85
+        break
+      case "steel":
+        baseInstallCost += 100
         break
     }
 
@@ -342,6 +538,11 @@ document.addEventListener("DOMContentLoaded", () => {
       case "large":
         baseInstallCost += 100
         break
+    }
+
+    // Installation adjustments for grids
+    if (hasGrids) {
+      baseInstallCost += 15
     }
 
     // Calculate total installation cost
@@ -395,6 +596,23 @@ document.addEventListener("DOMContentLoaded", () => {
         })
       }
     })
+
+    // Setup grid options toggle
+    const gridsYes = document.getElementById("grids-yes")
+    const gridsNo = document.getElementById("grids-no")
+    const gridOptions = document.querySelector(".grid-options")
+
+    if (gridsYes && gridsNo && gridOptions) {
+      function toggleGridOptions() {
+        gridOptions.style.display = gridsYes.checked ? "flex" : "none"
+      }
+
+      gridsYes.addEventListener("change", toggleGridOptions)
+      gridsNo.addEventListener("change", toggleGridOptions)
+
+      // Initial state
+      toggleGridOptions()
+    }
 
     // Setup terms and privacy policy links to prevent form submission when clicked
     const termsLink = document.querySelector(".terms-link")
