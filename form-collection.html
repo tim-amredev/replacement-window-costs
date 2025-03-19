@@ -20,70 +20,6 @@ custom_js:
         <input type="hidden" name="notes" id="lp-notes">
         <input type="hidden" id="thank-you-url" value="{{ site.baseurl }}/thankyou.html">
         
-        <h3>Contact Information</h3>
-        <div class="form-row">
-          <div class="form-col">
-            <div class="form-group">
-              <label for="firstname">First Name</label>
-              <input type="text" id="firstname" name="firstname" required>
-            </div>
-          </div>
-          
-          <div class="form-col">
-            <div class="form-group">
-              <label for="lastname">Last Name</label>
-              <input type="text" id="lastname" name="lastname" required>
-            </div>
-          </div>
-          
-          <div class="form-col">
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="phone1">Phone Number</label>
-          <input type="tel" id="phone1" name="phone1" pattern="[0-9]{10}" title="Please enter a 10-digit phone number without spaces or special characters" required>
-          <small class="input-help">Enter a 10-digit number without spaces or special characters</small>
-        </div>
-
-        <div class="form-row">
-          <div class="form-col">
-            <div class="form-group">
-              <label for="address1">Street Address</label>
-              <input type="text" id="address1" name="address1" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-col">
-            <div class="form-group">
-              <label for="city">City</label>
-              <input type="text" id="city" name="city" required>
-            </div>
-          </div>
-          
-          <div class="form-col">
-            <div class="form-group">
-              <label for="state">State</label>
-              <input type="text" id="state" name="state" maxlength="2" required>
-              <small class="input-help">2-letter code (e.g., CA)</small>
-            </div>
-          </div>
-          
-          <div class="form-col">
-            <div class="form-group">
-              <label for="zip">Zip Code</label>
-              <input type="text" id="zip" name="zip" pattern="[0-9]{5}" title="Please enter a 5-digit zip code" required>
-              <small class="input-help">Enter a 5-digit zip code</small>
-            </div>
-          </div>
-        </div>
-        
         <div class="form-section">
           <h3>Basic Information</h3>
           
@@ -279,6 +215,29 @@ custom_js:
               </div>
             </div>
           </div>
+
+          <div class="form-row grid-options" style="display: none;">
+            <div class="form-col">
+              <div class="form-group">
+                <label for="grid-type">Grid Type</label>
+                <select id="grid-type" name="grid_type">
+                  <option value="flat">Flat</option>
+                  <option value="contour">Contour</option>
+                  <option value="sdl">SDL (Simulated Divided Light)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-col">
+              <div class="form-group">
+                <label for="grid-pattern">Grid Pattern</label>
+                <select id="grid-pattern" name="grid_pattern">
+                  <option value="colonial">Colonial</option>
+                  <option value="prairie">Prairie</option>
+                  <option value="diamond">Diamond</option>
+                </select>
+              </div>
+            </div>
+          </div>
           
           <div class="form-group">
             <label>What window frame material are you interested in?</label>
@@ -370,6 +329,119 @@ custom_js:
                 <input type="checkbox" id="glass-unsure" name="glass_features[]" value="Unsure/need recommendations">
                 <label for="glass-unsure">Unsure/need recommendations</label>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Window Measurement Details</h3>
+          <div class="form-group">
+            <label for="window-size">Window Size</label>
+            <select id="window-size" name="window_size" class="form-select">
+              <option value="">Select window size</option>
+              <option value="small">Small (0-84 United inches)</option>
+              <option value="medium">Medium (85-101 United inches)</option>
+              <option value="large">Large (101+ United inches)</option>
+            </select>
+            <small class="input-help">United inches = the width of the bottom + the height of one side</small>
+          </div>
+
+          <div class="form-group">
+            <label>Exterior Color</label>
+            <div class="color-selector">
+              <input type="radio" name="exterior_color" id="exterior-white" value="white" checked>
+              <label for="exterior-white" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/white.jpg" alt="White">
+                <span>White</span>
+              </label>
+              
+              <input type="radio" name="exterior_color" id="exterior-almond" value="almond">
+              <label for="exterior-almond" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/almond.png" alt="Almond">
+                <span>Almond</span>
+              </label>
+              
+              <input type="radio" name="exterior_color" id="exterior-cocoa" value="cocoa">
+              <label for="exterior-cocoa" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/cocoa.png" alt="Cocoa">
+                <span>Cocoa</span>
+              </label>
+              
+              <input type="radio" name="exterior_color" id="exterior-bronze" value="bronze">
+              <label for="exterior-bronze" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/bronze.png" alt="Bronze">
+                <span>Bronze</span>
+              </label>
+              
+              <input type="radio" name="exterior_color" id="exterior-black" value="black">
+              <label for="exterior-black" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/black.png" alt="Black">
+                <span>Black</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Interior Color</label>
+            <div class="color-selector">
+              <input type="radio" name="interior_color" id="interior-white" value="white" checked>
+              <label for="interior-white" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/white-interior.jpg" alt="White">
+                <span>White</span>
+              </label>
+              
+              <input type="radio" name="interior_color" id="interior-winchester" value="winchester">
+              <label for="interior-winchester" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/winchester.jpg" alt="Winchester">
+                <span>Winchester</span>
+              </label>
+              
+              <input type="radio" name="interior_color" id="interior-melrose-cherry" value="melrose-cherry">
+              <label for="interior-melrose-cherry" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/melrose-cherry.jpg" alt="Melrose Cherry">
+                <span>Melrose Cherry</span>
+              </label>
+              
+              <input type="radio" name="interior_color" id="interior-dark-oak" value="dark-oak">
+              <label for="interior-dark-oak" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/dark-oak.jpg" alt="Dark Oak">
+                <span>Dark Oak</span>
+              </label>
+              
+              <input type="radio" name="interior_color" id="interior-black" value="black">
+              <label for="interior-black" class="color-option">
+                <img src="{{ site.baseurl }}/images/colors/black-interior.jpg" alt="Black">
+                <span>Black</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Hardware Finish</label>
+            <div class="hardware-selector">
+              <input type="radio" name="hardware" id="hardware-white" value="white" checked>
+              <label for="hardware-white" class="hardware-option">
+                <img src="{{ site.baseurl }}/images/hardware/white-hw.jpg" alt="White">
+                <span>White</span>
+              </label>
+              
+              <input type="radio" name="hardware" id="hardware-matte-bronze" value="matte-bronze">
+              <label for="hardware-matte-bronze" class="hardware-option">
+                <img src="{{ site.baseurl }}/images/hardware/matte-bronze-hw.jpg" alt="Matte Bronze">
+                <span>Matte Bronze</span>
+              </label>
+              
+              <input type="radio" name="hardware" id="hardware-brushed-nickel" value="brushed-nickel">
+              <label for="hardware-brushed-nickel" class="hardware-option">
+                <img src="{{ site.baseurl }}/images/hardware/brushed-nickel-hw.jpg" alt="Brushed Nickel">
+                <span>Brushed Nickel</span>
+              </label>
+              
+              <input type="radio" name="hardware" id="hardware-antique-brass" value="antique-brass">
+              <label for="hardware-antique-brass" class="hardware-option">
+                <img src="{{ site.baseurl }}/images/hardware/antique-brass-hw.jpg" alt="Antique Brass">
+                <span>Antique Brass</span>
+              </label>
             </div>
           </div>
         </div>
@@ -820,6 +892,72 @@ custom_js:
             <textarea id="comments" name="comments" rows="4"></textarea>
           </div>
         </div>
+
+        <div class="form-section">
+          <h3>Contact Information</h3>
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname" name="firstname" required>
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname" name="lastname" required>
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone1">Phone Number</label>
+            <input type="tel" id="phone1" name="phone1" pattern="[0-9]{10}" title="Please enter a 10-digit phone number without spaces or special characters" required>
+            <small class="input-help">Enter a 10-digit number without spaces or special characters</small>
+          </div>
+
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label for="address1">Street Address</label>
+                <input type="text" id="address1" name="address1" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" maxlength="2" required>
+                <small class="input-help">2-letter code (e.g., CA)</small>
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label for="zip">Zip Code</label>
+                <input type="text" id="zip" name="zip" pattern="[0-9]{5}" title="Please enter a 5-digit zip code" required>
+                <small class="input-help">Enter a 5-digit zip code</small>
+              </div>
+            </div>
+          </div>
+        </div>
         
         <!-- Original window details (hidden but preserved for functionality) -->
         <input type="hidden" id="window-count" name="window_count" value="1">
@@ -832,7 +970,7 @@ custom_js:
   <div class="form-group">
     <div class="checkbox-option terms-checkbox">
       <input type="checkbox" id="terms-consent" name="terms_consent" required>
-      <label for="terms-consent">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a>. I understand that my information will be used as described in the Privacy Policy.</label>
+      <label for="terms-consent">By submitting this form, I consent to personalized text messages from Replacement Window Costs and its marketing partners. Message and data rates may apply, and consent is not a condition of purchase. See our <a href="#" class="terms-link">terms of service</a> and <a href="#" class="privacy-link">privacy policy</a> for more information.</label>
     </div>
   </div>
   
@@ -976,5 +1114,170 @@ custom_js:
   input:valid {
     border-color: #28a745;
   }
+
+  .grid-options {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  /* Color selector styles */
+  .color-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 0.5rem;
+  }
+
+  .color-selector input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .color-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 80px;
+  }
+
+  .color-option img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--medium-gray);
+    transition: all 0.2s ease;
+    object-fit: cover;
+  }
+
+  .color-option span {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .color-selector input[type="radio"]:checked + .color-option img {
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .color-selector input[type="radio"]:focus + .color-option {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  .color-option:hover img {
+    border-color: var(--primary-dark);
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 576px) {
+    .color-selector {
+      justify-content: center;
+    }
+    
+    .color-option {
+      width: 70px;
+    }
+    
+    .color-option img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .hardware-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 0.5rem;
+  }
+
+  .hardware-selector input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .hardware-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 80px;
+  }
+
+  .hardware-option img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--medium-gray);
+    transition: all 0.2s ease;
+    object-fit: cover;
+  }
+
+  .hardware-option span {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .hardware-selector input[type="radio"]:checked + .hardware-option img {
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .hardware-selector input[type="radio"]:focus + .hardware-option {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  .hardware-option:hover img {
+    border-color: var(--primary-dark);
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 576px) {
+    .hardware-selector {
+      justify-content: center;
+    }
+    
+    .hardware-option {
+      width: 70px;
+    }
+    
+    .hardware-option img {
+      width: 50px;
+      height: 50px;
+    }
+  }
 </style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Grid options toggle
+  const gridsYes = document.getElementById("grids-yes");
+  const gridsNo = document.getElementById("grids-no");
+  const gridOptions = document.querySelector(".grid-options");
+  
+  if (gridsYes && gridsNo && gridOptions) {
+    function toggleGridOptions() {
+      gridOptions.style.display = gridsYes.checked ? "flex" : "none";
+    }
+    
+    gridsYes.addEventListener("change", toggleGridOptions);
+    gridsNo.addEventListener("change", toggleGridOptions);
+    
+    // Initial state
+    toggleGridOptions();
+  }
+});
+</script>
 
