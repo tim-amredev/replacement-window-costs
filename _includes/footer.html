@@ -24,3 +24,124 @@
   </div>
 </footer>
 
+<style>
+  .site-footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 4rem 0 1.5rem;
+    margin-top: 4rem;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+  
+  .footer-info,
+  .footer-links,
+  .footer-contact {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .footer-info h3,
+  .footer-links h4,
+  .footer-contact h4 {
+    color: white;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+  
+  .footer-info h3::after,
+  .footer-links h4::after,
+  .footer-contact h4::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 0.75rem;
+  }
+  
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    transition: var(--transition);
+    display: inline-block;
+    padding: 0.25rem 0;
+  }
+  
+  .footer-links a:hover {
+    color: white;
+    padding-left: 5px;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: 3rem 0 1.5rem;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      flex-direction: column;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-info,
+    .footer-links,
+    .footer-contact {
+      width: 100%;
+      padding-right: 0;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-links li {
+      margin-bottom: 1rem;
+    }
+    
+    .footer-links a {
+      padding: 0.5rem 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .site-footer {
+      padding: 2.5rem 0 1.25rem;
+      margin-top: 2.5rem;
+    }
+    
+    .footer-info img {
+      max-width: 100px;
+    }
+    
+    .footer-info p,
+    .footer-contact p,
+    .footer-bottom p {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
