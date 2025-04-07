@@ -70,13 +70,46 @@
   
   @media (max-width: 768px) {
     .logo-image {
-      max-width: 180px;
-      max-height: 75px;
+      max-width: 160px;
+      max-height: 67px;
     }
     
     .header-content {
       padding: 0.75rem 0;
+      position: relative;
+    }
+    
+    .mobile-menu-toggle {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+    }
+    
+    .main-nav.active {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--medium-gray);
+    }
+    
+    .main-nav ul {
+      gap: 1rem;
+    }
+    
+    .nav-link {
+      padding: 0.5rem 0;
+    }
+    
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo-image {
+      max-width: 140px;
+      max-height: 59px;
     }
   }
 </style>
-
