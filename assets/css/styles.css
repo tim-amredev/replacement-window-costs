@@ -563,6 +563,87 @@ textarea:focus {
   .feature-cards {
     grid-template-columns: 1fr;
   }
+  
+  /* Improved mobile form styles */
+  .radio-group, .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .radio-option, .checkbox-option {
+    padding: 0.5rem 0;
+  }
+  
+  .radio-option input[type="radio"],
+  .checkbox-option input[type="checkbox"] {
+    min-width: 20px;
+    min-height: 20px;
+    margin-right: 0.75rem;
+  }
+  
+  /* Improved mobile button styles */
+  .btn {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  /* Improved mobile card styles */
+  .card {
+    padding: 1.5rem;
+  }
+  
+  /* Improved mobile text sizes */
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.35rem;
+  }
+  
+  p {
+    font-size: 1rem;
+  }
+  
+  /* Improved mobile spacing */
+  .section {
+    margin-bottom: 3rem;
+  }
+  
+  .hero {
+    padding: 3rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+  
+  .price {
+    font-size: 2.5rem;
+  }
+  
+  .card {
+    padding: 1.25rem;
+  }
+  
+  /* Improved touch targets for very small screens */
+  .radio-option, .checkbox-option {
+    padding: 0.625rem 0;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.25rem;
+  }
 }
 
 /* Animations */
@@ -595,4 +676,3 @@ textarea:focus {
 .hidden {
   display: none;
 }
-
