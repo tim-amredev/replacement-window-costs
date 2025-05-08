@@ -141,6 +141,9 @@ custom_js:
                   <span>Winchester</span>
                 </label>
               </div>
+            </div>
+            <p class="price-note">Note: Non-white exterior colors add $99 to the base price.</p>
+          </div>
           
           <!-- Interior Color Options -->
           <div class="form-group">
@@ -174,6 +177,9 @@ custom_js:
                   <span>Cherry</span>
                 </label>
               </div>
+            </div>
+            <p class="price-note">Note: Non-white interior colors add $99 to the base price.</p>
+          </div>
           
           <!-- Hardware Options -->
           <div class="form-group">
@@ -207,6 +213,9 @@ custom_js:
                   <span>Matte Bronze</span>
                 </label>
               </div>
+            </div>
+            <p class="price-note">Note: Non-white hardware finishes add $52 to the base price.</p>
+          </div>
           
           <div class="form-buttons">
             <button type="button" id="back-to-specs-btn" class="btn btn-outline">Back to Window Specifications</button>
@@ -807,4 +816,171 @@ custom_js:
       font-size: 2.25rem;
     }
   }
+</style>
+
+<style>
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Improve form layout on mobile */
+  .form-row {
+    flex-direction: column;
+    margin: 0;
+  }
+  
+  .form-col {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  
+  /* Adjust tab navigation */
+  .form-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .form-tab {
+    white-space: nowrap;
+    flex: 0 0 auto;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Make color and hardware options more touch-friendly */
+  .color-options, .hardware-options {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .color-img, .hardware-img {
+    width: 65px;
+    height: 65px;
+  }
+  
+  /* Improve radio and checkbox groups */
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .radio-option {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  
+  .radio-option:last-child {
+    border-bottom: none;
+  }
+  
+  /* Make inputs larger and more touch-friendly */
+  input, select, textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 0.875rem;
+  }
+  
+  /* Improve button size for touch */
+  .btn {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  /* Adjust calculator result */
+  .calculator-result {
+    padding: 1.25rem;
+  }
+  
+  .price-range {
+    font-size: 2.25rem;
+  }
+  
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Improve form buttons */
+  .form-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .form-buttons .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for very small screens */
+  .color-options, .hardware-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .color-img, .hardware-img {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .color-label span, .hardware-label span {
+    font-size: 0.8rem;
+  }
+  
+  /* Adjust price range */
+  .price-range {
+    font-size: 2rem;
+  }
+  
+  /* Adjust other text */
+  .price-note {
+    font-size: 0.8rem;
+  }
+  
+  /* Ensure tab navigation is usable */
+  .form-tab {
+    font-size: 0.85rem;
+    padding: 0.75rem 0.4rem;
+  }
+}
+
+/* Fix for iOS input zoom */
+@media screen and (-webkit-min-device-pixel-ratio: 0) { 
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+
+/* Improve touch targets */
+@media (hover: none) and (pointer: coarse) {
+  .radio-option {
+    min-height: 44px; /* Apple's recommended minimum touch target size */
+  }
+  
+  input[type="radio"],
+  input[type="checkbox"] {
+    min-width: 22px;
+    min-height: 22px;
+  }
+  
+  /* Make tab navigation more touch-friendly */
+  .form-tab {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Fix for selected options display */
+@media (max-width: 768px) {
+  .selected-options {
+    padding: 0.75rem;
+  }
+  
+  .option-item {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
 </style>
