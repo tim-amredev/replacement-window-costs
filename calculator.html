@@ -27,10 +27,7 @@ custom_js:
                 <option value="2-lite-slider">2 Lite Slider</option>
                 <option value="3-lite-slider">3 Lite Slider</option>
                 <option value="picture">Picture/Fixed</option>
-                <option value="bay">Bay/Bow</option>
                 <option value="awning">Awning</option>
-                <option value="hopper">Hopper</option>
-                <option value="garden">Garden</option>
               </select>
             </div>
           </div>
@@ -40,23 +37,20 @@ custom_js:
               <label for="frame-material">Frame Material</label>
               <select id="frame-material" required>
                 <option value="vinyl">Vinyl</option>
-                <option value="wood">Wood</option>
-                <option value="fiberglass">Fiberglass</option>
-                <option value="aluminum">Aluminum</option>
                 <option value="composite">Composite</option>
-                <option value="wood-clad">Wood-Clad</option>
               </select>
             </div>
           </div>
         </div>
         
         <div class="form-group">
-          <label for="window-size">Window Size</label>
+          <label for="window-size">Window Size (United Inches)</label>
           <select id="window-size" required>
-            <option value="small">Small (Less than 3 ft × 4 ft)</option>
-            <option value="medium" selected>Medium (3 ft × 4 ft to 4 ft × 5 ft)</option>
-            <option value="large">Large (Larger than 4 ft × 5 ft)</option>
+            <option value="small">Small (Less than 80 united inches)</option>
+            <option value="medium" selected>Medium (80-100 united inches)</option>
+            <option value="large">Large (More than 100 united inches)</option>
           </select>
+          <p class="size-note">United inches = width + height of the window in inches</p>
         </div>
         
         <div class="form-row">
@@ -140,6 +134,7 @@ custom_js:
         <li><strong>Additional Features:</strong> Energy-efficient glass, special finishes, or custom options</li>
         <li><strong>Brand:</strong> Different manufacturers offer various price points and quality levels</li>
       </ul>
+      <p><strong>About United Inches:</strong> "United inches" is an industry standard measurement calculated by adding the width and height of a window in inches. For example, a window that is 36" wide and 48" tall would be 84 united inches (36 + 48 = 84). This measurement is commonly used to determine window pricing and installation costs.</p>
     </div>
     
     <p>For a more accurate quote tailored to your specific needs, we recommend requesting a personalized quote from our network of trusted professionals.</p>
@@ -160,7 +155,7 @@ custom_js:
     
     <div class="card">
       <h3>How long do new windows last?</h3>
-      <p>Quality windows typically last 15-30 years, depending on the material, quality, and maintenance. Vinyl and fiberglass windows tend to last longer than wood windows in most climates.</p>
+      <p>Quality windows typically last 15-30 years, depending on the material, quality, and maintenance. Vinyl and composite windows tend to last longer in most climates.</p>
     </div>
   </div>
 </section>
@@ -220,6 +215,15 @@ custom_js:
   
   .radio-option input[type="radio"] {
     margin-right: 0.5rem;
+  }
+  
+  /* Size note style */
+  .size-note {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    font-style: italic;
+    margin-bottom: 0;
   }
   
   @media (max-width: 768px) {
