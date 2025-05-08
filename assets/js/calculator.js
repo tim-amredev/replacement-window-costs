@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function calculateDetailedPrice(count, type, material, size, screenType, hasGrids) {
     // Base price per window
-    let baseWindowPrice = 300
+    let baseWindowPrice = 799
 
     // Adjustments for window type
     switch (type) {
@@ -71,19 +71,19 @@ document.addEventListener("DOMContentLoaded", () => {
         baseWindowPrice += 0
         break
       case "casement":
-        baseWindowPrice += 50
+        baseWindowPrice += 44
         break
       case "2-lite-slider":
-        baseWindowPrice += 25
+        baseWindowPrice += 23
         break
       case "3-lite-slider":
-        baseWindowPrice += 40
+        baseWindowPrice += 785
         break
       case "picture":
-        baseWindowPrice += 75
+        baseWindowPrice += 19
         break
       case "awning":
-        baseWindowPrice += 60
+        baseWindowPrice += 32
         break
     }
 
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         baseWindowPrice += 0
         break
       case "composite":
-        baseWindowPrice += 125
+        baseWindowPrice += 572
         break
     }
 
@@ -103,10 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
         baseWindowPrice += 0
         break
       case "medium":
-        baseWindowPrice += 100
+        baseWindowPrice += 136
         break
       case "large":
-        baseWindowPrice += 200
+        baseWindowPrice += 289
         break
     }
 
@@ -116,23 +116,23 @@ document.addEventListener("DOMContentLoaded", () => {
         baseWindowPrice += 0
         break
       case "half":
-        baseWindowPrice += 25
+        baseWindowPrice += 14
         break
       case "full":
-        baseWindowPrice += 50
+        baseWindowPrice += 27
         break
     }
 
     // Adjustments for grids
     if (hasGrids) {
-      baseWindowPrice += 75
+      baseWindowPrice += 89
     }
 
     // Calculate window cost
     const windowCost = baseWindowPrice * count
 
     // Calculate installation cost (varies by type, material, and size)
-    let baseInstallCost = 150 // Base installation cost per window
+    let baseInstallCost = 0 // Base installation cost per window
 
     // Installation adjustments for window type
     switch (type) {
@@ -140,19 +140,18 @@ document.addEventListener("DOMContentLoaded", () => {
         baseInstallCost += 0
         break
       case "casement":
-        baseInstallCost += 25
+        baseInstallCost += 0
         break
       case "2-lite-slider":
-        baseInstallCost += 15
+        baseInstallCost += 0
         break
       case "3-lite-slider":
-        baseInstallCost += 20
+        baseInstallCost += 0
         break
       case "picture":
-        baseInstallCost += 20
-        break
+        baseInstallCost += 0   
       case "awning":
-        baseInstallCost += 30
+        baseInstallCost += 0
         break
     }
 
@@ -162,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
         baseInstallCost += 0
         break
       case "composite":
-        baseInstallCost += 60
+        baseInstallCost += 0
         break
     }
 
@@ -172,10 +171,10 @@ document.addEventListener("DOMContentLoaded", () => {
         baseInstallCost += 0
         break
       case "medium":
-        baseInstallCost += 50
+        baseInstallCost += 0
         break
       case "large":
-        baseInstallCost += 100
+        baseInstallCost += 0
         break
     }
 
@@ -185,16 +184,16 @@ document.addEventListener("DOMContentLoaded", () => {
         baseInstallCost += 0
         break
       case "half":
-        baseInstallCost += 10
+        baseInstallCost += 0
         break
       case "full":
-        baseInstallCost += 20
+        baseInstallCost += 0
         break
     }
 
     // Installation adjustments for grids
     if (hasGrids) {
-      baseInstallCost += 15
+      baseInstallCost += 0
     }
 
     // Calculate total installation cost
@@ -204,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const subtotal = windowCost + installationCost
 
     // Add commission (typically 15-20% in home improvement)
-    const commissionRate = 0.18 // 18%
+    const commissionRate = 0.11 // 11%
     const commission = Math.round(subtotal * commissionRate)
 
     // Calculate total price
