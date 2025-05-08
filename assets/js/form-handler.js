@@ -243,6 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
     quoteForm.submit()
   })
 
+  // Update the form handler to use the price range
   function updateEstimatedPrice() {
     const windowCount = Number.parseInt(document.getElementById("window-count").value)
     const windowType = document.getElementById("window-type").value
@@ -651,4 +652,3 @@ window.addEventListener("load", () => {
     window.location.href = redirectUrl
   }
 })
-
