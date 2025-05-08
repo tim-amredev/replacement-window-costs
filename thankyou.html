@@ -92,6 +92,68 @@ title: Thank You
       grid-template-columns: 1fr;
     }
   }
+
+/* Enhanced Mobile Responsiveness for Thank You Page */
+@media (max-width: 768px) {
+  /* Adjust price display */
+  #quoted-price {
+    font-size: 2.25rem;
+  }
+  
+  /* Improve options grid */
+  .options-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .option-item {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Adjust spacing */
+  .section {
+    padding: 2rem 0;
+  }
+  
+  /* Make button more touch-friendly */
+  .btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for very small screens */
+  #quoted-price {
+    font-size: 2rem;
+  }
+  
+  .option-item {
+    font-size: 0.85rem;
+  }
+  
+  /* Adjust card padding */
+  .card {
+    padding: 1.25rem;
+  }
+  
+  /* Adjust SVG size */
+  svg {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Fix for iOS form elements */
+@supports (-webkit-touch-callout: none) {
+  .btn {
+    -webkit-appearance: none;
+    border-radius: var(--border-radius);
+  }
+}
 </style>
 
 <script>
