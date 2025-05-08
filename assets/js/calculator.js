@@ -519,4 +519,62 @@ document.addEventListener("DOMContentLoaded", () => {
       totalPrice,
     }
   }
+
+  // Improve mobile experience for tab navigation
+  const formTabs = document.querySelector(".form-tabs")
+  if (formTabs) {
+    // Add horizontal scroll with touch
+    formTabs.addEventListener(
+      "touchstart",
+      function (e) {
+        this.startX = e.touches[0].clientX
+        this.scrollLeft = this.scrollLeft
+      },
+      { passive: true },
+    )
+
+    formTabs.addEventListener(
+      "touchmove",
+      function (e) {
+        if (!this.startX) return
+
+        const x = e.touches[0].clientX
+        const walk = x - this.startX
+        this.scrollLeft = this.scrollLeft - walk
+      },
+      { passive: true },
+    )
+
+    formTabs.addEventListener(
+      "touchend",
+      function () {
+        this.startX = null
+      },
+      { passive: true },
+    )
+  }
+
+  // Ensure proper display on mobile orientation change
+  window.addEventListener("orientationchange", () => {
+    // Small delay to allow the browser to complete the orientation change
+    setTimeout(() => {
+      // Adjust any elements that might need fixing after orientation change
+      const activeTab = document.querySelector(".form-tab.active")
+      if (activeTab) {
+        activeTab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" })
+      }
+
+      // Force redraw of color and hardware options
+      const colorOptions = document.querySelector(".color-options")
+      const hardwareOptions = document.querySelector(".hardware-options")
+
+      if (colorOptions) colorOptions.style.display = "none"
+      if (hardwareOptions) hardwareOptions.style.display = "none"
+
+      setTimeout(() => {
+        if (colorOptions) colorOptions.style.display = ""
+        if (hardwareOptions) hardwareOptions.style.display = ""
+      }, 50)
+    }, 300)
+  })
 })
