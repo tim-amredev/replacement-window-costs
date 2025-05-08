@@ -9,16 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalCostElement = document.getElementById("total-cost")
 
   // Tab navigation elements
-  const nextStepBtn = document.getElementById("next-step-btn")
-  const backStepBtn = document.getElementById("back-step-btn")
+  const nextToColorsBtn = document.getElementById("next-to-colors-btn")
+  const backToSpecsBtn = document.getElementById("back-to-specs-btn")
+  const nextToContactBtn = document.getElementById("next-to-contact-btn")
+  const backToColorsBtn = document.getElementById("back-to-colors-btn")
+
   const windowSpecsTab = document.querySelector('.form-tab[data-tab="window-specs"]')
+  const colorHardwareTab = document.querySelector('.form-tab[data-tab="color-hardware"]')
   const contactInfoTab = document.querySelector('.form-tab[data-tab="contact-info"]')
+
   const windowSpecsContent = document.getElementById("window-specs-content")
+  const colorHardwareContent = document.getElementById("color-hardware-content")
   const contactInfoContent = document.getElementById("contact-info-content")
 
   // Add tab navigation functionality
-  if (nextStepBtn) {
-    nextStepBtn.addEventListener("click", () => {
+  if (nextToColorsBtn) {
+    nextToColorsBtn.addEventListener("click", () => {
       // Validate window specs before proceeding
       const windowCount = document.getElementById("window-count").value
       const windowType = document.getElementById("window-type").value
@@ -31,31 +37,76 @@ document.addEventListener("DOMContentLoaded", () => {
         return
       }
 
-      // Switch to contact info tab
+      // Switch to colors & hardware tab
       windowSpecsTab.classList.remove("active")
-      contactInfoTab.classList.add("active")
+      colorHardwareTab.classList.add("active")
       windowSpecsContent.style.display = "none"
+      colorHardwareContent.style.display = "block"
+    })
+  }
+
+  if (backToSpecsBtn) {
+    backToSpecsBtn.addEventListener("click", () => {
+      // Switch back to window specs tab
+      colorHardwareTab.classList.remove("active")
+      windowSpecsTab.classList.add("active")
+      colorHardwareContent.style.display = "none"
+      windowSpecsContent.style.display = "block"
+    })
+  }
+
+  if (nextToContactBtn) {
+    nextToContactBtn.addEventListener("click", () => {
+      // Switch to contact info tab
+      colorHardwareTab.classList.remove("active")
+      contactInfoTab.classList.add("active")
+      colorHardwareContent.style.display = "none"
       contactInfoContent.style.display = "block"
     })
   }
 
-  if (backStepBtn) {
-    backStepBtn.addEventListener("click", () => {
-      // Switch back to window specs tab
+  if (backToColorsBtn) {
+    backToColorsBtn.addEventListener("click", () => {
+      // Switch back to colors & hardware tab
       contactInfoTab.classList.remove("active")
-      windowSpecsTab.classList.add("active")
+      colorHardwareTab.classList.add("active")
       contactInfoContent.style.display = "none"
-      windowSpecsContent.style.display = "block"
+      colorHardwareContent.style.display = "block"
     })
   }
 
   // Tab click handlers
   if (windowSpecsTab) {
     windowSpecsTab.addEventListener("click", () => {
+      colorHardwareTab.classList.remove("active")
       contactInfoTab.classList.remove("active")
       windowSpecsTab.classList.add("active")
+      colorHardwareContent.style.display = "none"
       contactInfoContent.style.display = "none"
       windowSpecsContent.style.display = "block"
+    })
+  }
+
+  if (colorHardwareTab) {
+    colorHardwareTab.addEventListener("click", () => {
+      // Validate window specs before allowing tab switch
+      const windowCount = document.getElementById("window-count").value
+      const windowType = document.getElementById("window-type").value
+      const frameMaterial = document.getElementById("frame-material").value
+      const windowSize = document.getElementById("window-size").value
+      const screenType = document.getElementById("screen-type").value
+
+      if (!windowCount || !windowType || !frameMaterial || !windowSize || !screenType) {
+        alert("Please fill in all window specification fields before proceeding.")
+        return
+      }
+
+      windowSpecsTab.classList.remove("active")
+      contactInfoTab.classList.remove("active")
+      colorHardwareTab.classList.add("active")
+      windowSpecsContent.style.display = "none"
+      contactInfoContent.style.display = "none"
+      colorHardwareContent.style.display = "block"
     })
   }
 
@@ -74,8 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       windowSpecsTab.classList.remove("active")
+      colorHardwareTab.classList.remove("active")
       contactInfoTab.classList.add("active")
       windowSpecsContent.style.display = "none"
+      colorHardwareContent.style.display = "none"
       contactInfoContent.style.display = "block"
     })
   }
@@ -155,6 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const screenType = document.getElementById("screen-type").value
     const hasGrids = document.querySelector('input[name="grids"]:checked').value === "yes"
 
+    // Get color and hardware selections
+    const exteriorColor = document.querySelector('input[name="exterior-color"]:checked').value
+    const interiorColor = document.querySelector('input[name="interior-color"]:checked').value
+    const hardware = document.querySelector('input[name="hardware"]:checked').value
+
     // Calculate prices
     const { totalPrice } = calculateDetailedPrice(
       windowCount,
@@ -163,6 +221,9 @@ document.addEventListener("DOMContentLoaded", () => {
       windowSize,
       screenType,
       hasGrids,
+      exteriorColor,
+      interiorColor,
+      hardware,
     )
 
     // Calculate price range (20% below and above)
@@ -175,6 +236,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Hide breakdown container
     breakdownContainer.style.display = "none"
+
+    // Update selected options display
+    document.getElementById("result-window-type").textContent = formatOptionName(windowType)
+    document.getElementById("result-frame-material").textContent = formatOptionName(frameMaterial)
+    document.getElementById("result-window-size").textContent = windowSize
+    document.getElementById("result-window-count").textContent = windowCount
+    document.getElementById("result-exterior-color").textContent = formatOptionName(exteriorColor)
+    document.getElementById("result-interior-color").textContent = formatOptionName(interiorColor)
+    document.getElementById("result-hardware").textContent = formatOptionName(hardware)
+    document.getElementById("result-screen-type").textContent = formatOptionName(screenType)
+    document.getElementById("result-grids").textContent = hasGrids ? "Yes" : "No"
 
     // Hide the form and show calculator result
     calculatorForm.style.display = "none"
@@ -190,6 +262,9 @@ document.addEventListener("DOMContentLoaded", () => {
       size: windowSize,
       screen: screenType,
       grids: hasGrids ? "yes" : "no",
+      exteriorColor: exteriorColor,
+      interiorColor: interiorColor,
+      hardware: hardware,
       price: totalPrice,
       lowerPrice: lowerPrice,
       upperPrice: upperPrice,
@@ -209,6 +284,9 @@ document.addEventListener("DOMContentLoaded", () => {
       windowSize,
       screenType,
       hasGrids,
+      exteriorColor,
+      interiorColor,
+      hardware,
       firstName,
       lastName,
       email,
@@ -230,25 +308,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // In a real implementation, you would send this data to your server or CRM
     // This is just a placeholder for demonstration purposes
     console.log("Lead information:", leadInfo)
-
-    // You could also send this data to a server endpoint
-    /*
-    fetch('/api/submit-lead', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(leadInfo),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-    */
   })
+
+  // Helper function to format option names for display
+  function formatOptionName(option) {
+    if (!option) return ""
+
+    // Replace hyphens with spaces and capitalize each word
+    return option
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+  }
 
   // Setup terms and privacy policy links to prevent form submission when clicked
   const termsLink = document.querySelector(".terms-link")
@@ -268,7 +339,17 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
-  function calculateDetailedPrice(count, type, material, size, screenType, hasGrids) {
+  function calculateDetailedPrice(
+    count,
+    type,
+    material,
+    size,
+    screenType,
+    hasGrids,
+    exteriorColor,
+    interiorColor,
+    hardware,
+  ) {
     // Base price per window
     let baseWindowPrice = 799
 
@@ -333,6 +414,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // Adjustments for grids
     if (hasGrids) {
       baseWindowPrice += 89
+    }
+
+    // Adjustments for exterior color
+    if (exteriorColor && exteriorColor !== "white") {
+      baseWindowPrice += 99
+    }
+
+    // Adjustments for interior color
+    if (interiorColor && interiorColor !== "white") {
+      baseWindowPrice += 99
+    }
+
+    // Adjustments for hardware
+    if (hardware && hardware !== "white") {
+      baseWindowPrice += 52
     }
 
     // Calculate window cost
