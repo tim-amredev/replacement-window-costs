@@ -7,10 +7,78 @@ document.addEventListener("DOMContentLoaded", () => {
   const installationCostElement = document.getElementById("installation-cost")
   const commissionElement = document.getElementById("commission")
   const totalCostElement = document.getElementById("total-cost")
-  const contactForm = document.getElementById("contact-form")
-  const windowDetailsInput = document.getElementById("window-details")
-  const estimatedPriceRangeInput = document.getElementById("estimated-price-range")
-  const thankYouUrl = document.getElementById("thank-you-url")
+
+  // Tab navigation elements
+  const nextStepBtn = document.getElementById("next-step-btn")
+  const backStepBtn = document.getElementById("back-step-btn")
+  const windowSpecsTab = document.querySelector('.form-tab[data-tab="window-specs"]')
+  const contactInfoTab = document.querySelector('.form-tab[data-tab="contact-info"]')
+  const windowSpecsContent = document.getElementById("window-specs-content")
+  const contactInfoContent = document.getElementById("contact-info-content")
+
+  // Add tab navigation functionality
+  if (nextStepBtn) {
+    nextStepBtn.addEventListener("click", () => {
+      // Validate window specs before proceeding
+      const windowCount = document.getElementById("window-count").value
+      const windowType = document.getElementById("window-type").value
+      const frameMaterial = document.getElementById("frame-material").value
+      const windowSize = document.getElementById("window-size").value
+      const screenType = document.getElementById("screen-type").value
+
+      if (!windowCount || !windowType || !frameMaterial || !windowSize || !screenType) {
+        alert("Please fill in all window specification fields before proceeding.")
+        return
+      }
+
+      // Switch to contact info tab
+      windowSpecsTab.classList.remove("active")
+      contactInfoTab.classList.add("active")
+      windowSpecsContent.style.display = "none"
+      contactInfoContent.style.display = "block"
+    })
+  }
+
+  if (backStepBtn) {
+    backStepBtn.addEventListener("click", () => {
+      // Switch back to window specs tab
+      contactInfoTab.classList.remove("active")
+      windowSpecsTab.classList.add("active")
+      contactInfoContent.style.display = "none"
+      windowSpecsContent.style.display = "block"
+    })
+  }
+
+  // Tab click handlers
+  if (windowSpecsTab) {
+    windowSpecsTab.addEventListener("click", () => {
+      contactInfoTab.classList.remove("active")
+      windowSpecsTab.classList.add("active")
+      contactInfoContent.style.display = "none"
+      windowSpecsContent.style.display = "block"
+    })
+  }
+
+  if (contactInfoTab) {
+    contactInfoTab.addEventListener("click", () => {
+      // Validate window specs before allowing tab switch
+      const windowCount = document.getElementById("window-count").value
+      const windowType = document.getElementById("window-type").value
+      const frameMaterial = document.getElementById("frame-material").value
+      const windowSize = document.getElementById("window-size").value
+      const screenType = document.getElementById("screen-type").value
+
+      if (!windowCount || !windowType || !frameMaterial || !windowSize || !screenType) {
+        alert("Please fill in all window specification fields before proceeding.")
+        return
+      }
+
+      windowSpecsTab.classList.remove("active")
+      contactInfoTab.classList.add("active")
+      windowSpecsContent.style.display = "none"
+      contactInfoContent.style.display = "block"
+    })
+  }
 
   // Add input validation for phone and zip
   const phoneInput = document.getElementById("phone")
@@ -63,7 +131,23 @@ document.addEventListener("DOMContentLoaded", () => {
   calculatorForm.addEventListener("submit", (e) => {
     e.preventDefault()
 
-    // Get form values
+    // Validate all required fields
+    const firstName = document.getElementById("first-name").value
+    const lastName = document.getElementById("last-name").value
+    const email = document.getElementById("email").value
+    const phone = document.getElementById("phone").value
+    const address = document.getElementById("address").value
+    const city = document.getElementById("city").value
+    const state = document.getElementById("state").value
+    const zip = document.getElementById("zip").value
+    const termsConsent = document.getElementById("terms-consent").checked
+
+    if (!firstName || !lastName || !email || !phone || !address || !city || !state || !zip || !termsConsent) {
+      alert("Please fill in all required fields and accept the terms.")
+      return
+    }
+
+    // Get form values for window specifications
     const windowCount = Number.parseInt(document.getElementById("window-count").value)
     const windowType = document.getElementById("window-type").value
     const frameMaterial = document.getElementById("frame-material").value
@@ -92,7 +176,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Hide breakdown container
     breakdownContainer.style.display = "none"
 
-    // Show calculator result
+    // Hide the form and show calculator result
+    calculatorForm.style.display = "none"
     calculatorResult.style.display = "block"
     calculatorResult.classList.add("fadeIn")
 
@@ -108,85 +193,62 @@ document.addEventListener("DOMContentLoaded", () => {
       price: totalPrice,
       lowerPrice: lowerPrice,
       upperPrice: upperPrice,
+      name: `${firstName} ${lastName}`,
+      email: email,
+      phone: phone,
+      address: `${address}, ${city}, ${state} ${zip}`,
     })
 
     requestQuoteBtn.setAttribute("href", `${baseUrl}?${queryParams.toString()}`)
 
-    // Prepare window details for the contact form
-    const windowDetails = `
-      Number of Windows: ${windowCount}
-      Window Type: ${windowType}
-      Frame Material: ${frameMaterial}
-      Window Size: ${windowSize}
-      Screen Type: ${screenType}
-      Grids/Muntins: ${hasGrids ? "Yes" : "No"}
-      Estimated Price Range: $${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}
-    `
-
-    // Update hidden fields in the contact form
-    if (windowDetailsInput) {
-      windowDetailsInput.value = windowDetails
+    // Store lead information in localStorage (this would typically be sent to a server)
+    const leadInfo = {
+      windowCount,
+      windowType,
+      frameMaterial,
+      windowSize,
+      screenType,
+      hasGrids,
+      firstName,
+      lastName,
+      email,
+      phone,
+      address,
+      city,
+      state,
+      zip,
+      comments: document.getElementById("comments").value,
+      priceRange: `$${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}`,
+      timestamp: new Date().toISOString(),
     }
 
-    if (estimatedPriceRangeInput) {
-      estimatedPriceRangeInput.value = `$${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}`
-    }
+    localStorage.setItem("recentLead", JSON.stringify(leadInfo))
 
     // Scroll to result
     calculatorResult.scrollIntoView({ behavior: "smooth" })
-  })
 
-  // Handle contact form submission
-  if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault()
+    // In a real implementation, you would send this data to your server or CRM
+    // This is just a placeholder for demonstration purposes
+    console.log("Lead information:", leadInfo)
 
-      // Validate required fields
-      const firstName = document.getElementById("first-name").value
-      const lastName = document.getElementById("last-name").value
-      const email = document.getElementById("email").value
-      const phone = document.getElementById("phone").value
-      const address = document.getElementById("address").value
-      const city = document.getElementById("city").value
-      const state = document.getElementById("state").value
-      const zip = document.getElementById("zip").value
-      const termsConsent = document.getElementById("terms-consent").checked
-
-      if (!firstName || !lastName || !email || !phone || !address || !city || !state || !zip || !termsConsent) {
-        alert("Please fill in all required fields and accept the terms.")
-        return
-      }
-
-      // Get the window details from the hidden field
-      const windowDetails = windowDetailsInput.value
-      const priceRange = estimatedPriceRangeInput.value
-
-      // Store the thank you URL in localStorage to redirect after form submission
-      const baseThankYouUrl = thankYouUrl.value.split("?")[0]
-      const urlParams = new URLSearchParams(window.location.search)
-
-      // Extract price information
-      const redirectParams = new URLSearchParams()
-
-      if (urlParams.has("lowerPrice") && urlParams.has("upperPrice")) {
-        redirectParams.set("lowerPrice", urlParams.get("lowerPrice"))
-        redirectParams.set("upperPrice", urlParams.get("upperPrice"))
-      } else {
-        // Use the calculated price range
-        const priceRangeText = priceRange.replace(/[^\d-]/g, "").split("-")
-        if (priceRangeText.length === 2) {
-          redirectParams.set("lowerPrice", priceRangeText[0].trim())
-          redirectParams.set("upperPrice", priceRangeText[1].trim())
-        }
-      }
-
-      const redirectUrl = `${baseThankYouUrl}?${redirectParams.toString()}`
-      localStorage.setItem("redirectUrl", redirectUrl)
-
-      // Submit the form
-      contactForm.submit()
+    // You could also send this data to a server endpoint
+    /*
+    fetch('/api/submit-lead', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(leadInfo),
     })
-  }
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+    */
+  })
 
   // Setup terms and privacy policy links to prevent form submission when clicked
   const termsLink = document.querySelector(".terms-link")
