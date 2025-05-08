@@ -1,13 +1,63 @@
 document.addEventListener("DOMContentLoaded", () => {
   const calculatorForm = document.getElementById("calculator-form")
   const calculatorResult = document.getElementById("calculator-result")
-  const estimatedPrice = document.getElementById("estimated-price")
   const requestQuoteBtn = document.getElementById("request-quote-btn")
   const breakdownContainer = document.getElementById("price-breakdown")
   const windowCostElement = document.getElementById("window-cost")
   const installationCostElement = document.getElementById("installation-cost")
   const commissionElement = document.getElementById("commission")
   const totalCostElement = document.getElementById("total-cost")
+  const contactForm = document.getElementById("contact-form")
+  const windowDetailsInput = document.getElementById("window-details")
+  const estimatedPriceRangeInput = document.getElementById("estimated-price-range")
+  const thankYouUrl = document.getElementById("thank-you-url")
+
+  // Add input validation for phone and zip
+  const phoneInput = document.getElementById("phone")
+  const zipInput = document.getElementById("zip")
+  const stateInput = document.getElementById("state")
+
+  if (phoneInput) {
+    // Phone validation - only allow numbers
+    phoneInput.addEventListener("input", function (e) {
+      // Remove any non-numeric characters
+      this.value = this.value.replace(/\D/g, "")
+
+      // Limit to 10 digits
+      if (this.value.length > 10) {
+        this.value = this.value.slice(0, 10)
+      }
+    })
+  }
+
+  if (zipInput) {
+    // Zip code validation - only allow numbers
+    zipInput.addEventListener("input", function (e) {
+      // Remove any non-numeric characters
+      this.value = this.value.replace(/\D/g, "")
+
+      // Limit to 5 digits
+      if (this.value.length > 5) {
+        this.value = this.value.slice(0, 5)
+      }
+    })
+  }
+
+  if (stateInput) {
+    // State code validation - force uppercase
+    stateInput.addEventListener("input", function (e) {
+      // Convert to uppercase
+      this.value = this.value.toUpperCase()
+
+      // Limit to 2 characters
+      if (this.value.length > 2) {
+        this.value = this.value.slice(0, 2)
+      }
+
+      // Only allow letters
+      this.value = this.value.replace(/[^A-Z]/g, "")
+    })
+  }
 
   // Modify the event listener for form submission to show a price range instead of a breakdown
   calculatorForm.addEventListener("submit", (e) => {
@@ -40,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
     priceRangeElement.textContent = `$${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}`
 
     // Hide breakdown container
-    const breakdownContainer = document.getElementById("price-breakdown")
     breakdownContainer.style.display = "none"
 
     // Show calculator result
@@ -63,9 +112,99 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestQuoteBtn.setAttribute("href", `${baseUrl}?${queryParams.toString()}`)
 
+    // Prepare window details for the contact form
+    const windowDetails = `
+      Number of Windows: ${windowCount}
+      Window Type: ${windowType}
+      Frame Material: ${frameMaterial}
+      Window Size: ${windowSize}
+      Screen Type: ${screenType}
+      Grids/Muntins: ${hasGrids ? "Yes" : "No"}
+      Estimated Price Range: $${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}
+    `
+
+    // Update hidden fields in the contact form
+    if (windowDetailsInput) {
+      windowDetailsInput.value = windowDetails
+    }
+
+    if (estimatedPriceRangeInput) {
+      estimatedPriceRangeInput.value = `$${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}`
+    }
+
     // Scroll to result
     calculatorResult.scrollIntoView({ behavior: "smooth" })
   })
+
+  // Handle contact form submission
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault()
+
+      // Validate required fields
+      const firstName = document.getElementById("first-name").value
+      const lastName = document.getElementById("last-name").value
+      const email = document.getElementById("email").value
+      const phone = document.getElementById("phone").value
+      const address = document.getElementById("address").value
+      const city = document.getElementById("city").value
+      const state = document.getElementById("state").value
+      const zip = document.getElementById("zip").value
+      const termsConsent = document.getElementById("terms-consent").checked
+
+      if (!firstName || !lastName || !email || !phone || !address || !city || !state || !zip || !termsConsent) {
+        alert("Please fill in all required fields and accept the terms.")
+        return
+      }
+
+      // Get the window details from the hidden field
+      const windowDetails = windowDetailsInput.value
+      const priceRange = estimatedPriceRangeInput.value
+
+      // Store the thank you URL in localStorage to redirect after form submission
+      const baseThankYouUrl = thankYouUrl.value.split("?")[0]
+      const urlParams = new URLSearchParams(window.location.search)
+
+      // Extract price information
+      const redirectParams = new URLSearchParams()
+
+      if (urlParams.has("lowerPrice") && urlParams.has("upperPrice")) {
+        redirectParams.set("lowerPrice", urlParams.get("lowerPrice"))
+        redirectParams.set("upperPrice", urlParams.get("upperPrice"))
+      } else {
+        // Use the calculated price range
+        const priceRangeText = priceRange.replace(/[^\d-]/g, "").split("-")
+        if (priceRangeText.length === 2) {
+          redirectParams.set("lowerPrice", priceRangeText[0].trim())
+          redirectParams.set("upperPrice", priceRangeText[1].trim())
+        }
+      }
+
+      const redirectUrl = `${baseThankYouUrl}?${redirectParams.toString()}`
+      localStorage.setItem("redirectUrl", redirectUrl)
+
+      // Submit the form
+      contactForm.submit()
+    })
+  }
+
+  // Setup terms and privacy policy links to prevent form submission when clicked
+  const termsLink = document.querySelector(".terms-link")
+  const privacyLink = document.querySelector(".privacy-link")
+
+  if (termsLink) {
+    termsLink.addEventListener("click", (e) => {
+      e.preventDefault()
+      alert("Terms of Service would open in a new window. This is a placeholder.")
+    })
+  }
+
+  if (privacyLink) {
+    privacyLink.addEventListener("click", (e) => {
+      e.preventDefault()
+      alert("Privacy Policy would open in a new window. This is a placeholder.")
+    })
+  }
 
   function calculateDetailedPrice(count, type, material, size, screenType, hasGrids) {
     // Base price per window
