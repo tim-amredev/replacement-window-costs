@@ -116,9 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
       case "wood-clad":
         baseWindowPrice += 175
         break
-      case "steel":
-        baseWindowPrice += 200
-        break
     }
 
     // Adjustments for window size
@@ -208,9 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
         break
       case "wood-clad":
         baseInstallCost += 85
-        break
-      case "steel":
-        baseInstallCost += 100
         break
     }
 
