@@ -82,17 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
       case "picture":
         baseWindowPrice += 75
         break
-      case "bay":
-        baseWindowPrice += 200
-        break
       case "awning":
         baseWindowPrice += 60
-        break
-      case "hopper":
-        baseWindowPrice += 40
-        break
-      case "garden":
-        baseWindowPrice += 150
         break
     }
 
@@ -101,20 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
       case "vinyl":
         baseWindowPrice += 0
         break
-      case "wood":
-        baseWindowPrice += 100
-        break
-      case "fiberglass":
-        baseWindowPrice += 150
-        break
-      case "aluminum":
-        baseWindowPrice += 50
-        break
       case "composite":
         baseWindowPrice += 125
-        break
-      case "wood-clad":
-        baseWindowPrice += 175
         break
     }
 
@@ -172,17 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
       case "picture":
         baseInstallCost += 20
         break
-      case "bay":
-        baseInstallCost += 150
-        break
       case "awning":
         baseInstallCost += 30
-        break
-      case "hopper":
-        baseInstallCost += 20
-        break
-      case "garden":
-        baseInstallCost += 100
         break
     }
 
@@ -191,20 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
       case "vinyl":
         baseInstallCost += 0
         break
-      case "wood":
-        baseInstallCost += 50
-        break
-      case "fiberglass":
-        baseInstallCost += 75
-        break
-      case "aluminum":
-        baseInstallCost += 25
-        break
       case "composite":
         baseInstallCost += 60
-        break
-      case "wood-clad":
-        baseInstallCost += 85
         break
     }
 
