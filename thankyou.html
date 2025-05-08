@@ -13,6 +13,33 @@ title: Thank You
     <p class="price" id="quoted-price">$0</p>
     <p>This comprehensive estimate includes window costs, professional installation, and service fees.</p>
     
+    <div id="selected-options-thankyou" class="selected-options" style="display: none;">
+      <h4>Your Selected Options</h4>
+      <div class="options-grid">
+        <div class="option-item">
+          <strong>Window Type:</strong> <span id="thankyou-window-type"></span>
+        </div>
+        <div class="option-item">
+          <strong>Frame Material:</strong> <span id="thankyou-frame-material"></span>
+        </div>
+        <div class="option-item">
+          <strong>Window Size:</strong> <span id="thankyou-window-size"></span>
+        </div>
+        <div class="option-item">
+          <strong>Number of Windows:</strong> <span id="thankyou-window-count"></span>
+        </div>
+        <div class="option-item">
+          <strong>Exterior Color:</strong> <span id="thankyou-exterior-color"></span>
+        </div>
+        <div class="option-item">
+          <strong>Interior Color:</strong> <span id="thankyou-interior-color"></span>
+        </div>
+        <div class="option-item">
+          <strong>Hardware Finish:</strong> <span id="thankyou-hardware"></span>
+        </div>
+      </div>
+    </div>
+    
     <div style="margin-top: 2rem;">
       <a href="{{ site.baseurl }}/" class="btn btn-primary">Return to Home</a>
     </div>
@@ -32,11 +59,59 @@ title: Thank You
 </div>
 </section>
 
+<style>
+  /* Selected options display */
+  .selected-options {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--medium-gray);
+  }
+  
+  .selected-options h4 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+  }
+  
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .option-item {
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--medium-gray);
+  }
+  
+  @media (max-width: 768px) {
+    .options-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const quotedPrice = document.getElementById('quoted-price');
+  const selectedOptionsContainer = document.getElementById('selected-options-thankyou');
   const urlParams = new URLSearchParams(window.location.search);
   
+  // Helper function to format option names for display
+  function formatOptionName(option) {
+    if (!option) return ""
+    
+    // Replace hyphens with spaces and capitalize each word
+    return option
+      .split("-")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+  }
+  
+  // Display price range
   if (urlParams.has('lowerPrice') && urlParams.has('upperPrice')) {
     const lowerPrice = parseInt(urlParams.get('lowerPrice'));
     const upperPrice = parseInt(urlParams.get('upperPrice'));
@@ -45,6 +120,19 @@ document.addEventListener('DOMContentLoaded', function() {
       quotedPrice.textContent = '$' + lowerPrice.toLocaleString() + ' - $' + upperPrice.toLocaleString();
     } else {
       quotedPrice.textContent = 'Price information unavailable';
+    }
+    
+    // Display selected options if available
+    if (urlParams.has('type') && urlParams.has('material') && urlParams.has('exteriorColor')) {
+      selectedOptionsContainer.style.display = 'block';
+      
+      document.getElementById('thankyou-window-type').textContent = formatOptionName(urlParams.get('type'));
+      document.getElementById('thankyou-frame-material').textContent = formatOptionName(urlParams.get('material'));
+      document.getElementById('thankyou-window-size').textContent = urlParams.get('size');
+      document.getElementById('thankyou-window-count').textContent = urlParams.get('count');
+      document.getElementById('thankyou-exterior-color').textContent = formatOptionName(urlParams.get('exteriorColor'));
+      document.getElementById('thankyou-interior-color').textContent = formatOptionName(urlParams.get('interiorColor'));
+      document.getElementById('thankyou-hardware').textContent = formatOptionName(urlParams.get('hardware'));
     }
   } else if (urlParams.has('price')) {
     const price = parseInt(urlParams.get('price'));
@@ -64,6 +152,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const parsedInfo = JSON.parse(leadInfo);
         if (parsedInfo.priceRange) {
           quotedPrice.textContent = parsedInfo.priceRange;
+          
+          // Display selected options from localStorage
+          if (parsedInfo.windowType && parsedInfo.frameMaterial) {
+            selectedOptionsContainer.style.display = 'block';
+            
+            document.getElementById('thankyou-window-type').textContent = formatOptionName(parsedInfo.windowType);
+            document.getElementById('thankyou-frame-material').textContent = formatOptionName(parsedInfo.frameMaterial);
+            document.getElementById('thankyou-window-size').textContent = parsedInfo.windowSize;
+            document.getElementById('thankyou-window-count').textContent = parsedInfo.windowCount;
+            document.getElementById('thankyou-exterior-color').textContent = formatOptionName(parsedInfo.exteriorColor);
+            document.getElementById('thankyou-interior-color').textContent = formatOptionName(parsedInfo.interiorColor);
+            document.getElementById('thankyou-hardware').textContent = formatOptionName(parsedInfo.hardware);
+          }
         } else {
           quotedPrice.textContent = 'Price information unavailable';
         }
