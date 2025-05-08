@@ -865,6 +865,129 @@ input[type="radio"]:checked + .hardware-label {
     height: 60px;
   }
 }
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Improve form layout on mobile */
+  .form-row {
+    flex-direction: column;
+    margin: 0;
+  }
+  
+  .form-col {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  
+  /* Adjust section spacing */
+  .form-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+  }
+  
+  /* Make color and hardware options more touch-friendly */
+  .color-options, .hardware-options {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .color-img, .hardware-img {
+    width: 65px;
+    height: 65px;
+  }
+  
+  /* Improve radio and checkbox groups */
+  .radio-group, .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .radio-option, .checkbox-option {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  
+  .radio-option:last-child, .checkbox-option:last-child {
+    border-bottom: none;
+  }
+  
+  /* Make inputs larger and more touch-friendly */
+  input, select, textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 0.875rem;
+  }
+  
+  /* Improve button size for touch */
+  .btn {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  /* Adjust headings for mobile */
+  h3 {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for very small screens */
+  .color-options, .hardware-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .color-img, .hardware-img {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .color-label span, .hardware-label span {
+    font-size: 0.8rem;
+  }
+  
+  /* Adjust consent section */
+  .consent-section {
+    padding: 1rem;
+  }
+  
+  .terms-checkbox label, .sms-checkbox label {
+    font-size: 0.85rem;
+  }
+  
+  /* Adjust other text */
+  .price-note {
+    font-size: 0.8rem;
+  }
+  
+  /* Ensure other inputs are properly sized */
+  .other-input {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Fix for iOS input zoom */
+@media screen and (-webkit-min-device-pixel-ratio: 0) { 
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+
+/* Improve touch targets */
+@media (hover: none) and (pointer: coarse) {
+  .radio-option, .checkbox-option {
+    min-height: 44px; /* Apple's recommended minimum touch target size */
+  }
+  
+  input[type="radio"],
+  input[type="checkbox"] {
+    min-width: 22px;
+    min-height: 22px;
+  }
+}
 </style>
 
 <QuickEdit file="assets/js/form-handler.js">
