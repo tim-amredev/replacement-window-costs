@@ -37,10 +37,22 @@ document.addEventListener('DOMContentLoaded', function() {
   const quotedPrice = document.getElementById('quoted-price');
   const urlParams = new URLSearchParams(window.location.search);
   
-  if (urlParams.has('price')) {
+  if (urlParams.has('lowerPrice') && urlParams.has('upperPrice')) {
+    const lowerPrice = parseInt(urlParams.get('lowerPrice'));
+    const upperPrice = parseInt(urlParams.get('upperPrice'));
+    
+    if (!isNaN(lowerPrice) && !isNaN(upperPrice)) {
+      quotedPrice.textContent = '$' + lowerPrice.toLocaleString() + ' - $' + upperPrice.toLocaleString();
+    } else {
+      quotedPrice.textContent = 'Price information unavailable';
+    }
+  } else if (urlParams.has('price')) {
     const price = parseInt(urlParams.get('price'));
     if (!isNaN(price)) {
-      quotedPrice.textContent = '$' + price.toLocaleString();
+      // Calculate price range if only total price is available
+      const lowerPrice = Math.round(price * 0.8);
+      const upperPrice = Math.round(price * 1.2);
+      quotedPrice.textContent = '$' + lowerPrice.toLocaleString() + ' - $' + upperPrice.toLocaleString();
     } else {
       quotedPrice.textContent = 'Price information unavailable';
     }
@@ -49,4 +61,3 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
-
