@@ -185,20 +185,8 @@ custom_js:
                 <label for="type-picture">Picture/fixed</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="type-bay" name="window_types[]" value="Bay or bow">
-                <label for="type-bay">Bay or bow</label>
-              </div>
-              <div class="checkbox-option">
                 <input type="checkbox" id="type-awning" name="window_types[]" value="Awning">
                 <label for="type-awning">Awning</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="type-hopper" name="window_types[]" value="Hopper">
-                <label for="type-hopper">Hopper</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="type-garden" name="window_types[]" value="Garden">
-                <label for="type-garden">Garden</label>
               </div>
               <div class="checkbox-option">
                 <input type="checkbox" id="type-mixture" name="window_types[]" value="Mixture of types">
@@ -209,6 +197,17 @@ custom_js:
                 <label for="type-unsure">Unsure</label>
               </div>
             </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="window-size">Window Size (United Inches)</label>
+            <select id="window-size" name="window_size" class="form-select">
+              <option value="">Select window size</option>
+              <option value="small">Small (Less than 80 united inches)</option>
+              <option value="medium">Medium (80-100 united inches)</option>
+              <option value="large">Large (More than 100 united inches)</option>
+            </select>
+            <p class="size-note">United inches = width + height of the window in inches</p>
           </div>
           
           <div class="form-group">
@@ -243,29 +242,8 @@ custom_js:
                 <label for="material-vinyl">Vinyl</label>
               </div>
               <div class="radio-option">
-                <input type="radio" id="material-wood" name="frame_material" value="Wood">
-                <label for="material-wood">Wood</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="material-fiberglass" name="frame_material" value="Fiberglass">
-                <label for="material-fiberglass">Fiberglass</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="material-aluminum" name="frame_material" value="Aluminum">
-                <label for="material-aluminum">Aluminum</label>
-              </div>
-              <div class="radio-option">
                 <input type="radio" id="material-composite" name="frame_material" value="Composite">
                 <label for="material-composite">Composite</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="material-woodclad" name="frame_material" value="Wood-clad">
-                <label for="material-woodclad">Wood-clad</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="material-other" name="frame_material" value="Other">
-                <label for="material-other">Other</label>
-                <input type="text" id="material-other-text" name="frame_material_other" placeholder="Please specify" class="other-input">
               </div>
               <div class="radio-option">
                 <input type="radio" id="material-unsure" name="frame_material" value="Unsure/need recommendations">
@@ -504,49 +482,6 @@ custom_js:
           </div>
           
           <div class="form-group">
-            <label>Do you need any specialized windows for specific areas? (Select all that apply)</label>
-            <div class="checkbox-group">
-              <div class="checkbox-option">
-                <input type="checkbox" id="special-egress" name="specialized_windows[]" value="Egress windows for basement">
-                <label for="special-egress">Egress windows for basement</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="special-privacy" name="specialized_windows[]" value="Privacy windows for bathrooms">
-                <label for="special-privacy">Privacy windows for bathrooms</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="special-picture" name="specialized_windows[]" value="Picture windows for views">
-                <label for="special-picture">Picture windows for views</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="special-bay" name="specialized_windows[]" value="Bay/bow windows for added space">
-                <label for="special-bay">Bay/bow windows for added space</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="special-energy" name="specialized_windows[]" value="Energy-efficient windows for south/west exposures">
-                <label for="special-energy">Energy-efficient windows for south/west exposures</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="special-impact" name="specialized_windows[]" value="Hurricane/impact windows for weather protection">
-                <label for="special-impact">Hurricane/impact windows for weather protection</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="special-historical" name="specialized_windows[]" value="Historical/period-appropriate windows">
-                <label for="special-historical">Historical/period-appropriate windows</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="special-other" name="specialized_windows[]" value="Other">
-                <label for="special-other">Other</label>
-                <input type="text" id="special-other-text" name="specialized_windows_other" placeholder="Please specify" class="other-input">
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="special-none" name="specialized_windows[]" value="No specialized needs">
-                <label for="special-none">No specialized needs</label>
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group">
             <label>What is your preferred timeframe for this project?</label>
             <div class="radio-group">
               <div class="radio-option">
@@ -729,22 +664,6 @@ custom_js:
                 <label for="brand-milgard">Milgard</label>
               </div>
               <div class="radio-option">
-                <input type="radio" id="brand-loewen" name="brand_preference" value="Loewen">
-                <label for="brand-loewen">Loewen</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="brand-kolbe" name="brand_preference" value="Kolbe">
-                <label for="brand-kolbe">Kolbe</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="brand-simonton" name="brand_preference" value="Simonton">
-                <label for="brand-simonton">Simonton</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="brand-plygem" name="brand_preference" value="Ply Gem">
-                <label for="brand-plygem">Ply Gem</label>
-              </div>
-              <div class="radio-option">
                 <input type="radio" id="brand-none" name="brand_preference" value="No preference" checked>
                 <label for="brand-none">No preference</label>
               </div>
@@ -752,49 +671,6 @@ custom_js:
                 <input type="radio" id="brand-other" name="brand_preference" value="Other">
                 <label for="brand-other">Other</label>
                 <input type="text" id="brand-other-text" name="brand_preference_other" placeholder="Please specify" class="other-input">
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label>Will you need additional services with your window project? (Select all that apply)</label>
-            <div class="checkbox-group">
-              <div class="checkbox-option">
-                <input type="checkbox" id="service-trim" name="additional_services[]" value="Interior trim work">
-                <label for="service-trim">Interior trim work</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="service-siding" name="additional_services[]" value="Exterior siding repair/replacement">
-                <label for="service-siding">Exterior siding repair/replacement</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="service-treatments" name="additional_services[]" value="Window treatments (blinds/curtains)">
-                <label for="service-treatments">Window treatments (blinds/curtains)</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="service-painting" name="additional_services[]" value="Painting">
-                <label for="service-painting">Painting</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="service-insulation" name="additional_services[]" value="Insulation">
-                <label for="service-insulation">Insulation</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="service-disposal" name="additional_services[]" value="Removal/disposal of old windows">
-                <label for="service-disposal">Removal/disposal of old windows</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="service-permits" name="additional_services[]" value="Permits/HOA approval assistance">
-                <label for="service-permits">Permits/HOA approval assistance</label>
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="service-other" name="additional_services[]" value="Other">
-                <label for="service-other">Other</label>
-                <input type="text" id="service-other-text" name="additional_services_other" placeholder="Please specify" class="other-input">
-              </div>
-              <div class="checkbox-option">
-                <input type="checkbox" id="service-none" name="additional_services[]" value="None">
-                <label for="service-none">None</label>
               </div>
             </div>
           </div>
@@ -958,6 +834,15 @@ custom_js:
   
   .ranking-item select {
     width: 100%;
+  }
+  
+  /* Size note style */
+  .size-note {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    font-style: italic;
+    margin-bottom: 0;
   }
   
   @media (max-width: 768px) {
