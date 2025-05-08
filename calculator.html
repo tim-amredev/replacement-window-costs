@@ -86,34 +86,34 @@ custom_js:
       </form>
       
       <div id="calculator-result" class="calculator-result" style="display: none;">
-        <h3>Estimated Total Cost</h3>
-        <p class="price" id="estimated-price">$0</p>
-        
-        <div id="price-breakdown" class="price-breakdown" style="display: none;">
-          <h4>Cost Breakdown</h4>
-          <div class="breakdown-table">
-            <div class="breakdown-row">
-              <div class="breakdown-label">Window Cost:</div>
-              <div class="breakdown-value" id="window-cost">$0</div>
-            </div>
-            <div class="breakdown-row">
-              <div class="breakdown-label">Installation Cost:</div>
-              <div class="breakdown-value" id="installation-cost">$0</div>
-            </div>
-            <div class="breakdown-row">
-              <div class="breakdown-label">Service Fee:</div>
-              <div class="breakdown-value" id="commission">$0</div>
-            </div>
-            <div class="breakdown-row breakdown-total">
-              <div class="breakdown-label">Total Cost:</div>
-              <div class="breakdown-value" id="total-cost">$0</div>
-            </div>
-          </div>
-        </div>
-        
-        <p>This is an estimate based on national averages. Actual costs may vary based on your location and specific requirements.</p>
-        <a id="request-quote-btn" href="{{ site.baseurl }}/form-collection.html" class="btn btn-secondary">Request a Personalized Quote</a>
+  <h3>Estimated Price Range</h3>
+  <p class="price-range" id="price-range">$0 - $0</p>
+  
+  <div id="price-breakdown" class="price-breakdown" style="display: none;">
+    <!-- This is hidden but kept for compatibility -->
+    <div class="breakdown-table">
+      <div class="breakdown-row">
+        <div class="breakdown-label">Window Cost:</div>
+        <div class="breakdown-value" id="window-cost">$0</div>
       </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">Installation Cost:</div>
+        <div class="breakdown-value" id="installation-cost">$0</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">Service Fee:</div>
+        <div class="breakdown-value" id="commission">$0</div>
+      </div>
+      <div class="breakdown-row breakdown-total">
+        <div class="breakdown-label">Total Cost:</div>
+        <div class="breakdown-value" id="total-cost">$0</div>
+      </div>
+    </div>
+  </div>
+  
+  <p>This is a general estimate based on national averages. Actual costs may vary based on your location, specific requirements, and local labor rates. The price range represents typical variations you might encounter.</p>
+  <a id="request-quote-btn" href="{{ site.baseurl }}/form-collection.html" class="btn btn-secondary">Request a Personalized Quote</a>
+</div>
     </div>
   </div>
   
@@ -159,6 +159,29 @@ custom_js:
     </div>
   </div>
 </section>
+
+<style>
+  /* Price range styles */
+  .price-range {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin: 1rem 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .price-range {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .price-range {
+      font-size: 2.25rem;
+    }
+  }
+</style>
 
 <style>
   /* Price breakdown styles */
