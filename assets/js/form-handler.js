@@ -511,6 +511,76 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     }
   }
+
+  // Improve mobile experience
+
+  // Fix for iOS form submission issues
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+    // Add specific handling for iOS devices
+    quoteForm.addEventListener("submit", function (e) {
+      // Prevent double submission on iOS
+      if (this.hasAttribute("data-submitting")) {
+        e.preventDefault()
+        return
+      }
+
+      this.setAttribute("data-submitting", "true")
+
+      // Remove the attribute after a delay to allow resubmission if needed
+      setTimeout(() => {
+        this.removeAttribute("data-submitting")
+      }, 3000)
+    })
+  }
+
+  // Ensure proper display on mobile orientation change
+  window.addEventListener("orientationchange", () => {
+    // Small delay to allow the browser to complete the orientation change
+    setTimeout(() => {
+      // Force redraw of color and hardware options
+      const colorOptions = document.querySelectorAll(".color-options")
+      const hardwareOptions = document.querySelectorAll(".hardware-options")
+
+      colorOptions.forEach((el) => {
+        el.style.display = "none"
+        setTimeout(() => {
+          el.style.display = ""
+        }, 50)
+      })
+
+      hardwareOptions.forEach((el) => {
+        el.style.display = "none"
+        setTimeout(() => {
+          el.style.display = ""
+        }, 50)
+      })
+    }, 300)
+  })
+
+  // Improve scrolling to form sections on mobile
+  const formSections = document.querySelectorAll(".form-section")
+  formSections.forEach((section) => {
+    const heading = section.querySelector("h3")
+    if (heading) {
+      heading.addEventListener("click", function () {
+        // Add a small visual feedback
+        this.style.opacity = "0.7"
+        setTimeout(() => {
+          this.style.opacity = "1"
+        }, 200)
+
+        // Scroll the section into view with offset for fixed header
+        const headerHeight = document.querySelector(".site-header")?.offsetHeight || 0
+        const yOffset = -headerHeight - 20
+        const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset
+
+        window.scrollTo({ top: y, behavior: "smooth" })
+      })
+
+      // Add visual cue that headings are clickable
+      heading.style.cursor = "pointer"
+    }
+  })
 })
 
 // Check if we need to redirect after form submission
