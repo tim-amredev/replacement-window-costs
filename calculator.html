@@ -86,34 +86,124 @@ custom_js:
       </form>
       
       <div id="calculator-result" class="calculator-result" style="display: none;">
-  <h3>Estimated Price Range</h3>
-  <p class="price-range" id="price-range">$0 - $0</p>
-  
-  <div id="price-breakdown" class="price-breakdown" style="display: none;">
-    <!-- This is hidden but kept for compatibility -->
-    <div class="breakdown-table">
-      <div class="breakdown-row">
-        <div class="breakdown-label">Window Cost:</div>
-        <div class="breakdown-value" id="window-cost">$0</div>
+        <h3>Estimated Price Range</h3>
+        <p class="price-range" id="price-range">$0 - $0</p>
+        
+        <div id="price-breakdown" class="price-breakdown" style="display: none;">
+          <!-- This is hidden but kept for compatibility -->
+          <div class="breakdown-table">
+            <div class="breakdown-row">
+              <div class="breakdown-label">Window Cost:</div>
+              <div class="breakdown-value" id="window-cost">$0</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-label">Installation Cost:</div>
+              <div class="breakdown-value" id="installation-cost">$0</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-label">Service Fee:</div>
+              <div class="breakdown-value" id="commission">$0</div>
+            </div>
+            <div class="breakdown-row breakdown-total">
+              <div class="breakdown-label">Total Cost:</div>
+              <div class="breakdown-value" id="total-cost">$0</div>
+            </div>
+          </div>
+        </div>
+        
+        <p>This is a general estimate based on national averages. Actual costs may vary based on your location, specific requirements, and local labor rates. The price range represents typical variations you might encounter.</p>
+        
+        <!-- Contact Information Form -->
+        <div id="contact-form-container" class="contact-form-container">
+          <h3>Get Your Personalized Quote</h3>
+          <p>Fill out your contact information below to receive a detailed quote from our window specialists.</p>
+          
+          <form id="contact-form" action="https://formsubmit.co/34621b6167978998b0c76f8366420183" method="POST">
+            <!-- FormSubmit Configuration -->
+            <input type="hidden" name="_captcha" value="true">
+            <input type="hidden" name="_next" id="thank-you-url" value="{{ site.baseurl }}/thankyou.html">
+            <input type="hidden" name="_subject" value="New Quote Request from Calculator - ReplacementWindowCosts.com">
+            <input type="hidden" id="window-details" name="window_details" value="">
+            <input type="hidden" id="estimated-price-range" name="estimated_price_range" value="">
+            
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="first-name">First Name*</label>
+                  <input type="text" id="first-name" name="first_name" required>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="last-name">Last Name*</label>
+                  <input type="text" id="last-name" name="last_name" required>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="email">Email Address*</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="phone">Phone Number*</label>
+                  <input type="tel" id="phone" name="phone" required>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="address">Street Address*</label>
+              <input type="text" id="address" name="address" required>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="city">City*</label>
+                  <input type="text" id="city" name="city" required>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="state">State*</label>
+                  <input type="text" id="state" name="state" maxlength="2" required>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="zip">ZIP Code*</label>
+                  <input type="text" id="zip" name="zip" maxlength="5" required>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="comments">Additional Comments</label>
+              <textarea id="comments" name="comments" rows="3" placeholder="Tell us more about your project or any specific requirements"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <div class="checkbox-option terms-checkbox">
+                <input type="checkbox" id="terms-consent" name="terms_consent" required>
+                <label for="terms-consent">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a>. I understand that my information will be used to provide me with a quote.</label>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-secondary" style="width: 100%;">Submit Request</button>
+          </form>
+        </div>
+        
+        <div class="or-divider">
+          <span>OR</span>
+        </div>
+        
+        <a id="request-quote-btn" href="{{ site.baseurl }}/form-collection.html" class="btn btn-outline">Request a More Detailed Quote</a>
       </div>
-      <div class="breakdown-row">
-        <div class="breakdown-label">Installation Cost:</div>
-        <div class="breakdown-value" id="installation-cost">$0</div>
-      </div>
-      <div class="breakdown-row">
-        <div class="breakdown-label">Service Fee:</div>
-        <div class="breakdown-value" id="commission">$0</div>
-      </div>
-      <div class="breakdown-row breakdown-total">
-        <div class="breakdown-label">Total Cost:</div>
-        <div class="breakdown-value" id="total-cost">$0</div>
-      </div>
-    </div>
-  </div>
-  
-  <p>This is a general estimate based on national averages. Actual costs may vary based on your location, specific requirements, and local labor rates. The price range represents typical variations you might encounter.</p>
-  <a id="request-quote-btn" href="{{ site.baseurl }}/form-collection.html" class="btn btn-secondary">Request a Personalized Quote</a>
-</div>
     </div>
   </div>
   
@@ -170,9 +260,85 @@ custom_js:
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   
+  /* Contact form styles */
+  .contact-form-container {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--medium-gray);
+  }
+  
+  .contact-form-container h3 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .contact-form-container p {
+    margin-bottom: 1.5rem;
+  }
+  
+  .or-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+  
+  .or-divider::before,
+  .or-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--medium-gray);
+  }
+  
+  .or-divider span {
+    padding: 0 1rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+  
+  .btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+  }
+  
+  .btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  
+  .terms-checkbox input {
+    margin-top: 0.25rem;
+    margin-right: 0.75rem;
+  }
+  
+  .terms-checkbox label {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .terms-link, .privacy-link {
+    text-decoration: underline;
+    color: var(--primary-color);
+  }
+  
   @media (max-width: 768px) {
     .price-range {
       font-size: 2.5rem;
+    }
+    
+    .contact-form-container {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+    }
+    
+    .terms-checkbox label {
+      font-size: 0.9rem;
     }
   }
   
