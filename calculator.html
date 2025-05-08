@@ -11,200 +11,198 @@ custom_js:
     <p class="text-center">Use our calculator to estimate the cost of your window replacement project. Enter the details below to get an instant estimate.</p>
     
     <div class="card">
-      <form id="calculator-form">
-        <div class="form-group">
-          <label for="window-count">Number of Windows</label>
-          <input type="number" id="window-count" min="1" value="1" required>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-col">
-            <div class="form-group">
-              <label for="window-type">Window Type</label>
-              <select id="window-type" required>
-                <option value="double-hung">Double-Hung</option>
-                <option value="casement">Casement</option>
-                <option value="2-lite-slider">2 Lite Slider</option>
-                <option value="3-lite-slider">3 Lite Slider</option>
-                <option value="picture">Picture/Fixed</option>
-                <option value="awning">Awning</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="form-col">
-            <div class="form-group">
-              <label for="frame-material">Frame Material</label>
-              <select id="frame-material" required>
-                <option value="vinyl">Vinyl</option>
-                <option value="composite">Composite</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="window-size">Window Size (United Inches)</label>
-          <select id="window-size" required>
-            <option value="small">Small (Less than 80 united inches)</option>
-            <option value="medium" selected>Medium (80-100 united inches)</option>
-            <option value="large">Large (More than 100 united inches)</option>
-          </select>
-          <p class="size-note">United inches = width + height of the window in inches</p>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-col">
-            <div class="form-group">
-              <label for="screen-type">Screen Options</label>
-              <select id="screen-type" required>
-                <option value="none">No Screens</option>
-                <option value="half">Half Screens</option>
-                <option value="full">Full Screens</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="form-col">
-            <div class="form-group">
-              <label>Grids/Muntins</label>
-              <div class="radio-group">
-                <div class="radio-option">
-                  <input type="radio" id="grids-yes" name="grids" value="yes">
-                  <label for="grids-yes">Yes</label>
-                </div>
-                <div class="radio-option">
-                  <input type="radio" id="grids-no" name="grids" value="no" checked>
-                  <label for="grids-no">No</label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Calculate Cost</button>
-      </form>
+  <form id="calculator-form">
+    <div class="form-tabs">
+      <div class="form-tab active" data-tab="window-specs">Window Specifications</div>
+      <div class="form-tab" data-tab="contact-info">Contact Information</div>
+    </div>
+    
+    <div class="tab-content" id="window-specs-content">
+      <div class="form-group">
+        <label for="window-count">Number of Windows</label>
+        <input type="number" id="window-count" min="1" value="1" required>
+      </div>
       
-      <div id="calculator-result" class="calculator-result" style="display: none;">
-        <h3>Estimated Price Range</h3>
-        <p class="price-range" id="price-range">$0 - $0</p>
-        
-        <div id="price-breakdown" class="price-breakdown" style="display: none;">
-          <!-- This is hidden but kept for compatibility -->
-          <div class="breakdown-table">
-            <div class="breakdown-row">
-              <div class="breakdown-label">Window Cost:</div>
-              <div class="breakdown-value" id="window-cost">$0</div>
-            </div>
-            <div class="breakdown-row">
-              <div class="breakdown-label">Installation Cost:</div>
-              <div class="breakdown-value" id="installation-cost">$0</div>
-            </div>
-            <div class="breakdown-row">
-              <div class="breakdown-label">Service Fee:</div>
-              <div class="breakdown-value" id="commission">$0</div>
-            </div>
-            <div class="breakdown-row breakdown-total">
-              <div class="breakdown-label">Total Cost:</div>
-              <div class="breakdown-value" id="total-cost">$0</div>
-            </div>
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="window-type">Window Type</label>
+            <select id="window-type" required>
+              <option value="double-hung">Double-Hung</option>
+              <option value="casement">Casement</option>
+              <option value="2-lite-slider">2 Lite Slider</option>
+              <option value="3-lite-slider">3 Lite Slider</option>
+              <option value="picture">Picture/Fixed</option>
+              <option value="awning">Awning</option>
+            </select>
           </div>
         </div>
         
-        <p>This is a general estimate based on national averages. Actual costs may vary based on your location, specific requirements, and local labor rates. The price range represents typical variations you might encounter.</p>
-        
-        <!-- Contact Information Form -->
-        <div id="contact-form-container" class="contact-form-container">
-          <h3>Get Your Personalized Quote</h3>
-          <p>Fill out your contact information below to receive a detailed quote from our window specialists.</p>
-          
-          <form id="contact-form" action="https://formsubmit.co/34621b6167978998b0c76f8366420183" method="POST">
-            <!-- FormSubmit Configuration -->
-            <input type="hidden" name="_captcha" value="true">
-            <input type="hidden" name="_next" id="thank-you-url" value="{{ site.baseurl }}/thankyou.html">
-            <input type="hidden" name="_subject" value="New Quote Request from Calculator - ReplacementWindowCosts.com">
-            <input type="hidden" id="window-details" name="window_details" value="">
-            <input type="hidden" id="estimated-price-range" name="estimated_price_range" value="">
-            
-            <div class="form-row">
-              <div class="form-col">
-                <div class="form-group">
-                  <label for="first-name">First Name*</label>
-                  <input type="text" id="first-name" name="first_name" required>
-                </div>
-              </div>
-              <div class="form-col">
-                <div class="form-group">
-                  <label for="last-name">Last Name*</label>
-                  <input type="text" id="last-name" name="last_name" required>
-                </div>
-              </div>
-            </div>
-            
-            <div class="form-row">
-              <div class="form-col">
-                <div class="form-group">
-                  <label for="email">Email Address*</label>
-                  <input type="email" id="email" name="email" required>
-                </div>
-              </div>
-              <div class="form-col">
-                <div class="form-group">
-                  <label for="phone">Phone Number*</label>
-                  <input type="tel" id="phone" name="phone" required>
-                </div>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="address">Street Address*</label>
-              <input type="text" id="address" name="address" required>
-            </div>
-            
-            <div class="form-row">
-              <div class="form-col">
-                <div class="form-group">
-                  <label for="city">City*</label>
-                  <input type="text" id="city" name="city" required>
-                </div>
-              </div>
-              <div class="form-col">
-                <div class="form-group">
-                  <label for="state">State*</label>
-                  <input type="text" id="state" name="state" maxlength="2" required>
-                </div>
-              </div>
-              <div class="form-col">
-                <div class="form-group">
-                  <label for="zip">ZIP Code*</label>
-                  <input type="text" id="zip" name="zip" maxlength="5" required>
-                </div>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="comments">Additional Comments</label>
-              <textarea id="comments" name="comments" rows="3" placeholder="Tell us more about your project or any specific requirements"></textarea>
-            </div>
-            
-            <div class="form-group">
-              <div class="checkbox-option terms-checkbox">
-                <input type="checkbox" id="terms-consent" name="terms_consent" required>
-                <label for="terms-consent">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a>. I understand that my information will be used to provide me with a quote.</label>
-              </div>
-            </div>
-            
-            <button type="submit" class="btn btn-secondary" style="width: 100%;">Submit Request</button>
-          </form>
+        <div class="form-col">
+          <div class="form-group">
+            <label for="frame-material">Frame Material</label>
+            <select id="frame-material" required>
+              <option value="vinyl">Vinyl</option>
+              <option value="composite">Composite</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="window-size">Window Size (United Inches)</label>
+        <select id="window-size" required>
+          <option value="small">Small (Less than 80 united inches)</option>
+          <option value="medium" selected>Medium (80-100 united inches)</option>
+          <option value="large">Large (More than 100 united inches)</option>
+        </select>
+        <p class="size-note">United inches = width + height of the window in inches</p>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="screen-type">Screen Options</label>
+            <select id="screen-type" required>
+              <option value="none">No Screens</option>
+              <option value="half">Half Screens</option>
+              <option value="full">Full Screens</option>
+            </select>
+          </div>
         </div>
         
-        <div class="or-divider">
-          <span>OR</span>
+        <div class="form-col">
+          <div class="form-group">
+            <label>Grids/Muntins</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="grids-yes" name="grids" value="yes">
+                <label for="grids-yes">Yes</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="grids-no" name="grids" value="no" checked>
+                <label for="grids-no">No</label>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <a id="request-quote-btn" href="{{ site.baseurl }}/form-collection.html" class="btn btn-outline">Request a More Detailed Quote</a>
+      </div>
+      
+      <button type="button" id="next-step-btn" class="btn btn-primary" style="width: 100%;">Next: Contact Information</button>
+    </div>
+    
+    <div class="tab-content" id="contact-info-content" style="display: none;">
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="first-name">First Name*</label>
+            <input type="text" id="first-name" name="first_name" required>
+          </div>
+        </div>
+        <div class="form-col">
+          <div class="form-group">
+            <label for="last-name">Last Name*</label>
+            <input type="text" id="last-name" name="last_name" required>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="email">Email Address*</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+        <div class="form-col">
+          <div class="form-group">
+            <label for="phone">Phone Number*</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Street Address*</label>
+        <input type="text" id="address" name="address" required>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="city">City*</label>
+            <input type="text" id="city" name="city" required>
+          </div>
+        </div>
+        <div class="form-col">
+          <div class="form-group">
+            <label for="state">State*</label>
+            <input type="text" id="state" name="state" maxlength="2" required>
+          </div>
+        </div>
+        <div class="form-col">
+          <div class="form-group">
+            <label for="zip">ZIP Code*</label>
+            <input type="text" id="zip" name="zip" maxlength="5" required>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="comments">Additional Comments</label>
+        <textarea id="comments" name="comments" rows="3" placeholder="Tell us more about your project or any specific requirements"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <div class="checkbox-option terms-checkbox">
+          <input type="checkbox" id="terms-consent" name="terms_consent" required>
+          <label for="terms-consent">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a>. I understand that my information will be used to provide me with a quote.</label>
+        </div>
+      </div>
+      
+      <div class="form-buttons">
+        <button type="button" id="back-step-btn" class="btn btn-outline">Back to Window Specifications</button>
+        <button type="submit" class="btn btn-primary">Calculate Cost</button>
       </div>
     </div>
+  </form>
+  
+  <div id="calculator-result" class="calculator-result" style="display: none;">
+    <h3>Estimated Price Range</h3>
+    <p class="price-range" id="price-range">$0 - $0</p>
+    
+    <div id="price-breakdown" class="price-breakdown" style="display: none;">
+      <!-- This is hidden but kept for compatibility -->
+      <div class="breakdown-table">
+        <div class="breakdown-row">
+          <div class="breakdown-label">Window Cost:</div>
+          <div class="breakdown-value" id="window-cost">$0</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="breakdown-label">Installation Cost:</div>
+          <div class="breakdown-value" id="installation-cost">$0</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="breakdown-label">Service Fee:</div>
+          <div class="breakdown-value" id="commission">$0</div>
+        </div>
+        <div class="breakdown-row breakdown-total">
+          <div class="breakdown-label">Total Cost:</div>
+          <div class="breakdown-value" id="total-cost">$0</div>
+        </div>
+      </div>
+    </div>
+    
+    <p>This is a general estimate based on national averages. Actual costs may vary based on your location, specific requirements, and local labor rates. The price range represents typical variations you might encounter.</p>
+    
+    <div class="thank-you-message">
+      <h3>Thank You for Your Information!</h3>
+      <p>One of our window specialists will contact you shortly to discuss your project in more detail.</p>
+    </div>
+    
+    <a id="request-quote-btn" href="{{ site.baseurl }}/form-collection.html" class="btn btn-secondary">Request a More Detailed Quote</a>
+  </div>
+</div>
   </div>
   
   <div class="section">
@@ -347,6 +345,83 @@ custom_js:
       font-size: 2.25rem;
     }
   }
+
+/* Form tabs styles */
+.form-tabs {
+  display: flex;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.form-tab {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  color: var(--text-light);
+}
+
+.form-tab.active {
+  color: var(--primary-color);
+}
+
+.form-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+.form-tab:first-child {
+  padding-left: 0;
+}
+
+.tab-content {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.form-buttons .btn {
+  flex: 1;
+}
+
+.thank-you-message {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-left: 4px solid var(--secondary-color);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: var(--border-radius);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .form-tab {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+  }
+}
 </style>
 
 <style>
