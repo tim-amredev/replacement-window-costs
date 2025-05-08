@@ -27,33 +27,67 @@ document.addEventListener("DOMContentLoaded", () => {
   if (urlParams.has("type")) {
     document.getElementById("window-type").value = urlParams.get("type")
 
-    // Try to select the appropriate radio button for window type
+    // Try to select the appropriate checkbox for window type
     const type = urlParams.get("type")
     if (type === "double-hung") {
       document.getElementById("type-double").checked = true
     } else if (type === "casement") {
       document.getElementById("type-casement").checked = true
-    } else if (type === "bay") {
-      document.getElementById("type-bay").checked = true
+    } else if (type === "2-lite-slider") {
+      document.getElementById("type-2-lite-slider").checked = true
+    } else if (type === "3-lite-slider") {
+      document.getElementById("type-3-lite-slider").checked = true
+    } else if (type === "picture") {
+      document.getElementById("type-picture").checked = true
+    } else if (type === "awning") {
+      document.getElementById("type-awning").checked = true
     }
   }
 
   if (urlParams.has("material")) {
     document.getElementById("frame-material").value = urlParams.get("material")
-
-    // Try to select the appropriate radio button for material
-    const material = urlParams.get("material")
-    if (material === "vinyl") {
-      document.getElementById("material-vinyl").checked = true
-    } else if (material === "wood") {
-      document.getElementById("material-wood").checked = true
-    } else if (material === "fiberglass") {
-      document.getElementById("material-fiberglass").checked = true
-    }
   }
 
   if (urlParams.has("size")) {
     document.getElementById("window-size").value = urlParams.get("size")
+  }
+
+  if (urlParams.has("screen")) {
+    document.getElementById("screen-type").value = urlParams.get("screen")
+  }
+
+  if (urlParams.has("grids")) {
+    const gridsValue = urlParams.get("grids")
+    if (gridsValue === "yes") {
+      document.getElementById("grids-yes").checked = true
+    } else {
+      document.getElementById("grids-no").checked = true
+    }
+  }
+
+  // Pre-fill color and hardware options if available
+  if (urlParams.has("exteriorColor")) {
+    const exteriorColor = urlParams.get("exteriorColor")
+    const exteriorColorInput = document.querySelector(`input[name="exterior_color"][value="${exteriorColor}"]`)
+    if (exteriorColorInput) {
+      exteriorColorInput.checked = true
+    }
+  }
+
+  if (urlParams.has("interiorColor")) {
+    const interiorColor = urlParams.get("interiorColor")
+    const interiorColorInput = document.querySelector(`input[name="interior_color"][value="${interiorColor}"]`)
+    if (interiorColorInput) {
+      interiorColorInput.checked = true
+    }
+  }
+
+  if (urlParams.has("hardware")) {
+    const hardware = urlParams.get("hardware")
+    const hardwareInput = document.querySelector(`input[name="hardware"][value="${hardware}"]`)
+    if (hardwareInput) {
+      hardwareInput.checked = true
+    }
   }
 
   // Calculate initial price if parameters are present
@@ -68,12 +102,24 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("window-type").addEventListener("change", updateEstimatedPrice)
   document.getElementById("frame-material").addEventListener("change", updateEstimatedPrice)
   document.getElementById("window-size").addEventListener("change", updateEstimatedPrice)
+  document.getElementById("screen-type").addEventListener("change", updateEstimatedPrice)
+
+  // Update price when color and hardware options change
+  const colorOptions = document.querySelectorAll('input[name="exterior_color"], input[name="interior_color"]')
+  colorOptions.forEach((option) => {
+    option.addEventListener("change", updateEstimatedPrice)
+  })
+
+  const hardwareOptions = document.querySelectorAll('input[name="hardware"]')
+  hardwareOptions.forEach((option) => {
+    option.addEventListener("change", updateEstimatedPrice)
+  })
 
   // Handle "Other" options
   setupOtherInputs()
 
   // Add input validation for phone and zip
-  const phoneInput = document.getElementById("phone1")
+  const phoneInput = document.getElementById("phone")
   const zipInput = document.getElementById("zip")
   const stateInput = document.getElementById("state")
 
@@ -123,18 +169,61 @@ document.addEventListener("DOMContentLoaded", () => {
   quoteForm.addEventListener("submit", (e) => {
     e.preventDefault() // Prevent default form submission
 
-    // Validate required fields for LeadPerfection
-    const phone1 = document.getElementById("phone1").value
-    const zip = document.getElementById("zip").value
+    // Validate required fields
+    const termsConsent = document.getElementById("terms-consent").checked
 
-    if (!phone1 || !zip) {
-      alert("Please provide a valid phone number and zip code.")
+    if (!termsConsent) {
+      alert("Please agree to the Terms of Service and Privacy Policy.")
       return
     }
+
+    // Get window specifications
+    const windowCount = Number.parseInt(document.getElementById("window-count").value)
+    const windowType = document.getElementById("window-type").value
+    const frameMaterial = document.getElementById("frame-material").value
+    const windowSize = document.getElementById("window-size").value
+    const screenType = document.getElementById("screen-type").value
+    const hasGrids = document.querySelector('input[name="grids"]:checked').value === "yes"
+
+    // Get color and hardware selections
+    const exteriorColor = document.querySelector('input[name="exterior_color"]:checked').value
+    const interiorColor = document.querySelector('input[name="interior_color"]:checked').value
+    const hardware = document.querySelector('input[name="hardware"]:checked').value
+
+    // Calculate price
+    const { totalPrice } = calculateDetailedPrice(
+      windowCount,
+      windowType,
+      frameMaterial,
+      windowSize,
+      screenType,
+      hasGrids,
+      exteriorColor,
+      interiorColor,
+      hardware,
+    )
+
+    // Calculate price range (20% below and above)
+    const lowerPrice = Math.round(totalPrice * 0.8)
+    const upperPrice = Math.round(totalPrice * 1.2)
+
+    // Update hidden input
+    estimatedPriceInput.value = totalPrice
 
     // Prepare notes field with all form data
     const formData = new FormData(quoteForm)
     let notesContent = "Window Replacement Quote Request:\n\n"
+
+    // Add window specifications
+    notesContent += `Window Count: ${windowCount}\n`
+    notesContent += `Window Type: ${windowType}\n`
+    notesContent += `Frame Material: ${frameMaterial}\n`
+    notesContent += `Window Size: ${windowSize}\n`
+    notesContent += `Screen Type: ${screenType}\n`
+    notesContent += `Grids: ${hasGrids ? "Yes" : "No"}\n`
+    notesContent += `Exterior Color: ${exteriorColor}\n`
+    notesContent += `Interior Color: ${interiorColor}\n`
+    notesContent += `Hardware: ${hardware}\n\n`
 
     // Add primary reason
     const primaryReason = document.querySelector('input[name="primary_reason"]:checked')
@@ -162,12 +251,6 @@ document.addEventListener("DOMContentLoaded", () => {
         notesContent += type.value + (index < windowTypes.length - 1 ? ", " : "")
       })
       notesContent += "\n"
-    }
-
-    // Add frame material
-    const frameMaterial = document.querySelector('input[name="frame_material"]:checked')
-    if (frameMaterial) {
-      notesContent += `Frame Material: ${frameMaterial.value}\n`
     }
 
     // Add glass features
@@ -209,37 +292,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Add estimated price
-    const price = estimatedPriceInput.value
-    if (price) {
-      notesContent += `\nEstimated Price: $${price}\n`
-    }
+    notesContent += `\nEstimated Price Range: $${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}\n`
 
-    // Set the notes field
-    document.getElementById("lp-notes").value = notesContent
-
-    // Set call time preferences as boolean values
-    const callMorning = document.getElementById("contact-phone").checked ? "true" : "false"
-    const callAfternoon = document.getElementById("contact-email").checked ? "true" : "false"
-    const callEvening = document.getElementById("contact-text").checked ? "true" : "false"
-    const callWeekend = document.getElementById("contact-inperson").checked ? "true" : "false"
-
-    // Add hidden fields for call preferences
-    appendHiddenField("callmorning", callMorning)
-    appendHiddenField("callafternoon", callAfternoon)
-    appendHiddenField("callevening", callEvening)
-    appendHiddenField("callweekend", callWeekend)
-
-    // Extract zip code from address and add it as a separate field
-    if (zip) {
-      appendHiddenField("zip", zip)
-    }
+    // Add a hidden field for the notes
+    const notesInput = document.createElement("input")
+    notesInput.type = "hidden"
+    notesInput.name = "notes"
+    notesInput.value = notesContent
+    quoteForm.appendChild(notesInput)
 
     // Store the thank you URL in localStorage to redirect after form submission
     const baseThankYouUrl = thankYouUrl.value.split("?")[0]
-    const redirectUrl = `${baseThankYouUrl}?price=${price}`
+    const redirectUrl = `${baseThankYouUrl}?price=${totalPrice}&lowerPrice=${lowerPrice}&upperPrice=${upperPrice}&count=${windowCount}&type=${windowType}&material=${frameMaterial}&size=${windowSize}&exteriorColor=${exteriorColor}&interiorColor=${interiorColor}&hardware=${hardware}`
     localStorage.setItem("redirectUrl", redirectUrl)
 
-    // Submit the form to LeadPerfection
+    // Submit the form
     quoteForm.submit()
   })
 
@@ -249,33 +316,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const windowType = document.getElementById("window-type").value
     const frameMaterial = document.getElementById("frame-material").value
     const windowSize = document.getElementById("window-size").value
+    const screenType = document.getElementById("screen-type").value
 
-    // Get grid options if available
-    const hasGrids = document.getElementById("grids-yes") && document.getElementById("grids-yes").checked
-    const gridType =
-      hasGrids && document.getElementById("grid-type") ? document.getElementById("grid-type").value : null
-    const gridPattern =
-      hasGrids && document.getElementById("grid-pattern") ? document.getElementById("grid-pattern").value : null
+    // Get grid options
+    const hasGrids = document.querySelector('input[name="grids"]:checked').value === "yes"
 
-    // Get color and hardware options if available
-    const exteriorColor = document.getElementById("exterior-color")
-      ? document.getElementById("exterior-color").value
-      : "white"
+    // Get color and hardware options
+    const exteriorColor = document.querySelector('input[name="exterior_color"]:checked').value
+    const interiorColor = document.querySelector('input[name="interior_color"]:checked').value
+    const hardware = document.querySelector('input[name="hardware"]:checked').value
 
-    // Get interior color and hardware from radio buttons
-    const interiorColor = document.querySelector('input[name="interior_color"]:checked')?.value || "white"
-    const hardware = document.querySelector('input[name="hardware"]:checked')?.value || "white"
-
-    // Calculate price using the same logic as the calculator
+    // Calculate price
     const { totalPrice } = calculateDetailedPrice(
       windowCount,
       windowType,
       frameMaterial,
       windowSize,
-      "none", // screenType
+      screenType,
       hasGrids,
-      gridType,
-      gridPattern,
       exteriorColor,
       interiorColor,
       hardware,
@@ -292,14 +350,12 @@ document.addEventListener("DOMContentLoaded", () => {
     size,
     screenType = "none",
     hasGrids = false,
-    gridType = null,
-    gridPattern = null,
     exteriorColor = "white",
     interiorColor = "white",
     hardware = "white",
   ) {
     // Base price per window
-    let baseWindowPrice = 300
+    let baseWindowPrice = 799
 
     // Adjustments for window type
     switch (type) {
@@ -307,37 +363,19 @@ document.addEventListener("DOMContentLoaded", () => {
         baseWindowPrice += 0
         break
       case "casement":
-        baseWindowPrice += 50
+        baseWindowPrice += 44
         break
-      case "bay":
-        baseWindowPrice += 200
+      case "2-lite-slider":
+        baseWindowPrice += 23
         break
-      case "single-hung":
-        baseWindowPrice -= 25
-        break
-      case "sliding":
-        baseWindowPrice += 25
+      case "3-lite-slider":
+        baseWindowPrice += 785
         break
       case "picture":
-        baseWindowPrice += 75
+        baseWindowPrice += 19
         break
       case "awning":
-        baseWindowPrice += 60
-        break
-      case "hopper":
-        baseWindowPrice += 40
-        break
-      case "garden":
-        baseWindowPrice += 150
-        break
-      case "storm":
-        baseWindowPrice -= 50
-        break
-      case "skylight":
-        baseWindowPrice += 250
-        break
-      case "jalousie":
-        baseWindowPrice += 30
+        baseWindowPrice += 32
         break
     }
 
@@ -346,23 +384,8 @@ document.addEventListener("DOMContentLoaded", () => {
       case "vinyl":
         baseWindowPrice += 0
         break
-      case "wood":
-        baseWindowPrice += 100
-        break
-      case "fiberglass":
-        baseWindowPrice += 150
-        break
-      case "aluminum":
-        baseWindowPrice += 50
-        break
       case "composite":
-        baseWindowPrice += 125
-        break
-      case "wood-clad":
-        baseWindowPrice += 175
-        break
-      case "steel":
-        baseWindowPrice += 200
+        baseWindowPrice += 572
         break
     }
 
@@ -372,179 +395,51 @@ document.addEventListener("DOMContentLoaded", () => {
         baseWindowPrice += 0
         break
       case "medium":
-        baseWindowPrice += 100
+        baseWindowPrice += 136
         break
       case "large":
-        baseWindowPrice += 200
+        baseWindowPrice += 289
         break
     }
 
     // Adjustments for screen type
-    if (screenType) {
-      switch (screenType) {
-        case "none":
-          baseWindowPrice += 0
-          break
-        case "half":
-          baseWindowPrice += 25
-          break
-        case "full":
-          baseWindowPrice += 50
-          break
-      }
+    switch (screenType) {
+      case "none":
+        baseWindowPrice += 0
+        break
+      case "half":
+        baseWindowPrice += 14
+        break
+      case "full":
+        baseWindowPrice += 27
+        break
     }
 
     // Adjustments for grids
     if (hasGrids) {
-      baseWindowPrice += 75
-
-      // Additional adjustments for grid type
-      if (gridType) {
-        switch (gridType) {
-          case "flat":
-            baseWindowPrice += 0
-            break
-          case "contour":
-            baseWindowPrice += 25
-            break
-          case "sdl":
-            baseWindowPrice += 50
-            break
-        }
-      }
-
-      // Additional adjustments for grid pattern
-      if (gridPattern) {
-        switch (gridPattern) {
-          case "colonial":
-            baseWindowPrice += 0
-            break
-          case "prairie":
-            baseWindowPrice += 15
-            break
-          case "diamond":
-            baseWindowPrice += 30
-            break
-        }
-      }
+      baseWindowPrice += 89
     }
 
     // Adjustments for exterior color
     if (exteriorColor && exteriorColor !== "white") {
-      baseWindowPrice += 35
+      baseWindowPrice += 99
     }
 
     // Adjustments for interior color
     if (interiorColor && interiorColor !== "white") {
-      baseWindowPrice += 45
+      baseWindowPrice += 99
     }
 
     // Adjustments for hardware
-    if (hardware) {
-      switch (hardware) {
-        case "white":
-          baseWindowPrice += 0
-          break
-        case "matte-bronze":
-          baseWindowPrice += 20
-          break
-        case "brushed-nickel":
-          baseWindowPrice += 25
-          break
-        case "antique-brass":
-          baseWindowPrice += 30
-          break
-      }
+    if (hardware && hardware !== "white") {
+      baseWindowPrice += 52
     }
 
     // Calculate window cost
     const windowCost = baseWindowPrice * count
 
     // Calculate installation cost (varies by type, material, and size)
-    let baseInstallCost = 150 // Base installation cost per window
-
-    // Installation adjustments for window type
-    switch (type) {
-      case "double-hung":
-        baseInstallCost += 0
-        break
-      case "casement":
-        baseInstallCost += 25
-        break
-      case "bay":
-        baseInstallCost += 150
-        break
-      case "single-hung":
-        baseInstallCost -= 10
-        break
-      case "sliding":
-        baseInstallCost += 15
-        break
-      case "picture":
-        baseInstallCost += 20
-        break
-      case "awning":
-        baseInstallCost += 30
-        break
-      case "hopper":
-        baseInstallCost += 20
-        break
-      case "garden":
-        baseInstallCost += 100
-        break
-      case "storm":
-        baseInstallCost -= 25
-        break
-      case "skylight":
-        baseInstallCost += 200
-        break
-      case "jalousie":
-        baseInstallCost += 15
-        break
-    }
-
-    // Installation adjustments for material (some materials are harder to install)
-    switch (material) {
-      case "vinyl":
-        baseInstallCost += 0
-        break
-      case "wood":
-        baseInstallCost += 50
-        break
-      case "fiberglass":
-        baseInstallCost += 75
-        break
-      case "aluminum":
-        baseInstallCost += 25
-        break
-      case "composite":
-        baseInstallCost += 60
-        break
-      case "wood-clad":
-        baseInstallCost += 85
-        break
-      case "steel":
-        baseInstallCost += 100
-        break
-    }
-
-    // Installation adjustments for size
-    switch (size) {
-      case "small":
-        baseInstallCost += 0
-        break
-      case "medium":
-        baseInstallCost += 50
-        break
-      case "large":
-        baseInstallCost += 100
-        break
-    }
-
-    // Installation adjustments for grids
-    if (hasGrids) {
-      baseInstallCost += 15
-    }
+    const baseInstallCost = 0 // Base installation cost per window
 
     // Calculate total installation cost
     const installationCost = baseInstallCost * count
@@ -553,7 +448,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const subtotal = windowCost + installationCost
 
     // Add commission (typically 15-20% in home improvement)
-    const commissionRate = 0.18 // 18%
+    const commissionRate = 0.11 // 11%
     const commission = Math.round(subtotal * commissionRate)
 
     // Calculate total price
@@ -598,23 +493,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
 
-    // Setup grid options toggle
-    const gridsYes = document.getElementById("grids-yes")
-    const gridsNo = document.getElementById("grids-no")
-    const gridOptions = document.querySelector(".grid-options")
-
-    if (gridsYes && gridsNo && gridOptions) {
-      function toggleGridOptions() {
-        gridOptions.style.display = gridsYes.checked ? "flex" : "none"
-      }
-
-      gridsYes.addEventListener("change", toggleGridOptions)
-      gridsNo.addEventListener("change", toggleGridOptions)
-
-      // Initial state
-      toggleGridOptions()
-    }
-
     // Setup terms and privacy policy links to prevent form submission when clicked
     const termsLink = document.querySelector(".terms-link")
     const privacyLink = document.querySelector(".privacy-link")
@@ -632,15 +510,6 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Privacy Policy would open in a new window. This is a placeholder.")
       })
     }
-  }
-
-  // Helper function to append hidden fields
-  function appendHiddenField(name, value) {
-    const input = document.createElement("input")
-    input.type = "hidden"
-    input.name = name
-    input.value = value
-    quoteForm.appendChild(input)
   }
 })
 
