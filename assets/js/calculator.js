@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const commissionElement = document.getElementById("commission")
   const totalCostElement = document.getElementById("total-cost")
 
+  // Modify the event listener for form submission to show a price range instead of a breakdown
   calculatorForm.addEventListener("submit", (e) => {
     e.preventDefault()
 
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const hasGrids = document.querySelector('input[name="grids"]:checked').value === "yes"
 
     // Calculate prices
-    const { windowCost, installationCost, commission, totalPrice } = calculateDetailedPrice(
+    const { totalPrice } = calculateDetailedPrice(
       windowCount,
       windowType,
       frameMaterial,
@@ -30,17 +31,20 @@ document.addEventListener("DOMContentLoaded", () => {
       hasGrids,
     )
 
+    // Calculate price range (20% below and above)
+    const lowerPrice = Math.round(totalPrice * 0.8)
+    const upperPrice = Math.round(totalPrice * 1.2)
+
     // Display result with animation
-    estimatedPrice.textContent = "$" + totalPrice.toLocaleString()
+    const priceRangeElement = document.getElementById("price-range")
+    priceRangeElement.textContent = `$${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}`
 
-    // Update price breakdown
-    windowCostElement.textContent = "$" + windowCost.toLocaleString()
-    installationCostElement.textContent = "$" + installationCost.toLocaleString()
-    commissionElement.textContent = "$" + commission.toLocaleString()
-    totalCostElement.textContent = "$" + totalPrice.toLocaleString()
+    // Hide breakdown container
+    const breakdownContainer = document.getElementById("price-breakdown")
+    breakdownContainer.style.display = "none"
 
+    // Show calculator result
     calculatorResult.style.display = "block"
-    breakdownContainer.style.display = "block"
     calculatorResult.classList.add("fadeIn")
 
     // Update request quote button URL
@@ -53,6 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
       screen: screenType,
       grids: hasGrids ? "yes" : "no",
       price: totalPrice,
+      lowerPrice: lowerPrice,
+      upperPrice: upperPrice,
     })
 
     requestQuoteBtn.setAttribute("href", `${baseUrl}?${queryParams.toString()}`)
@@ -149,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
         baseInstallCost += 0
         break
       case "picture":
-        baseInstallCost += 0   
+        baseInstallCost += 0
       case "awning":
         baseInstallCost += 0
         break
