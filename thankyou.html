@@ -57,7 +57,22 @@ document.addEventListener('DOMContentLoaded', function() {
       quotedPrice.textContent = 'Price information unavailable';
     }
   } else {
-    quotedPrice.textContent = 'Price information unavailable';
+    // Try to get lead info from localStorage as a fallback
+    const leadInfo = localStorage.getItem('recentLead');
+    if (leadInfo) {
+      try {
+        const parsedInfo = JSON.parse(leadInfo);
+        if (parsedInfo.priceRange) {
+          quotedPrice.textContent = parsedInfo.priceRange;
+        } else {
+          quotedPrice.textContent = 'Price information unavailable';
+        }
+      } catch (e) {
+        quotedPrice.textContent = 'Price information unavailable';
+      }
+    } else {
+      quotedPrice.textContent = 'Price information unavailable';
+    }
   }
 });
 </script>
