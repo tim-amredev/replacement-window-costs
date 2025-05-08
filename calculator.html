@@ -6,624 +6,267 @@ custom_js:
 ---
 
 <section class="container">
-<div class="section">
-  <h1 class="text-center">Window Replacement Cost Calculator</h1>
-  <p class="text-center">Use our calculator to estimate the cost of your window replacement project. Enter the details below to get an instant estimate.</p>
-  
-  <div class="card">
-    <form id="calculator-form">
-      <div class="form-row">
-        <div class="form-col">
-          <div class="form-group">
-            <label for="window-type">Window Type</label>
-            <select id="window-type" required>
-              <option value="single-hung">Single-Hung</option>
-              <option value="double-hung">Double-Hung</option>
-              <option value="casement">Casement</option>
-              <option value="sliding">Sliding/Gliding</option>
-              <option value="picture">Picture/Fixed</option>
-              <option value="bay">Bay/Bow</option>
-              <option value="awning">Awning</option>
-              <option value="hopper">Hopper</option>
-              <option value="garden">Garden</option>
-              <option value="storm">Storm</option>
-              <option value="skylight">Skylight</option>
-              <option value="jalousie">Jalousie</option>
-            </select>
+  <div class="section">
+    <h1 class="text-center">Window Replacement Cost Calculator</h1>
+    <p class="text-center">Use our calculator to estimate the cost of your window replacement project. Enter the details below to get an instant estimate.</p>
+    
+    <div class="card">
+      <form id="calculator-form">
+        <div class="form-group">
+          <label for="window-count">Number of Windows</label>
+          <input type="number" id="window-count" min="1" value="1" required>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-col">
+            <div class="form-group">
+              <label for="window-type">Window Type</label>
+              <select id="window-type" required>
+                <option value="double-hung">Double-Hung</option>
+                <option value="casement">Casement</option>
+                <option value="2-lite-slider">2 Lite Slider</option>
+                <option value="3-lite-slider">3 Lite Slider</option>
+                <option value="picture">Picture/Fixed</option>
+                <option value="bay">Bay/Bow</option>
+                <option value="awning">Awning</option>
+                <option value="hopper">Hopper</option>
+                <option value="garden">Garden</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-col">
+            <div class="form-group">
+              <label for="frame-material">Frame Material</label>
+              <select id="frame-material" required>
+                <option value="vinyl">Vinyl</option>
+                <option value="wood">Wood</option>
+                <option value="fiberglass">Fiberglass</option>
+                <option value="aluminum">Aluminum</option>
+                <option value="composite">Composite</option>
+                <option value="wood-clad">Wood-Clad</option>
+                <option value="steel">Steel</option>
+              </select>
+            </div>
           </div>
         </div>
         
-        <div class="form-col">
-          <div class="form-group">
-            <label for="frame-material">Frame Material</label>
-            <select id="frame-material" required>
-              <option value="vinyl">Vinyl</option>
-              <option value="wood">Wood</option>
-              <option value="fiberglass">Fiberglass</option>
-              <option value="aluminum">Aluminum</option>
-              <option value="composite">Composite</option>
-              <option value="wood-clad">Wood-Clad</option>
-              <option value="steel">Steel</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="window-size">Window Size</label>
-        <select id="window-size" required>
-          <option value="small">Small (0-84 United inches)</option>
-          <option value="medium" selected>Medium (85-101 United inches)</option>
-          <option value="large">Large (101+ United inches)</option>
-        </select>
-        <small class="input-help">United inches = the width of the bottom + the height of one side</small>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-col">
-          <div class="form-group">
-            <label for="screen-type">Screen Options</label>
-            <select id="screen-type" required>
-              <option value="none">No Screens</option>
-              <option value="half">Half Screens</option>
-              <option value="full">Full Screens</option>
-            </select>
-          </div>
+        <div class="form-group">
+          <label for="window-size">Window Size</label>
+          <select id="window-size" required>
+            <option value="small">Small (Less than 3 ft × 4 ft)</option>
+            <option value="medium" selected>Medium (3 ft × 4 ft to 4 ft × 5 ft)</option>
+            <option value="large">Large (Larger than 4 ft × 5 ft)</option>
+          </select>
         </div>
         
-        <div class="form-col">
-          <div class="form-group">
-            <label>Grids/Muntins</label>
-            <div class="radio-group">
-              <div class="radio-option">
-                <input type="radio" id="grids-yes" name="grids" value="yes">
-                <label for="grids-yes">Yes</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="grids-no" name="grids" value="no" checked>
-                <label for="grids-no">No</label>
+        <div class="form-row">
+          <div class="form-col">
+            <div class="form-group">
+              <label for="screen-type">Screen Options</label>
+              <select id="screen-type" required>
+                <option value="none">No Screens</option>
+                <option value="half">Half Screens</option>
+                <option value="full">Full Screens</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-col">
+            <div class="form-group">
+              <label>Grids/Muntins</label>
+              <div class="radio-group">
+                <div class="radio-option">
+                  <input type="radio" id="grids-yes" name="grids" value="yes">
+                  <label for="grids-yes">Yes</label>
+                </div>
+                <div class="radio-option">
+                  <input type="radio" id="grids-no" name="grids" value="no" checked>
+                  <label for="grids-no">No</label>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="form-row grid-options" style="display: none;">
-        <div class="form-col">
-          <div class="form-group">
-            <label for="grid-type">Grid Type</label>
-            <select id="grid-type" name="grid-type">
-              <option value="flat">Flat</option>
-              <option value="contour">Contour</option>
-              <option value="sdl">SDL (Simulated Divided Light)</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-col">
-          <div class="form-group">
-            <label for="grid-pattern">Grid Pattern</label>
-            <select id="grid-pattern" name="grid-pattern">
-              <option value="colonial">Colonial</option>
-              <option value="prairie">Prairie</option>
-              <option value="diamond">Diamond</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Exterior Color</label>
-        <div class="color-selector">
-          <input type="radio" name="exterior-color" id="exterior-white" value="white" checked>
-          <label for="exterior-white" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/white.jpg" alt="White">
-            <span>White</span>
-          </label>
-          
-          <input type="radio" name="exterior-color" id="exterior-almond" value="almond">
-          <label for="exterior-almond" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/almond.png" alt="Almond">
-            <span>Almond</span>
-          </label>
-          
-          <input type="radio" name="exterior-color" id="exterior-cocoa" value="cocoa">
-          <label for="exterior-cocoa" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/cocoa.png" alt="Cocoa">
-            <span>Cocoa</span>
-          </label>
-          
-          <input type="radio" name="exterior-color" id="exterior-bronze" value="bronze">
-          <label for="exterior-bronze" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/bronze.png" alt="Bronze">
-            <span>Bronze</span>
-          </label>
-          
-          <input type="radio" name="exterior-color" id="exterior-black" value="black">
-          <label for="exterior-black" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/black.png" alt="Black">
-            <span>Black</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Interior Color</label>
-        <div class="color-selector">
-          <input type="radio" name="interior-color" id="interior-white" value="white" checked>
-          <label for="interior-white" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/white-interior.jpg" alt="White">
-            <span>White</span>
-          </label>
-          
-          <input type="radio" name="interior-color" id="interior-winchester" value="winchester">
-          <label for="interior-winchester" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/winchester.jpg" alt="Winchester">
-            <span>Winchester</span>
-          </label>
-          
-          <input type="radio" name="interior-color" id="interior-melrose-cherry" value="melrose-cherry">
-          <label for="interior-melrose-cherry" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/melrose-cherry.jpg" alt="Melrose Cherry">
-            <span>Melrose Cherry</span>
-          </label>
-          
-          <input type="radio" name="interior-color" id="interior-dark-oak" value="dark-oak">
-          <label for="interior-dark-oak" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/dark-oak.jpg" alt="Dark Oak">
-            <span>Dark Oak</span>
-          </label>
-          
-          <input type="radio" name="interior-color" id="interior-black" value="black">
-          <label for="interior-black" class="color-option">
-            <img src="{{ site.baseurl }}/assets/images/colors/black-interior.jpg" alt="Black">
-            <span>Black</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Hardware Finish</label>
-        <div class="hardware-selector">
-          <input type="radio" name="hardware" id="hardware-white" value="white" checked>
-          <label for="hardware-white" class="hardware-option">
-            <img src="{{ site.baseurl }}/assets/images/hardware/white-hw.jpg" alt="White">
-            <span>White</span>
-          </label>
-          
-          <input type="radio" name="hardware" id="hardware-matte-bronze" value="matte-bronze">
-          <label for="hardware-matte-bronze" class="hardware-option">
-            <img src="{{ site.baseurl }}/assets/images/hardware/matte-bronze-hw.jpg" alt="Matte Bronze">
-            <span>Matte Bronze</span>
-          </label>
-          
-          <input type="radio" name="hardware" id="hardware-brushed-nickel" value="brushed-nickel">
-          <label for="hardware-brushed-nickel" class="hardware-option">
-            <img src="{{ site.baseurl }}/assets/images/hardware/brushed-nickel-hw.jpg" alt="Brushed Nickel">
-            <span>Brushed Nickel</span>
-          </label>
-          
-          <input type="radio" name="hardware" id="hardware-antique-brass" value="antique-brass">
-          <label for="hardware-antique-brass" class="hardware-option">
-            <img src="{{ site.baseurl }}/assets/images/hardware/antique-brass-hw.jpg" alt="Antique Brass">
-            <span>Antique Brass</span>
-          </label>
-        </div>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-col">
-          <div class="form-group">
-            <label for="lp-firstname">First Name</label>
-            <input type="text" id="lp-firstname" name="firstname" required>
-          </div>
-        </div>
-        <div class="form-col">
-          <div class="form-group">
-            <label for="lp-lastname">Last Name</label>
-            <input type="text" id="lp-lastname" name="lastname" required>
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="lp-email">Email Address</label>
-        <input type="email" id="lp-email" name="email" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="lp-phone1">Phone Number</label>
-        <input type="tel" id="lp-phone1" name="phone1" pattern="[0-9]{10}" title="Please enter a 10-digit phone number without spaces or special characters" required>
-        <small class="input-help">Enter a 10-digit number without spaces or special characters</small>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-col">
-          <div class="form-group">
-            <label for="lp-zip">Zip Code</label>
-            <input type="text" id="lp-zip" name="zip" pattern="[0-9]{5}" title="Please enter a 5-digit zip code" required>
-            <small class="input-help">Enter a 5-digit zip code</small>
-          </div>
-        </div>
-        <div class="form-col">
-          <div class="form-group">
-            <label for="lp-city">City</label>
-            <input type="text" id="lp-city" name="city">
-          </div>
-        </div>
-        <div class="form-col">
-          <div class="form-group">
-            <label for="lp-state">State</label>
-            <input type="text" id="lp-state" name="state" maxlength="2">
-            <small class="input-help">2-letter code (e.g., CA)</small>
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group consent-section">
-        <div class="checkbox-option terms-checkbox">
-          <input type="checkbox" id="lp-terms-consent" required>
-          <label for="lp-terms-consent">By submitting this form, I consent to personalized text messages from Replacement Window Costs and its marketing partners. Message and data rates may apply, and consent is not a condition of purchase. See our terms of service and privacy policy for more information.</label>
-        </div>
-      </div>
-      
-      <button type="submit" class="btn btn-primary" style="width: 100%;">Calculate Cost</button>
-    </form>
-    
-    <div id="calculator-result" class="calculator-result" style="display: none;">
-      <h3>Estimated Total Cost</h3>
-      <p class="price" id="estimated-price">$0</p>
-      
-      <div id="price-breakdown" class="price-breakdown" style="display: none;">
-        <h4>Cost Breakdown</h4>
-        <div class="breakdown-table">
-          <div class="breakdown-row">
-            <div class="breakdown-label">Window Cost:</div>
-            <div class="breakdown-value" id="window-cost">$0</div>
-          </div>
-          <div class="breakdown-row">
-            <div class="breakdown-label">Installation Cost:</div>
-            <div class="breakdown-value" id="installation-cost">$0</div>
-          </div>
-          <div class="breakdown-row">
-            <div class="breakdown-label">Service Fee:</div>
-            <div class="breakdown-value" id="commission">$0</div>
-          </div>
-          <div class="breakdown-row breakdown-total">
-            <div class="breakdown-label">Total Cost:</div>
-            <div class="breakdown-value" id="total-cost">$0</div>
-          </div>
-        </div>
-      </div>
-      
-      <p>This is an estimate based on national averages. Actual costs may vary based on your location and specific requirements.</p>
-      
-      <div class="lead-capture-form" id="lead-capture-form" style="display: none;">
-        <h4>Save Your Estimate</h4>
-        <p>Review your information and submit to save this estimate and receive a detailed quote from our professionals.</p>
         
-        <form id="quick-lead-form" action="https://th97.leadperfection.com/batch/addleads.asp" method="POST">
-          <!-- Hidden fields for LeadPerfection -->
-          <input type="hidden" name="sender" value="Replacement Window Costs">
-          <input type="hidden" name="srs_id" value="1672">
-          <input type="hidden" name="productid" id="lp-productid">
-          <input type="hidden" name="proddescr" id="lp-proddescr">
-          <input type="hidden" name="notes" id="lp-notes">
-          
-          <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Estimate Request</button>
-        </form>
-      </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Calculate Cost</button>
+      </form>
       
-      <div class="action-buttons">
-        <button id="save-estimate-btn" class="btn btn-primary">Save This Estimate</button>
-        <a id="request-quote-btn" href="{{ site.baseurl }}/form-collection.html" class="btn btn-secondary">Request Detailed Quote</a>
+      <div id="calculator-result" class="calculator-result" style="display: none;">
+        <h3>Estimated Total Cost</h3>
+        <p class="price" id="estimated-price">$0</p>
+        
+        <div id="price-breakdown" class="price-breakdown" style="display: none;">
+          <h4>Cost Breakdown</h4>
+          <div class="breakdown-table">
+            <div class="breakdown-row">
+              <div class="breakdown-label">Window Cost:</div>
+              <div class="breakdown-value" id="window-cost">$0</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-label">Installation Cost:</div>
+              <div class="breakdown-value" id="installation-cost">$0</div>
+            </div>
+            <div class="breakdown-row">
+              <div class="breakdown-label">Service Fee:</div>
+              <div class="breakdown-value" id="commission">$0</div>
+            </div>
+            <div class="breakdown-row breakdown-total">
+              <div class="breakdown-label">Total Cost:</div>
+              <div class="breakdown-value" id="total-cost">$0</div>
+            </div>
+          </div>
+        </div>
+        
+        <p>This is an estimate based on national averages. Actual costs may vary based on your location and specific requirements.</p>
+        <a id="request-quote-btn" href="{{ site.baseurl }}/form-collection.html" class="btn btn-secondary">Request a Personalized Quote</a>
       </div>
     </div>
   </div>
-</div>
-
-<div class="section">
-  <h2>Understanding Your Estimate</h2>
-  <p>Our calculator provides a comprehensive estimate for your window replacement project, including:</p>
   
-  <div class="card">
-    <ul>
-      <li><strong>Window Cost:</strong> The price of the windows themselves, based on type, material, size, screens, and grids</li>
-      <li><strong>Installation Cost:</strong> Labor costs for professional installation</li>
-      <li><strong>Service Fee:</strong> Includes project management, permits, and other service costs</li>
-    </ul>
-    <p>Additional factors that may affect your final price:</p>
-    <ul>
-      <li><strong>Location:</strong> Labor and material costs vary by region</li>
-      <li><strong>Installation Complexity:</strong> Structural modifications may be needed</li>
-      <li><strong>Additional Features:</strong> Energy-efficient glass, special finishes, or custom options</li>
-      <li><strong>Brand:</strong> Different manufacturers offer various price points and quality levels</li>
-    </ul>
+  <div class="section">
+    <h2>Understanding Your Estimate</h2>
+    <p>Our calculator provides a comprehensive estimate for your window replacement project, including:</p>
+    
+    <div class="card">
+      <ul>
+        <li><strong>Window Cost:</strong> The price of the windows themselves, based on type, material, size, screens, and grids</li>
+        <li><strong>Installation Cost:</strong> Labor costs for professional installation</li>
+        <li><strong>Service Fee:</strong> Includes project management, permits, and other service costs</li>
+      </ul>
+      <p>Additional factors that may affect your final price:</p>
+      <ul>
+        <li><strong>Location:</strong> Labor and material costs vary by region</li>
+        <li><strong>Installation Complexity:</strong> Structural modifications may be needed</li>
+        <li><strong>Additional Features:</strong> Energy-efficient glass, special finishes, or custom options</li>
+        <li><strong>Brand:</strong> Different manufacturers offer various price points and quality levels</li>
+      </ul>
+    </div>
+    
+    <p>For a more accurate quote tailored to your specific needs, we recommend requesting a personalized quote from our network of trusted professionals.</p>
   </div>
   
-  <p>For a more accurate quote tailored to your specific needs, we recommend requesting a personalized quote from our network of trusted professionals.</p>
-</div>
-
-<div class="section">
-  <h2>Window Replacement FAQs</h2>
-  
-  <div class="card">
-    <h3>How long does window replacement take?</h3>
-    <p>Typically, professional installers can replace 8-10 windows per day. A whole-house window replacement usually takes 1-2 days, depending on the number of windows and complexity.</p>
+  <div class="section">
+    <h2>Window Replacement FAQs</h2>
+    
+    <div class="card">
+      <h3>How long does window replacement take?</h3>
+      <p>Typically, professional installers can replace 8-10 windows per day. A whole-house window replacement usually takes 1-2 days, depending on the number of windows and complexity.</p>
+    </div>
+    
+    <div class="card">
+      <h3>What's the best time of year to replace windows?</h3>
+      <p>While windows can be replaced year-round, spring and fall offer the most comfortable temperatures. However, winter installations can sometimes offer better pricing due to lower demand.</p>
+    </div>
+    
+    <div class="card">
+      <h3>How long do new windows last?</h3>
+      <p>Quality windows typically last 15-30 years, depending on the material, quality, and maintenance. Vinyl and fiberglass windows tend to last longer than wood windows in most climates.</p>
+    </div>
   </div>
-  
-  <div class="card">
-    <h3>What's the best time of year to replace windows?</h3>
-    <p>While windows can be replaced year-round, spring and fall offer the most comfortable temperatures. However, winter installations can sometimes offer better pricing due to lower demand.</p>
-  </div>
-  
-  <div class="card">
-    <h3>How long do new windows last?</h3>
-    <p>Quality windows typically last 15-30 years, depending on the material, quality, and maintenance. Vinyl and fiberglass windows tend to last longer than wood windows in most climates.</p>
-  </div>
-</div>
 </section>
 
 <style>
-/* Price breakdown styles */
-.price-breakdown {
-  margin: 1.5rem 0;
-  background-color: var(--light-color);
-  border-radius: var(--border-radius);
-  padding: 1rem;
-  border: 1px solid var(--medium-gray);
-}
-
-.breakdown-table {
-  width: 100%;
-}
-
-.breakdown-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--medium-gray);
-}
-
-.breakdown-row:last-child {
-  border-bottom: none;
-}
-
-.breakdown-total {
-  font-weight: bold;
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
-  border-top: 2px solid var(--medium-gray);
-}
-
-.breakdown-label {
-  font-weight: 500;
-}
-
-.breakdown-value {
-  font-family: monospace;
-  font-size: 1.1rem;
-}
-
-/* Radio group styles for grids option */
-.radio-group {
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-
-.radio-option {
-  display: flex;
-  align-items: center;
-}
-
-.radio-option input[type="radio"] {
-  margin-right: 0.5rem;
-}
-
-/* Lead capture form styles */
-.lead-capture-form {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background-color: var(--light-color);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--medium-gray);
-}
-
-.lead-capture-form h4 {
-  margin-bottom: 1rem;
-}
-
-.checkbox-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-
-.checkbox-option {
-  display: flex;
-  align-items: center;
-}
-
-.checkbox-option input[type="checkbox"] {
-  width: auto;
-  margin-right: 0.5rem;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.action-buttons .btn {
-  flex: 1;
-}
-
-@media (max-width: 768px) {
-  .action-buttons {
-    flex-direction: column;
-  }
-}
-
-.input-help {
-  display: block;
-  font-size: 0.8rem;
-  color: var(--text-light);
-  margin-top: 0.25rem;
-}
-
-input:invalid {
-  border-color: #dc3545;
-}
-
-input:valid {
-  border-color: #28a745;
-}
-
-/* Color selector styles */
-.color-selector {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 0.5rem;
-}
-
-.color-selector input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.color-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  width: 80px;
-}
-
-.color-option img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 3px solid var(--medium-gray);
-  transition: all 0.2s ease;
-  object-fit: cover;
-}
-
-.color-option span {
-  margin-top: 5px;
-  font-size: 0.85rem;
-  text-align: center;
-}
-
-.color-selector input[type="radio"]:checked + .color-option img {
-  border-color: var(--primary-color);
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.color-selector input[type="radio"]:focus + .color-option {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-.color-option:hover img {
-  border-color: var(--primary-dark);
-  transform: scale(1.05);
-}
-
-/* Hardware selector styles */
-.hardware-selector {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 0.5rem;
-}
-
-.hardware-selector input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.hardware-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  width: 100px;
-}
-
-.hardware-option img {
-  width: 80px;
-  height: 60px;
-  border-radius: 8px;
-  border: 3px solid var(--medium-gray);
-  transition: all 0.2s ease;
-  object-fit: cover;
-}
-
-.hardware-option span {
-  margin-top: 5px;
-  font-size: 0.85rem;
-  text-align: center;
-}
-
-.hardware-selector input[type="radio"]:checked + .hardware-option img {
-  border-color: var(--primary-color);
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.hardware-selector input[type="radio"]:focus + .hardware-option {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-.hardware-option:hover img {
-  border-color: var(--primary-dark);
-  transform: scale(1.05);
-}
-
-@media (max-width: 576px) {
-  .hardware-selector {
-    justify-content: center;
+  /* Price breakdown styles */
+  .price-breakdown {
+    margin: 1.5rem 0;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    border: 1px solid var(--medium-gray);
   }
   
-  .hardware-option {
-    width: 90px;
+  .breakdown-table {
+    width: 100%;
   }
   
-  .hardware-option img {
-    width: 70px;
-    height: 50px;
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--medium-gray);
   }
-}
+  
+  .breakdown-row:last-child {
+    border-bottom: none;
+  }
+  
+  .breakdown-total {
+    font-weight: bold;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 2px solid var(--medium-gray);
+  }
+  
+  .breakdown-label {
+    font-weight: 500;
+  }
+  
+  .breakdown-value {
+    font-family: monospace;
+    font-size: 1.1rem;
+  }
+  
+  /* Radio group styles for grids option */
+  .radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .radio-option {
+    display: flex;
+    align-items: center;
+  }
+  
+  .radio-option input[type="radio"] {
+    margin-right: 0.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .radio-group {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .radio-option {
+      padding: 0.5rem 0;
+    }
+    
+    .radio-option input[type="radio"] {
+      min-width: 20px;
+      min-height: 20px;
+      margin-right: 0.75rem;
+    }
+    
+    .breakdown-row {
+      padding: 0.75rem 0;
+    }
+    
+    .breakdown-value {
+      font-size: 1rem;
+    }
+    
+    .calculator-result {
+      padding: 1.5rem;
+    }
+    
+    .price {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .price-breakdown {
+      padding: 0.75rem;
+    }
+    
+    .breakdown-label, .breakdown-value {
+      font-size: 0.95rem;
+    }
+    
+    .price {
+      font-size: 2.25rem;
+    }
+  }
 </style>
-
-<script>
-// Add this to the existing script
-document.addEventListener("DOMContentLoaded", () => {
-  // Grid options toggle
-  const gridsYes = document.getElementById("grids-yes");
-  const gridsNo = document.getElementById("grids-no");
-  const gridOptions = document.querySelector(".grid-options");
-  
-  function toggleGridOptions() {
-    gridOptions.style.display = gridsYes.checked ? "flex" : "none";
-  }
-  
-  gridsYes.addEventListener("change", toggleGridOptions);
-  gridsNo.addEventListener("change", toggleGridOptions);
-  
-  // Initial state
-  toggleGridOptions();
-});
-</script>
-
