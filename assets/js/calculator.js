@@ -290,84 +290,92 @@ document.addEventListener("DOMContentLoaded", () => {
     leadPerfectionData.append("productid", "WINDOWS")
     leadPerfectionData.append("proddescr", "Window Replacement")
 
-    // Send data to LeadPerfection - UPDATED URL
-    fetch("https://th97.leadperfection.com/batch/addleads.asp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: leadPerfectionData,
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        if (data.includes("[OK]")) {
-          // Successful submission - continue with showing the result
-          // Hide the form and show calculator result
-          calculatorForm.style.display = "none"
-          calculatorResult.style.display = "block"
-          calculatorResult.classList.add("fadeIn")
+    try {
+      // First, show the result immediately to improve user experience
+      calculatorForm.style.display = "none"
+      calculatorResult.style.display = "block"
+      calculatorResult.classList.add("fadeIn")
 
-          // Update request quote button URL
-          const baseUrl = requestQuoteBtn.getAttribute("href").split("?")[0]
-          const queryParams = new URLSearchParams({
-            count: windowCount,
-            type: windowType,
-            material: frameMaterial,
-            size: windowSize,
-            screen: screenType,
-            grids: hasGrids ? "yes" : "no",
-            exteriorColor: exteriorColor,
-            interiorColor: interiorColor,
-            hardware: hardware,
-            price: totalPrice,
-            lowerPrice: lowerPrice,
-            upperPrice: upperPrice,
-            name: `${firstName} ${lastName}`,
-            email: email,
-            phone: phone,
-            address: `${address}, ${city}, ${state} ${zip}`,
-          })
+      // Update request quote button URL
+      const baseUrl = requestQuoteBtn.getAttribute("href").split("?")[0]
+      const queryParams = new URLSearchParams({
+        count: windowCount,
+        type: windowType,
+        material: frameMaterial,
+        size: windowSize,
+        screen: screenType,
+        grids: hasGrids ? "yes" : "no",
+        exteriorColor: exteriorColor,
+        interiorColor: interiorColor,
+        hardware: hardware,
+        price: totalPrice,
+        lowerPrice: lowerPrice,
+        upperPrice: upperPrice,
+        name: `${firstName} ${lastName}`,
+        email: email,
+        phone: phone,
+        address: `${address}, ${city}, ${state} ${zip}`,
+      })
 
-          requestQuoteBtn.setAttribute("href", `${baseUrl}?${queryParams.toString()}`)
+      requestQuoteBtn.setAttribute("href", `${baseUrl}?${queryParams.toString()}`)
 
-          // Store lead information in localStorage
-          const leadInfo = {
-            windowCount,
-            windowType,
-            frameMaterial,
-            windowSize,
-            screenType,
-            hasGrids,
-            exteriorColor,
-            interiorColor,
-            hardware,
-            firstName,
-            lastName,
-            email,
-            phone,
-            address,
-            city,
-            state,
-            zip,
-            comments: document.getElementById("comments").value,
-            priceRange: `$${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}`,
-            timestamp: new Date().toISOString(),
+      // Store lead information in localStorage
+      const leadInfo = {
+        windowCount,
+        windowType,
+        frameMaterial,
+        windowSize,
+        screenType,
+        hasGrids,
+        exteriorColor,
+        interiorColor,
+        hardware,
+        firstName,
+        lastName,
+        email,
+        phone,
+        address,
+        city,
+        state,
+        zip,
+        comments: document.getElementById("comments").value,
+        priceRange: `$${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}`,
+        timestamp: new Date().toISOString(),
+      }
+
+      localStorage.setItem("recentLead", JSON.stringify(leadInfo))
+
+      // Scroll to result
+      calculatorResult.scrollIntoView({ behavior: "smooth" })
+
+      // Then, send data to LeadPerfection in the background
+      fetch("https://th97.leadperfection.com/batch/addleads.asp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: leadPerfectionData,
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          if (!data.includes("[OK]")) {
+            console.error("LeadPerfection error:", data)
+            // Don't alert the user since we've already shown the result
           }
+        })
+        .catch((error) => {
+          console.error("Error:", error)
+          // Don't alert the user since we've already shown the result
+        })
+    } catch (error) {
+      console.error("Error in form submission:", error)
 
-          localStorage.setItem("recentLead", JSON.stringify(leadInfo))
-
-          // Scroll to result
-          calculatorResult.scrollIntoView({ behavior: "smooth" })
-        } else {
-          // Failed submission
-          alert("There was an error submitting your request. Please try again later.")
-          console.error("LeadPerfection error:", data)
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error)
-        alert("There was an error submitting your request. Please try again later.")
-      })
+      // Still show the result even if there's an error with the API
+      calculatorForm.style.display = "none"
+      calculatorResult.style.display = "block"
+      calculatorResult.classList.add("fadeIn")
+      calculatorResult.scrollIntoView({ behavior: "smooth" })
+    }
   })
 
   // Helper function to format option names for display
