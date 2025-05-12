@@ -1,3 +1,5 @@
+// NOTE: Replace [LPCLIENTID] with your actual LeadPerfection client ID before deploying
+
 document.addEventListener("DOMContentLoaded", () => {
   const quoteForm = document.getElementById("quote-form")
   const thankYouUrl = document.getElementById("thank-you-url")
@@ -171,9 +173,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Validate required fields
     const termsConsent = document.getElementById("terms-consent").checked
+    const zip = document.getElementById("zip").value
+    const phone = document.getElementById("phone").value
 
     if (!termsConsent) {
       alert("Please agree to the Terms of Service and Privacy Policy.")
+      return
+    }
+
+    if (!zip || !phone) {
+      alert("Zip code and phone number are required fields.")
       return
     }
 
@@ -207,11 +216,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const lowerPrice = Math.round(totalPrice * 0.8)
     const upperPrice = Math.round(totalPrice * 1.2)
 
-    // Update hidden input
-    estimatedPriceInput.value = totalPrice
+    // Get form data for LeadPerfection
+    const firstName = document.getElementById("first-name").value
+    const lastName = document.getElementById("last-name").value
+    const email = document.getElementById("email").value
+    const address = document.getElementById("address").value
+    const city = document.getElementById("city").value
+    const state = document.getElementById("state").value
 
-    // Prepare notes field with all form data
-    const formData = new FormData(quoteForm)
+    // Get best time to call preferences
+    const callMorning = document.getElementById("contact-morning")
+      ? document.getElementById("contact-morning").checked
+      : false
+    const callAfternoon = document.getElementById("contact-afternoon")
+      ? document.getElementById("contact-afternoon").checked
+      : false
+    const callEvening = document.getElementById("contact-evening")
+      ? document.getElementById("contact-evening").checked
+      : false
+    const callWeekend = document.getElementById("contact-weekend")
+      ? document.getElementById("contact-weekend").checked
+      : false
+
+    // Get additional notes
+    const comments = document.getElementById("comments").value
+
+    // Prepare notes with all form data
     let notesContent = "Window Replacement Quote Request:\n\n"
 
     // Add window specifications
@@ -286,7 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Add comments
-    const comments = document.getElementById("comments").value
     if (comments) {
       notesContent += `\nAdditional Comments: ${comments}\n`
     }
@@ -294,20 +323,60 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add estimated price
     notesContent += `\nEstimated Price Range: $${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}\n`
 
-    // Add a hidden field for the notes
-    const notesInput = document.createElement("input")
-    notesInput.type = "hidden"
-    notesInput.name = "notes"
-    notesInput.value = notesContent
-    quoteForm.appendChild(notesInput)
+    // Create form data for LeadPerfection
+    const leadPerfectionData = new URLSearchParams()
+
+    // Required fields
+    leadPerfectionData.append("firstname", firstName)
+    leadPerfectionData.append("lastname", lastName)
+    leadPerfectionData.append("address1", address)
+    leadPerfectionData.append("city", city)
+    leadPerfectionData.append("state", state)
+    leadPerfectionData.append("zip", zip) // Required
+    leadPerfectionData.append("phone1", phone) // Required
+    leadPerfectionData.append("email", email)
+    leadPerfectionData.append("sender", "replacementwindowcosts.com") // Required - exact value
+    leadPerfectionData.append("srs_id", "1672") // Required - exact value
+    leadPerfectionData.append("notes", notesContent)
+
+    // Best time to call indicators
+    leadPerfectionData.append("callmorning", callMorning)
+    leadPerfectionData.append("callafternoon", callAfternoon)
+    leadPerfectionData.append("callevening", callEvening)
+    leadPerfectionData.append("callweekend", callWeekend)
+
+    // Product information
+    leadPerfectionData.append("productid", "WINDOWS")
+    leadPerfectionData.append("proddescr", "Window Replacement")
 
     // Store the thank you URL in localStorage to redirect after form submission
     const baseThankYouUrl = thankYouUrl.value.split("?")[0]
     const redirectUrl = `${baseThankYouUrl}?price=${totalPrice}&lowerPrice=${lowerPrice}&upperPrice=${upperPrice}&count=${windowCount}&type=${windowType}&material=${frameMaterial}&size=${windowSize}&exteriorColor=${exteriorColor}&interiorColor=${interiorColor}&hardware=${hardware}`
     localStorage.setItem("redirectUrl", redirectUrl)
 
-    // Submit the form
-    quoteForm.submit()
+    // Send data to LeadPerfection - UPDATED URL
+    fetch("https://th97.leadperfection.com/batch/addleads.asp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: leadPerfectionData,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        if (data.includes("[OK]")) {
+          // Successful submission
+          window.location.href = redirectUrl
+        } else {
+          // Failed submission
+          console.error("LeadPerfection error:", data)
+          alert("There was an error submitting your request. Please try again later.")
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+        alert("There was an error submitting your request. Please try again later.")
+      })
   })
 
   // Update the form handler to use the price range
