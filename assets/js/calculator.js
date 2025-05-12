@@ -1,3 +1,4 @@
+// NOTE: Replace [LPCLIENTID] with your actual LeadPerfection client ID before deploying
 document.addEventListener("DOMContentLoaded", () => {
   const calculatorForm = document.getElementById("calculator-form")
   const calculatorResult = document.getElementById("calculator-result")
@@ -248,66 +249,125 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("result-screen-type").textContent = formatOptionName(screenType)
     document.getElementById("result-grids").textContent = hasGrids ? "Yes" : "No"
 
-    // Hide the form and show calculator result
-    calculatorForm.style.display = "none"
-    calculatorResult.style.display = "block"
-    calculatorResult.classList.add("fadeIn")
+    // Prepare notes with all form data
+    let notesContent = "Window Replacement Calculator Quote:\n\n"
 
-    // Update request quote button URL
-    const baseUrl = requestQuoteBtn.getAttribute("href").split("?")[0]
-    const queryParams = new URLSearchParams({
-      count: windowCount,
-      type: windowType,
-      material: frameMaterial,
-      size: windowSize,
-      screen: screenType,
-      grids: hasGrids ? "yes" : "no",
-      exteriorColor: exteriorColor,
-      interiorColor: interiorColor,
-      hardware: hardware,
-      price: totalPrice,
-      lowerPrice: lowerPrice,
-      upperPrice: upperPrice,
-      name: `${firstName} ${lastName}`,
-      email: email,
-      phone: phone,
-      address: `${address}, ${city}, ${state} ${zip}`,
-    })
+    // Add window specifications
+    notesContent += `Window Count: ${windowCount}\n`
+    notesContent += `Window Type: ${windowType}\n`
+    notesContent += `Frame Material: ${frameMaterial}\n`
+    notesContent += `Window Size: ${windowSize}\n`
+    notesContent += `Screen Type: ${screenType}\n`
+    notesContent += `Grids: ${hasGrids ? "Yes" : "No"}\n`
+    notesContent += `Exterior Color: ${exteriorColor}\n`
+    notesContent += `Interior Color: ${interiorColor}\n`
+    notesContent += `Hardware: ${hardware}\n\n`
+    notesContent += `Estimated Price Range: $${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}\n`
 
-    requestQuoteBtn.setAttribute("href", `${baseUrl}?${queryParams.toString()}`)
-
-    // Store lead information in localStorage (this would typically be sent to a server)
-    const leadInfo = {
-      windowCount,
-      windowType,
-      frameMaterial,
-      windowSize,
-      screenType,
-      hasGrids,
-      exteriorColor,
-      interiorColor,
-      hardware,
-      firstName,
-      lastName,
-      email,
-      phone,
-      address,
-      city,
-      state,
-      zip,
-      comments: document.getElementById("comments").value,
-      priceRange: `$${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}`,
-      timestamp: new Date().toISOString(),
+    // Add comments if available
+    const comments = document.getElementById("comments").value
+    if (comments) {
+      notesContent += `\nAdditional Comments: ${comments}\n`
     }
 
-    localStorage.setItem("recentLead", JSON.stringify(leadInfo))
+    // Create form data for LeadPerfection
+    const leadPerfectionData = new URLSearchParams()
 
-    // Scroll to result
-    calculatorResult.scrollIntoView({ behavior: "smooth" })
+    // Required fields
+    leadPerfectionData.append("firstname", firstName)
+    leadPerfectionData.append("lastname", lastName)
+    leadPerfectionData.append("address1", address)
+    leadPerfectionData.append("city", city)
+    leadPerfectionData.append("state", state)
+    leadPerfectionData.append("zip", zip) // Required
+    leadPerfectionData.append("phone1", phone) // Required
+    leadPerfectionData.append("email", email)
+    leadPerfectionData.append("sender", "replacementwindowcosts.com") // Required - exact value
+    leadPerfectionData.append("srs_id", "1672") // Required - exact value
+    leadPerfectionData.append("notes", notesContent)
 
-    // In a real implementation, you would send this data to your server or CRM
-    // This is just a placeholder for demonstration purposes
-    console.log("Lead information:", leadInfo)
+    // Product information
+    leadPerfectionData.append("productid", "WINDOWS")
+    leadPerfectionData.append("proddescr", "Window Replacement")
+
+    // Send data to LeadPerfection - UPDATED URL
+    fetch("https://th97.leadperfection.com/batch/addleads.asp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: leadPerfectionData,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        if (data.includes("[OK]")) {
+          // Successful submission - continue with showing the result
+          // Hide the form and show calculator result
+          calculatorForm.style.display = "none"
+          calculatorResult.style.display = "block"
+          calculatorResult.classList.add("fadeIn")
+
+          // Update request quote button URL
+          const baseUrl = requestQuoteBtn.getAttribute("href").split("?")[0]
+          const queryParams = new URLSearchParams({
+            count: windowCount,
+            type: windowType,
+            material: frameMaterial,
+            size: windowSize,
+            screen: screenType,
+            grids: hasGrids ? "yes" : "no",
+            exteriorColor: exteriorColor,
+            interiorColor: interiorColor,
+            hardware: hardware,
+            price: totalPrice,
+            lowerPrice: lowerPrice,
+            upperPrice: upperPrice,
+            name: `${firstName} ${lastName}`,
+            email: email,
+            phone: phone,
+            address: `${address}, ${city}, ${state} ${zip}`,
+          })
+
+          requestQuoteBtn.setAttribute("href", `${baseUrl}?${queryParams.toString()}`)
+
+          // Store lead information in localStorage
+          const leadInfo = {
+            windowCount,
+            windowType,
+            frameMaterial,
+            windowSize,
+            screenType,
+            hasGrids,
+            exteriorColor,
+            interiorColor,
+            hardware,
+            firstName,
+            lastName,
+            email,
+            phone,
+            address,
+            city,
+            state,
+            zip,
+            comments: document.getElementById("comments").value,
+            priceRange: `$${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}`,
+            timestamp: new Date().toISOString(),
+          }
+
+          localStorage.setItem("recentLead", JSON.stringify(leadInfo))
+
+          // Scroll to result
+          calculatorResult.scrollIntoView({ behavior: "smooth" })
+        } else {
+          // Failed submission
+          alert("There was an error submitting your request. Please try again later.")
+          console.error("LeadPerfection error:", data)
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+        alert("There was an error submitting your request. Please try again later.")
+      })
   })
 
   // Helper function to format option names for display
