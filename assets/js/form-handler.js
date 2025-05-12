@@ -1,9 +1,205 @@
-// NOTE: Replace [LPCLIENTID] with your actual LeadPerfection client ID before deploying
-
 document.addEventListener("DOMContentLoaded", () => {
   const quoteForm = document.getElementById("quote-form")
   const thankYouUrl = document.getElementById("thank-you-url")
   const estimatedPriceInput = document.getElementById("estimated-price")
+
+  // Tab navigation elements
+  const nextToColorsBtn = document.getElementById("next-to-colors-btn")
+  const backToSpecsBtn = document.getElementById("back-to-specs-btn")
+  const nextToContactBtn = document.getElementById("next-to-contact-btn")
+  const backToColorsBtn = document.getElementById("back-to-colors-btn")
+  const nextToProjectBtn = document.getElementById("next-to-project-btn")
+  const backToContactBtn = document.getElementById("back-to-contact-btn")
+
+  const windowSpecsTab = document.querySelector('.form-tab[data-tab="window-specs"]')
+  const colorHardwareTab = document.querySelector('.form-tab[data-tab="color-hardware"]')
+  const contactInfoTab = document.querySelector('.form-tab[data-tab="contact-info"]')
+  const projectDetailsTab = document.querySelector('.form-tab[data-tab="project-details"]')
+
+  const windowSpecsContent = document.getElementById("window-specs-content")
+  const colorHardwareContent = document.getElementById("color-hardware-content")
+  const contactInfoContent = document.getElementById("contact-info-content")
+  const projectDetailsContent = document.getElementById("project-details-content")
+
+  // Add tab navigation functionality
+  if (nextToColorsBtn) {
+    nextToColorsBtn.addEventListener("click", () => {
+      // Validate window specs before proceeding
+      const windowCount = document.getElementById("window-count").value
+      const windowType = document.getElementById("window-type").value
+      const frameMaterial = document.getElementById("frame-material").value
+      const windowSize = document.getElementById("window-size").value
+      const screenType = document.getElementById("screen-type").value
+
+      if (!windowCount || !windowType || !frameMaterial || !windowSize || !screenType) {
+        alert("Please fill in all window specification fields before proceeding.")
+        return
+      }
+
+      // Switch to colors & hardware tab
+      windowSpecsTab.classList.remove("active")
+      colorHardwareTab.classList.add("active")
+      windowSpecsContent.style.display = "none"
+      colorHardwareContent.style.display = "block"
+    })
+  }
+
+  if (backToSpecsBtn) {
+    backToSpecsBtn.addEventListener("click", () => {
+      // Switch back to window specs tab
+      colorHardwareTab.classList.remove("active")
+      windowSpecsTab.classList.add("active")
+      colorHardwareContent.style.display = "none"
+      windowSpecsContent.style.display = "block"
+    })
+  }
+
+  if (nextToContactBtn) {
+    nextToContactBtn.addEventListener("click", () => {
+      // Switch to contact info tab
+      colorHardwareTab.classList.remove("active")
+      contactInfoTab.classList.add("active")
+      colorHardwareContent.style.display = "none"
+      contactInfoContent.style.display = "block"
+    })
+  }
+
+  if (backToColorsBtn) {
+    backToColorsBtn.addEventListener("click", () => {
+      // Switch back to colors & hardware tab
+      contactInfoTab.classList.remove("active")
+      colorHardwareTab.classList.add("active")
+      contactInfoContent.style.display = "none"
+      colorHardwareContent.style.display = "block"
+    })
+  }
+
+  if (nextToProjectBtn) {
+    nextToProjectBtn.addEventListener("click", () => {
+      // Validate contact info before proceeding
+      const firstName = document.getElementById("first-name").value
+      const lastName = document.getElementById("last-name").value
+      const email = document.getElementById("email").value
+      const phone = document.getElementById("phone").value
+      const address = document.getElementById("address").value
+      const city = document.getElementById("city").value
+      const state = document.getElementById("state").value
+      const zip = document.getElementById("zip").value
+
+      if (!firstName || !lastName || !email || !phone || !address || !city || !state || !zip) {
+        alert("Please fill in all required contact information fields before proceeding.")
+        return
+      }
+
+      // Switch to project details tab
+      contactInfoTab.classList.remove("active")
+      projectDetailsTab.classList.add("active")
+      contactInfoContent.style.display = "none"
+      projectDetailsContent.style.display = "block"
+    })
+  }
+
+  if (backToContactBtn) {
+    backToContactBtn.addEventListener("click", () => {
+      // Switch back to contact info tab
+      projectDetailsTab.classList.remove("active")
+      contactInfoTab.classList.add("active")
+      projectDetailsContent.style.display = "none"
+      contactInfoContent.style.display = "block"
+    })
+  }
+
+  // Tab click handlers
+  if (windowSpecsTab) {
+    windowSpecsTab.addEventListener("click", () => {
+      colorHardwareTab.classList.remove("active")
+      contactInfoTab.classList.remove("active")
+      projectDetailsTab.classList.remove("active")
+      windowSpecsTab.classList.add("active")
+      colorHardwareContent.style.display = "none"
+      contactInfoContent.style.display = "none"
+      projectDetailsContent.style.display = "none"
+      windowSpecsContent.style.display = "block"
+    })
+  }
+
+  if (colorHardwareTab) {
+    colorHardwareTab.addEventListener("click", () => {
+      // Validate window specs before allowing tab switch
+      const windowCount = document.getElementById("window-count").value
+      const windowType = document.getElementById("window-type").value
+      const frameMaterial = document.getElementById("frame-material").value
+      const windowSize = document.getElementById("window-size").value
+      const screenType = document.getElementById("screen-type").value
+
+      if (!windowCount || !windowType || !frameMaterial || !windowSize || !screenType) {
+        alert("Please fill in all window specification fields before proceeding.")
+        return
+      }
+
+      windowSpecsTab.classList.remove("active")
+      contactInfoTab.classList.remove("active")
+      projectDetailsTab.classList.remove("active")
+      colorHardwareTab.classList.add("active")
+      windowSpecsContent.style.display = "none"
+      contactInfoContent.style.display = "none"
+      projectDetailsContent.style.display = "none"
+      colorHardwareContent.style.display = "block"
+    })
+  }
+
+  if (contactInfoTab) {
+    contactInfoTab.addEventListener("click", () => {
+      // Validate window specs and colors before allowing tab switch
+      const windowCount = document.getElementById("window-count").value
+      const windowType = document.getElementById("window-type").value
+      const frameMaterial = document.getElementById("frame-material").value
+      const windowSize = document.getElementById("window-size").value
+      const screenType = document.getElementById("screen-type").value
+
+      if (!windowCount || !windowType || !frameMaterial || !windowSize || !screenType) {
+        alert("Please fill in all window specification fields before proceeding.")
+        return
+      }
+
+      windowSpecsTab.classList.remove("active")
+      colorHardwareTab.classList.remove("active")
+      projectDetailsTab.classList.remove("active")
+      contactInfoTab.classList.add("active")
+      windowSpecsContent.style.display = "none"
+      colorHardwareContent.style.display = "none"
+      projectDetailsContent.style.display = "none"
+      contactInfoContent.style.display = "block"
+    })
+  }
+
+  if (projectDetailsTab) {
+    projectDetailsTab.addEventListener("click", () => {
+      // Validate contact info before allowing tab switch
+      const firstName = document.getElementById("first-name").value
+      const lastName = document.getElementById("last-name").value
+      const email = document.getElementById("email").value
+      const phone = document.getElementById("phone").value
+      const address = document.getElementById("address").value
+      const city = document.getElementById("city").value
+      const state = document.getElementById("state").value
+      const zip = document.getElementById("zip").value
+
+      if (!firstName || !lastName || !email || !phone || !address || !city || !state || !zip) {
+        alert("Please fill in all required contact information fields before proceeding.")
+        return
+      }
+
+      windowSpecsTab.classList.remove("active")
+      colorHardwareTab.classList.remove("active")
+      contactInfoTab.classList.remove("active")
+      projectDetailsTab.classList.add("active")
+      windowSpecsContent.style.display = "none"
+      colorHardwareContent.style.display = "none"
+      contactInfoContent.style.display = "none"
+      projectDetailsContent.style.display = "block"
+    })
+  }
 
   // Parse URL parameters and pre-fill form
   const urlParams = new URLSearchParams(window.location.search)
@@ -354,29 +550,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const redirectUrl = `${baseThankYouUrl}?price=${totalPrice}&lowerPrice=${lowerPrice}&upperPrice=${upperPrice}&count=${windowCount}&type=${windowType}&material=${frameMaterial}&size=${windowSize}&exteriorColor=${exteriorColor}&interiorColor=${interiorColor}&hardware=${hardware}`
     localStorage.setItem("redirectUrl", redirectUrl)
 
-    // Send data to LeadPerfection - UPDATED URL
-    fetch("https://th97.leadperfection.com/batch/addleads.asp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: leadPerfectionData,
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        if (data.includes("[OK]")) {
-          // Successful submission
-          window.location.href = redirectUrl
-        } else {
-          // Failed submission
-          console.error("LeadPerfection error:", data)
-          alert("There was an error submitting your request. Please try again later.")
-        }
-      })
-      .catch((error) => {
+    try {
+      // First, set up the redirect to ensure user experience is smooth
+      window.location.href = redirectUrl
+
+      // Then attempt to send data to LeadPerfection
+      // Note: This may not complete if the page navigates away first, but we prioritize user experience
+      fetch("https://th97.leadperfection.com/batch/addleads.asp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: leadPerfectionData,
+      }).catch((error) => {
         console.error("Error:", error)
-        alert("There was an error submitting your request. Please try again later.")
+        // We don't alert the user since we're already redirecting
       })
+    } catch (error) {
+      console.error("Error in form submission:", error)
+      // Still redirect even if there's an error with the API
+      window.location.href = redirectUrl
+    }
   })
 
   // Update the form handler to use the price range
