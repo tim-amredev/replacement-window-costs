@@ -270,25 +270,23 @@ document.addEventListener("DOMContentLoaded", () => {
       notesContent += `\nAdditional Comments: ${comments}\n`
     }
 
-    // Create form data for LeadPerfection
-    const leadPerfectionData = new URLSearchParams()
+    // Create form data for LeadConduit
+    const leadConduitData = new URLSearchParams()
 
-    // Required fields
-    leadPerfectionData.append("firstname", firstName)
-    leadPerfectionData.append("lastname", lastName)
-    leadPerfectionData.append("address1", address)
-    leadPerfectionData.append("city", city)
-    leadPerfectionData.append("state", state)
-    leadPerfectionData.append("zip", zip) // Required
-    leadPerfectionData.append("phone1", phone) // Required
-    leadPerfectionData.append("email", email)
-    leadPerfectionData.append("sender", "replacementwindowcosts.com") // Required - exact value
-    leadPerfectionData.append("srs_id", "1672") // Required - exact value
-    leadPerfectionData.append("notes", notesContent)
+    // Required fields with LeadConduit field names
+    leadConduitData.append("first_name", firstName)
+    leadConduitData.append("last_name", lastName)
+    leadConduitData.append("address_1", address)
+    leadConduitData.append("city", city)
+    leadConduitData.append("state", state)
+    leadConduitData.append("postal_code", zip) // Changed from zip to postal_code
+    leadConduitData.append("phone_1", phone) // Changed from phone1 to phone_1
+    leadConduitData.append("email", email)
+    leadConduitData.append("comments", notesContent) // Changed from notes to comments
+    leadConduitData.append("product", "Window Replacement") // Changed from productid/proddescr to product
 
-    // Product information
-    leadPerfectionData.append("productid", "WINDOWS")
-    leadPerfectionData.append("proddescr", "Window Replacement")
+    // Additional fields
+    leadConduitData.append("original_source", "replacementwindowcosts.com")
 
     try {
       // First, show the result immediately to improve user experience
@@ -348,20 +346,17 @@ document.addEventListener("DOMContentLoaded", () => {
       // Scroll to result
       calculatorResult.scrollIntoView({ behavior: "smooth" })
 
-      // Then, send data to LeadPerfection in the background
-      fetch("https://th97.leadperfection.com/batch/addleads.asp", {
+      // Then, send data to LeadConduit in the background
+      fetch("https://app.leadconduit.com/flows/67f7c604f84b9544eca41ff7/sources/680b67e1735fe6f491a213ac/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: leadPerfectionData,
+        body: leadConduitData,
       })
         .then((response) => response.text())
         .then((data) => {
-          if (!data.includes("[OK]")) {
-            console.error("LeadPerfection error:", data)
-            // Don't alert the user since we've already shown the result
-          }
+          console.log("LeadConduit response:", data)
         })
         .catch((error) => {
           console.error("Error:", error)
