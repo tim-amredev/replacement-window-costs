@@ -369,18 +369,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Validate required fields
     const termsConsent = document.getElementById("terms-consent").checked
-    const zip = document.getElementById("zip").value
-    const phone = document.getElementById("phone").value
 
     if (!termsConsent) {
       alert("Please agree to the Terms of Service and Privacy Policy.")
       return
     }
 
-    if (!zip || !phone) {
-      alert("Zip code and phone number are required fields.")
-      return
-    }
+    // Get form data for LeadConduit
+    const firstName = document.getElementById("first-name").value
+    const lastName = document.getElementById("last-name").value
+    const email = document.getElementById("email").value
+    const phone = document.getElementById("phone").value
+    const address = document.getElementById("address").value
+    const city = document.getElementById("city").value
+    const state = document.getElementById("state").value
+    const zip = document.getElementById("zip").value
 
     // Get window specifications
     const windowCount = Number.parseInt(document.getElementById("window-count").value)
@@ -411,14 +414,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Calculate price range (20% below and above)
     const lowerPrice = Math.round(totalPrice * 0.8)
     const upperPrice = Math.round(totalPrice * 1.2)
-
-    // Get form data for LeadPerfection
-    const firstName = document.getElementById("first-name").value
-    const lastName = document.getElementById("last-name").value
-    const email = document.getElementById("email").value
-    const address = document.getElementById("address").value
-    const city = document.getElementById("city").value
-    const state = document.getElementById("state").value
 
     // Get best time to call preferences
     const callMorning = document.getElementById("contact-morning")
@@ -511,6 +506,17 @@ document.addEventListener("DOMContentLoaded", () => {
       notesContent += `Timeframe: ${timeframe.value}\n`
     }
 
+    // Add best time to call
+    if (callMorning || callAfternoon || callEvening || callWeekend) {
+      notesContent += "Best Time to Call: "
+      const callTimes = []
+      if (callMorning) callTimes.push("Morning")
+      if (callAfternoon) callTimes.push("Afternoon")
+      if (callEvening) callTimes.push("Evening")
+      if (callWeekend) callTimes.push("Weekend")
+      notesContent += callTimes.join(", ") + "\n"
+    }
+
     // Add comments
     if (comments) {
       notesContent += `\nAdditional Comments: ${comments}\n`
@@ -519,53 +525,52 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add estimated price
     notesContent += `\nEstimated Price Range: $${lowerPrice.toLocaleString()} - $${upperPrice.toLocaleString()}\n`
 
-    // Create form data for LeadPerfection
-    const leadPerfectionData = new URLSearchParams()
+    // Create form data for LeadConduit
+    const leadConduitData = new URLSearchParams()
 
-    // Required fields
-    leadPerfectionData.append("firstname", firstName)
-    leadPerfectionData.append("lastname", lastName)
-    leadPerfectionData.append("address1", address)
-    leadPerfectionData.append("city", city)
-    leadPerfectionData.append("state", state)
-    leadPerfectionData.append("zip", zip) // Required
-    leadPerfectionData.append("phone1", phone) // Required
-    leadPerfectionData.append("email", email)
-    leadPerfectionData.append("sender", "replacementwindowcosts.com") // Required - exact value
-    leadPerfectionData.append("srs_id", "1672") // Required - exact value
-    leadPerfectionData.append("notes", notesContent)
+    // Required fields with LeadConduit field names
+    leadConduitData.append("first_name", firstName)
+    leadConduitData.append("last_name", lastName)
+    leadConduitData.append("address_1", address)
+    leadConduitData.append("city", city)
+    leadConduitData.append("state", state)
+    leadConduitData.append("postal_code", zip) // Changed from zip to postal_code
+    leadConduitData.append("phone_1", phone) // Changed from phone1 to phone_1
+    leadConduitData.append("email", email)
+    leadConduitData.append("comments", notesContent) // Changed from notes to comments
+    leadConduitData.append("product", "Window Replacement") // Changed from productid/proddescr to product
 
-    // Best time to call indicators
-    leadPerfectionData.append("callmorning", callMorning)
-    leadPerfectionData.append("callafternoon", callAfternoon)
-    leadPerfectionData.append("callevening", callEvening)
-    leadPerfectionData.append("callweekend", callWeekend)
+    // Additional fields
+    leadConduitData.append("original_source", "replacementwindowcosts.com")
+    leadConduitData.append("price", totalPrice)
 
-    // Product information
-    leadPerfectionData.append("productid", "WINDOWS")
-    leadPerfectionData.append("proddescr", "Window Replacement")
+    // Update hidden input
+    estimatedPriceInput.value = totalPrice
 
     // Store the thank you URL in localStorage to redirect after form submission
     const baseThankYouUrl = thankYouUrl.value.split("?")[0]
     const redirectUrl = `${baseThankYouUrl}?price=${totalPrice}&lowerPrice=${lowerPrice}&upperPrice=${upperPrice}&count=${windowCount}&type=${windowType}&material=${frameMaterial}&size=${windowSize}&exteriorColor=${exteriorColor}&interiorColor=${interiorColor}&hardware=${hardware}`
-    localStorage.setItem("redirectUrl", redirectUrl)
 
     try {
-      // First, set up the redirect to ensure user experience is smooth
-      window.location.href = redirectUrl
-
-      // Then attempt to send data to LeadPerfection
-      // Note: This may not complete if the page navigates away first, but we prioritize user experience
-      fetch("https://th97.leadperfection.com/batch/addleads.asp", {
+      // Send data to LeadConduit
+      fetch("https://app.leadconduit.com/flows/67f7c604f84b9544eca41ff7/sources/680b67e1735fe6f491a213ac/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: leadPerfectionData,
-      }).catch((error) => {
-        console.error("Error:", error)
-        // We don't alert the user since we're already redirecting
+        body: leadConduitData,
       })
+        .then((response) => response.text())
+        .then((data) => {
+          console.log("LeadConduit response:", data)
+          // Redirect to thank you page
+          window.location.href = redirectUrl
+        })
+        .catch((error) => {
+          console.error("Error:", error)
+          // Still redirect even if there's an error with the API
+          window.location.href = redirectUrl
+        })
     } catch (error) {
       console.error("Error in form submission:", error)
       // Still redirect even if there's an error with the API
